@@ -1,0 +1,48 @@
+# E3: supervised pre-training of the small STFT-mask enhancement model on VoiceBank-DEMAND.
+config_name: se_pretrain
+task: se_pretrain
+phase: main
+seed: 0
+run_name: null
+
+model:
+  n_fft: 512
+  hop: 128
+  hidden: 384
+  rnn_hidden: 256
+  rnn_layers: 2
+  bidirectional: true
+  conv_kernel: 3
+  mask_max: 2.0          # fixed at pre-training: logit 0 = identity, room for +6 dB boosts under GRPO
+  init_log_std: -1.0     # policy σ (unused by supervised training; GRPO overrides it)
+  min_log_std: -5.0
+  max_log_std: 1.0
+
+data:
+  crop_seconds: 3.0
+  num_workers: 8
+  metric_workers: 8      # CPU processes for final PESQ/ESTOI
+  max_train_utts: null   # null = all of vbd_train (smoke tests shrink it)
+  max_val_utts: null     # null = all of vbd_val
+  subset_seed: 0
+
+pretrain:
+  steps: 50000          # measured 22.3 steps/s on A100 (batch 32 x 3 s) -> ~37 min
+  batch_size: 32
+  lr: 1.0e-3
+  weight_decay: 1.0e-5
+  warmup_steps: 1000
+  cosine: true
+  final_lr_frac: 0.02
+  grad_clip: 5.0
+  w_sisdr: 1.0
+  w_mag: 10.0
+  mag_compress: 0.3
+  log_every: 50
+  eval_every: 2500
+  report_noisy: true     # also report PESQ/ESTOI/SI-SDR of the unprocessed val input
+
+wandb:
+  entity: alialavi
+  mode: online
+  group: null

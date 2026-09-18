@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+outputs/
+multirun/
+wandb/
+.hydra/
+
+# LaTeX build artefacts (main.pdf and main.bbl stay tracked for submission)
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.blg
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.synctex.gz

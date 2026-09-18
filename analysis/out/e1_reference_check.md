@@ -1,0 +1,6 @@
+asr_ref_input: ASR(R0)-ASR(R3) per seed [0.143, 0.005, 0.247], mean +0.131, bootstrap 95% CI [+0.005, +0.247]
+asr_ref_input: ASR(R0)-ASR(R3ms) per seed [0.083, -0.729, 0.272], mean -0.125, bootstrap 95% CI [-0.729, +0.272]
+asr_ref_input: ASR(R0)-ASR(baseline_random) per seed [0.119, -0.017, 0.282], mean +0.128, bootstrap 95% CI [-0.017, +0.282]
+asr_ref_recon: ASR(R0)-ASR(R3) per seed [-0.073, -0.039, 0.379], mean +0.089, bootstrap 95% CI [-0.073, +0.379]
+asr_ref_recon: ASR(R0)-ASR(R3ms) per seed [0.227, -0.2, 0.404], mean +0.144, bootstrap 95% CI [-0.200, +0.404]
+asr_ref_recon: ASR(R0)-ASR(baseline_random) per seed [0.234, -0.007, 0.394], mean +0.207, bootstrap 95% CI [-0.007, +0.394]

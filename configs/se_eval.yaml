@@ -1,0 +1,30 @@
+# E3: test-set evaluation of enhancement checkpoints with every predictor and the external measures.
+config_name: se_eval
+task: se_eval
+phase: main
+seed: 0
+run_name: null
+
+checkpoints:             # {system name: se checkpoint path | noisy | clean}; order = table order
+  noisy: noisy
+  clean: clean
+predictors: {}           # {name: SSL-MOS ckpt}; each adds a score_{name} column (R0, R3, baselines)
+predictor_pretrained: facebook/wav2vec2-base
+
+eval:
+  split: test
+  n_utts: null           # null = all 824 test utterances
+  subset_seed: 0
+  n_boot: 1000
+  save_audio_n: 20       # first N utterances per system written to artifacts/audio for listening
+
+metrics:
+  external: [dnsmos, nisqa, utmos, spk_sim, pesq]
+  panel: [estoi, sisdr]
+  wer: true
+  asr_model: openai/whisper-small
+
+wandb:
+  entity: alialavi
+  mode: online
+  group: null

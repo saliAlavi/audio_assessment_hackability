@@ -1,0 +1,12 @@
+source=vbd_train (first 4 utts, centre crops) device=cuda params=2598273 input_sisdr=7.64
+step 1 loss=-6.383 sisdr=7.64 mag_l1=0.1260
+step 50 loss=-13.608 sisdr=14.42 mag_l1=0.0817
+step 100 loss=-16.275 sisdr=16.91 mag_l1=0.0636
+step 150 loss=-17.533 sisdr=18.07 mag_l1=0.0537
+step 200 loss=-18.399 sisdr=18.89 mag_l1=0.0487
+step 250 loss=-19.096 sisdr=19.56 mag_l1=0.0466
+step 300 loss=-19.486 sisdr=19.95 mag_l1=0.0468
+step 350 loss=-19.890 sisdr=20.39 mag_l1=0.0495
+step 400 loss=-19.707 sisdr=20.16 mag_l1=0.0455
+init_model_sisdr=7.64 fitted_sisdr=20.50 gain_over_input=12.87 dB time=12.6s
+PASS
