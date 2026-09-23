@@ -38,10 +38,13 @@ speech quality assessment, reward hacking, reinforcement learning, adversarial r
 \end{IEEEkeywords}
 
 \section{Introduction}
-Automatic mean-opinion-score (MOS) predictors are both the standard evaluation instrument for speech generation
-and, increasingly, the \emph{reward} that trains it. Optimising a metric degrades what it was meant to
-track~\cite{deoliveira2024pesqetarian,wang2026flowsegrpo}, and adversarial inputs drive UTMOS wherever an
-attacker wants~\cite{huang2026attacking}. Which predictor to reward with is a question practitioners must
+Automatic mean-opinion-score (MOS) predictors are both the standard evaluation instrument for speech
+generation~\cite{asonitis2026limits,huang2026attacking} and, increasingly, the \emph{reward} that trains
+it~\cite{kumar2025rlhf,wang2026flowsegrpo,berdoz2026gspo}. Optimising a metric degrades what it was meant to
+track~\cite{deoliveira2024pesqetarian,wang2026flowsegrpo}, and white-box attacks on UTMOS degrade speech
+severely while its predicted MOS stays high~\cite{huang2026attacking}, so a generator could earn reward without
+improving the audio. Those attacks only hold or lower the score of clean speech, whereas an RL-trained generator
+sees only the score and is optimised to \emph{raise} it. Which predictor to reward with is a question practitioners must
 answer, and the field answers it with intuition. There is no protocol for measuring how hackable a predictor is,
 and no study that puts the predictors people actually use in front of the \emph{same} attacker, at the
 \emph{same} perturbation strength, under the \emph{same} rule for what counts as a hack. Published attacks each
@@ -89,8 +92,8 @@ the released analysis scripts.
 \noindent\textbf{Quality metrics can be gamed.} Optimising a metric degrades true quality: the
 PESQetarian~\cite{deoliveira2024pesqetarian} reaches 3.82 PESQ while listeners rate it poorly, FlowSE-GRPO % lint:ok (cited from prior work)
 observes implausible DNSMOS gains under single-metric optimisation~\cite{wang2026flowsegrpo}, and composite
-rewards are the usual remedy~\cite{berdoz2026gspo,wang2025sqase}. Asonitis et al.~\cite{asonitis2026limits} diagnose hacking as we do --- the
-optimised score rises while an independent panel falls --- but leave the predictor untouched.
+rewards are the usual remedy~\cite{berdoz2026gspo,wang2025sqase}. Asonitis et al.~\cite{asonitis2026limits} diagnose hacking --- the
+optimised score rises as an independent panel falls --- but leave the predictor untouched.
 
 \noindent\textbf{Attacking quality predictors.} Adversarial examples fool non-intrusive
 predictors~\cite{lin2022robustness,ren2023eventtrojan}, and ``Attacking UTMOS''~\cite{huang2026attacking} attacks
@@ -192,7 +195,7 @@ $0.172$ when $x$ is used. Attack, detection and patching are repeated for $K$ ro
 \noindent\textbf{Multi-space variant.}
 The same loop can draw its pairs from several attack spaces at once. In addition to the codec latent space above
 we use (i) a second codec (DAC~\cite{kumar2023dac}, quantised latent) and (ii) white-box waveform PGD that
-maximises $R$ under $\|\delta\|_\infty\le 0.002$. All flagged hacks enter one shared buffer.
+maximises $R$ under $\|\delta\|_\infty\le 0.002$. All flagged hacks share one buffer.
 
 \section{Experimental setup}
 \label{sec:setup}
@@ -220,8 +223,8 @@ step-matched but not pair-matched (replay buffer 5.8k to 8.9k pairs against 19.9
 favouring the baseline).
 
 \noindent\textbf{Downstream (E3).} A 2.6\,M-parameter STFT mask enhancer is pre-trained on VoiceBank-DEMAND and % lint:ok
-then post-trained with GRPO for 2\,500 steps, the policy adding per-frame offsets on 32 ERB bands with no KL % lint:ok
-penalty, so that nothing but the reward model limits hacking. Evaluation uses the 824-utterance test set. % lint:ok
+post-trained with GRPO for 2\,500 steps, the policy adding per-frame offsets on 32 ERB bands with no KL % lint:ok
+penalty, so only the reward model limits hacking. Evaluation uses the 824-utterance test set. % lint:ok
 
 \noindent\textbf{Protocol.} Seeds, primary metrics and decision rules for E1--E3 were preregistered before any
 test-label contact, with one amendment (attack action space and the $\epsilon$ rule) made on validation evidence

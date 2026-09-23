@@ -21,12 +21,27 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{deoliveira2024pesqetarian}
+\bibitem{asonitis2026limits}
 \BIBentryALTinterwordspacing
-D.~de~Oliveira, S.~Welker, J.~Richter, and T.~Gerkmann, ``The {PESQetarian}: On
-  the relevance of {Goodhart's} law for speech enhancement,'' in \emph{Proc.
-  Interspeech}, 2024. [Online]. Available:
-  \url{https://arxiv.org/abs/2406.03460}
+A.~Asonitis, J.~P. Zuluaga~Gomez, F.~Verdini, A.~Farhadipour, M.~Razavi, P.-E.
+  Honnet, and V.~Avijeet, ``The limits of reference-free speech quality metrics
+  as evaluators and rewards on modern text-to-speech,''
+  \emph{arXiv:2609.13150}, 2026. [Online]. Available:
+  \url{https://arxiv.org/abs/2609.13150}
+\BIBentrySTDinterwordspacing
+
+\bibitem{huang2026attacking}
+\BIBentryALTinterwordspacing
+W.-C. Huang and T.~Toda, ``Attacking {UTMOS}: Probing the robustness of a
+  speech quality assessment model,'' \emph{arXiv:2606.31105}, 2026. [Online].
+  Available: \url{https://arxiv.org/abs/2606.31105}
+\BIBentrySTDinterwordspacing
+
+\bibitem{kumar2025rlhf}
+\BIBentryALTinterwordspacing
+A.~Kumar, A.~Perrault, and D.~S. Williamson, ``Using {RLHF} to align speech
+  enhancement approaches to mean-opinion quality scores,'' in \emph{Proc.
+  ICASSP}, 2025. [Online]. Available: \url{https://arxiv.org/abs/2410.13182}
 \BIBentrySTDinterwordspacing
 
 \bibitem{wang2026flowsegrpo}
@@ -37,11 +52,20 @@ H.~Wang, B.~Tian, Y.~Jiang, Z.~Pan, S.~Zhao, B.~Ma, D.~Chen, and X.~Li,
   \url{https://arxiv.org/abs/2601.16483}
 \BIBentrySTDinterwordspacing
 
-\bibitem{huang2026attacking}
+\bibitem{berdoz2026gspo}
 \BIBentryALTinterwordspacing
-W.-C. Huang and T.~Toda, ``Attacking {UTMOS}: Probing the robustness of a
-  speech quality assessment model,'' \emph{arXiv:2606.31105}, 2026. [Online].
-  Available: \url{https://arxiv.org/abs/2606.31105}
+F.~Berdoz, L.~A. Lanzend{\"o}rfer, A.~Asonitis, and R.~Wattenhofer,
+  ``Post-training speech enhancement language models with perceptual rewards,''
+  in \emph{Proc. Interspeech}, 2026. [Online]. Available:
+  \url{https://arxiv.org/abs/2606.21458}
+\BIBentrySTDinterwordspacing
+
+\bibitem{deoliveira2024pesqetarian}
+\BIBentryALTinterwordspacing
+D.~de~Oliveira, S.~Welker, J.~Richter, and T.~Gerkmann, ``The {PESQetarian}: On
+  the relevance of {Goodhart's} law for speech enhancement,'' in \emph{Proc.
+  Interspeech}, 2024. [Online]. Available:
+  \url{https://arxiv.org/abs/2406.03460}
 \BIBentrySTDinterwordspacing
 
 \bibitem{wang2025sqase}
@@ -58,23 +82,6 @@ A.~Bukharin, H.~Qian, S.~Sun, A.~Renduchintala, S.~Singhal, Z.~Wang,
   O.~Kuchaiev, O.~Delalleau, and T.~Zhao, ``Adversarial training of reward
   models,'' \emph{arXiv:2504.06141}, 2025. [Online]. Available:
   \url{https://arxiv.org/abs/2504.06141}
-\BIBentrySTDinterwordspacing
-
-\bibitem{berdoz2026gspo}
-\BIBentryALTinterwordspacing
-F.~Berdoz, L.~A. Lanzend{\"o}rfer, A.~Asonitis, and R.~Wattenhofer,
-  ``Post-training speech enhancement language models with perceptual rewards,''
-  in \emph{Proc. Interspeech}, 2026. [Online]. Available:
-  \url{https://arxiv.org/abs/2606.21458}
-\BIBentrySTDinterwordspacing
-
-\bibitem{asonitis2026limits}
-\BIBentryALTinterwordspacing
-A.~Asonitis, J.~P. Zuluaga~Gomez, F.~Verdini, A.~Farhadipour, M.~Razavi, P.-E.
-  Honnet, and V.~Avijeet, ``The limits of reference-free speech quality metrics
-  as evaluators and rewards on modern text-to-speech,''
-  \emph{arXiv:2609.13150}, 2026. [Online]. Available:
-  \url{https://arxiv.org/abs/2609.13150}
 \BIBentrySTDinterwordspacing
 
 \bibitem{lin2022robustness}
