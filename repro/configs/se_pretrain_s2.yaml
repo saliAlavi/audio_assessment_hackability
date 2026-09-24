@@ -1,0 +1,43 @@
+config_name: se_pretrain
+task: se_pretrain
+phase: main
+seed: 2
+run_name: se_pretrain_s2__2026-09-15_16-10-21
+model:
+  n_fft: 512
+  hop: 128
+  hidden: 384
+  rnn_hidden: 256
+  rnn_layers: 2
+  bidirectional: true
+  conv_kernel: 3
+  mask_max: 2.0
+  init_log_std: -1.0
+  min_log_std: -5.0
+  max_log_std: 1.0
+data:
+  crop_seconds: 3.0
+  num_workers: 8
+  metric_workers: 8
+  max_train_utts: null
+  max_val_utts: null
+  subset_seed: 0
+pretrain:
+  steps: 50000
+  batch_size: 32
+  lr: 0.001
+  weight_decay: 1.0e-05
+  warmup_steps: 1000
+  cosine: true
+  final_lr_frac: 0.02
+  grad_clip: 5.0
+  w_sisdr: 1.0
+  w_mag: 10.0
+  mag_compress: 0.3
+  log_every: 50
+  eval_every: 2500
+  report_noisy: true
+wandb:
+  entity: alialavi
+  mode: online
+  group: se_pretrain

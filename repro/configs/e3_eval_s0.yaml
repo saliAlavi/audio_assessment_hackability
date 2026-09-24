@@ -1,0 +1,43 @@
+config_name: se_eval
+task: se_eval
+phase: main
+seed: 0
+run_name: se_eval_s0__2026-09-15_17-34-11
+checkpoints:
+  noisy: noisy
+  clean: clean
+  pretrained: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_pretrain_s0__2026-09-15_16-10-03/checkpoints/best.pt
+  grpo_R0: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R0_s0__2026-09-15_17-32-04/checkpoints/last.pt
+  grpo_R3: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R3_s0__2026-09-15_17-32-19/checkpoints/last.pt
+  grpo_baseline_noise: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_noise_s0__2026-09-15_17-32-38/checkpoints/last.pt
+  grpo_baseline_pgd: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_pgd_s0__2026-09-15_17-33-15/checkpoints/last.pt
+  grpo_baseline_random: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_random_s0__2026-09-15_17-33-42/checkpoints/last.pt
+predictors:
+  R0: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/train_r0_s0__2026-09-15_15-31-19/results/selected_checkpoint.txt
+  R3: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s0__2026-09-15_16-10-10/round3/done.json
+  baseline_noise: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_noise_s0__2026-09-15_16-10-19/results/selected_checkpoint.txt
+  baseline_pgd: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_pgd_s0__2026-09-15_16-10-55/results/selected_checkpoint.txt
+  baseline_random: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_random_s0__2026-09-15_16-10-32/results/selected_checkpoint.txt
+predictor_pretrained: facebook/wav2vec2-base
+eval:
+  split: test
+  n_utts: null
+  subset_seed: 0
+  n_boot: 1000
+  save_audio_n: 20
+metrics:
+  external:
+  - dnsmos
+  - nisqa
+  - utmos
+  - spk_sim
+  - pesq
+  panel:
+  - estoi
+  - sisdr
+  wer: true
+  asr_model: openai/whisper-small
+wandb:
+  entity: alialavi
+  mode: online
+  group: null

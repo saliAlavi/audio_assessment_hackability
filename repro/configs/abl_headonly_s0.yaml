@@ -1,0 +1,101 @@
+config_name: hack_loop
+task: hack_loop
+phase: ablation
+seed: 0
+run_name: hack_loop_headonly_s0__2026-09-15_16-13-49
+init_ckpt: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/train_r0_s0__2026-09-15_15-31-19/results/selected_checkpoint.txt
+model:
+  pretrained: facebook/wav2vec2-base
+  freeze_feature_encoder: true
+  freeze_encoder: true
+data:
+  corpus: bvcc
+  max_seconds: 6.0
+  num_workers: 8
+loop:
+  rounds: 3
+  pair_preferred: recon
+  val_attack_utts: 400
+  max_train_utts: null
+attack:
+  codec:
+    name: encodec_24khz
+    quantize: false
+    encodec_bandwidth: 24.0
+  policy:
+    hidden: 256
+    layers: 4
+    kernel: 5
+    init_log_std: -1.0
+  action_hop: 0
+  budget_mode: sphere
+  eps: 0.5
+  budget_penalty: 0.0
+  group_size: 8
+  batch_size: 8
+  crop_seconds: 3.0
+  steps: 2000
+  lr: 0.001
+  ppo_epochs: 2
+  clip: 0.2
+  adv_eps: 0.0001
+  grad_clip: 1.0
+  log_every: 10
+  apply:
+    n_samples: 3
+    batch_size: 16
+    chunk_utts: 512
+    max_seconds: 20.0
+detect:
+  tau: 0.3
+  measures:
+  - estoi
+  - sisdr
+  - wer
+  - sbs
+  margins:
+    estoi: 0.02
+    sisdr: 1.0
+    wer: 0.0
+    sbs: 0.02
+  panel_batch: 64
+panel:
+  device: cuda
+  asr_model: openai/whisper-small
+  measures:
+  - estoi
+  - sisdr
+  - wer
+  - sbs
+patch:
+  pair_source: buffer
+  steps: 1500
+  batch_size: 8
+  pair_batch_size: 8
+  lr_encoder: 1.0e-05
+  lr_head: 0.001
+  weight_decay: 0.01
+  warmup_steps: 100
+  cosine: false
+  grad_clip: 1.0
+  w_mse: 1.0
+  w_rank: 1.0
+  margin: 0.5
+  noise_snr_db:
+  - 5.0
+  - 30.0
+  pgd:
+    eps: 0.002
+    steps: 5
+    step_size: 0.0005
+  log_every: 25
+  eval_every: 500
+  select: last
+eval:
+  batch_size: 16
+  max_seconds: 20.0
+  n_boot: 1000
+wandb:
+  entity: alialavi
+  mode: online
+  group: null

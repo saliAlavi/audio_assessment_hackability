@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -10,15 +11,17 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from hackpatch.repro import load_registry  # noqa: E402
 from hackpatch.utils import paths  # noqa: E402
 
-OUT = ROOT / "analysis" / "out"
-PROJ = paths.SCRATCH_DIR / "projects" / paths.project_name()
+# Overridable so the notebooks can point the analysis at released or recomputed run outputs.
+OUT = Path(os.environ.get("HACKPATCH_ANALYSIS_OUT", ROOT / "analysis" / "out"))
+PROJ = Path(os.environ.get("HACKPATCH_RUNS_DIR", paths.SCRATCH_DIR / "projects" / paths.project_name()))
 ORDER = ["sslmos", "utmos", "nisqa", "dnsmos"]
 
 
 def main() -> None:
-    reg = json.loads((PROJ / "_campaign.json").read_text())
+    reg = load_registry(PROJ)
     rows = []
     for key, v in reg.items():
         if v.get("kind") != "bench":

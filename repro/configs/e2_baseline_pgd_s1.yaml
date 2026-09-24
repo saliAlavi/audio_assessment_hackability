@@ -1,0 +1,33 @@
+config_name: e2_eval
+task: eval_corr
+phase: main
+seed: 1
+run_name: e2_eval_baseline_pgd_s1__2026-09-15_16-33-00
+model:
+  pretrained: facebook/wav2vec2-base
+  freeze_feature_encoder: true
+  freeze_encoder: false
+predictors:
+  baseline_pgd: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_pgd_s1__2026-09-15_16-11-40/results/selected_checkpoint.txt
+eval_sets:
+- bvcc/test
+- bvcc_ood/test
+- nisqa/test_for
+- nisqa/test_p501
+- nisqa/test_livetalk
+- somos/test
+- tmhintqi/test
+- vmc23/track1a
+- vmc23/track1b
+- vmc23/track2
+- vmc23/track3
+- urgent24_sqa/test
+- urgent25_sqa/test
+eval:
+  batch_size: 16
+  max_seconds: 20.0
+  n_boot: 1000
+wandb:
+  entity: alialavi
+  mode: online
+  group: null

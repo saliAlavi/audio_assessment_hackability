@@ -13,6 +13,7 @@ using the panel columns already stored per utterance. No GPU, no re-running.
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -22,10 +23,12 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from hackpatch.detect.detector import MEASURE_SIGN  # noqa: E402
+from hackpatch.repro import load_registry  # noqa: E402
 from hackpatch.utils import paths  # noqa: E402
 
-OUT = ROOT / "analysis" / "out"
-PROJ = paths.SCRATCH_DIR / "projects" / paths.project_name()
+# Overridable so the notebooks can point the analysis at released or recomputed run outputs.
+OUT = Path(os.environ.get("HACKPATCH_ANALYSIS_OUT", ROOT / "analysis" / "out"))
+PROJ = Path(os.environ.get("HACKPATCH_RUNS_DIR", paths.SCRATCH_DIR / "projects" / paths.project_name()))
 TAU = 0.3
 MARGINS = {"estoi": 0.02, "sisdr": 1.0, "wer": 0.0, "sbs": 0.02}
 
@@ -39,8 +42,27 @@ def panel_fires(df: pd.DataFrame) -> pd.Series:
     return fires
 
 
+def attacker_variance(reg: dict) -> pd.DataFrame:
+    """Attacker-seed control: five fresh EnCodec attackers against one fixed predictor (seed 0)."""
+    rows = []
+    for key, v in reg.items():
+        if v.get("kind") != "e1_attacker_seeds":
+            continue
+        for f in sorted(Path(v["run_dir"], "results").glob("attack_grpo_encodec_a*.csv")):
+            d = pd.read_csv(f)
+            m = d[d.cand == 0]
+            panel = panel_fires(m)
+            rows.append({"target": key.split("_")[1], "attacker": f.stem.rsplit("_", 1)[1],
+                         "asr_ref_recon": float((((m.score_attacked - m.score_recon) > TAU) & panel).mean()),
+                         "asr_ref_input": float((((m.score_attacked - m.score_input) > TAU) & panel).mean())})
+    av = pd.DataFrame(rows)
+    if len(av):
+        av.to_csv(OUT / "e1_attacker_variance.csv", index=False)
+    return av
+
+
 def main() -> None:
-    reg = json.loads((PROJ / "_campaign.json").read_text())
+    reg = load_registry(PROJ)
     rows = []
     for key, v in reg.items():
         if v.get("kind") != "e1":
@@ -135,6 +157,8 @@ def main() -> None:
                               "recon_gain": float((m.score_recon - m.score_input).mean()),
                               "n_pairs": int(m.hack.sum()) if "hack" in m else np.nan})
     pd.DataFrame(lrows).to_csv(OUT / "loop_rounds_both_refs.csv", index=False)
+
+    attacker_variance(reg)
 
     # Paired per-seed differences against R0 under each reference.
     report = []

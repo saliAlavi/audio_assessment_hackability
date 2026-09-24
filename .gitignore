@@ -13,3 +13,6 @@ paper/*.blg
 paper/*.fls
 paper/*.fdb_latexmk
 paper/*.synctex.gz
+
+# Notebook outputs of recomputed evaluations (the committed tables live in analysis/out and paper/)
+notebooks/out/

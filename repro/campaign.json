@@ -1,0 +1,604 @@
+{
+ "r0_s0": {
+  "job": "done",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/train_r0_s0__2026-09-15_15-31-19",
+  "kind": "r0"
+ },
+ "r0_s1": {
+  "job": "done",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/train_r0_s1__2026-09-15_15-31-19",
+  "kind": "r0"
+ },
+ "r0_s2": {
+  "job": "done",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/train_r0_s2__2026-09-15_15-31-19",
+  "kind": "r0"
+ },
+ "e2_R0_s0": {
+  "job": "7323988",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_R0_s0__2026-09-15_15-49-55",
+  "kind": "e2",
+  "predictor": "R0"
+ },
+ "e2_R0_s1": {
+  "job": "7324001",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_R0_s1__2026-09-15_15-50-09",
+  "kind": "e2",
+  "predictor": "R0"
+ },
+ "e2_R0_s2": {
+  "job": "7324008",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_R0_s2__2026-09-15_15-52-14",
+  "kind": "e2",
+  "predictor": "R0"
+ },
+ "hnp_s0": {
+  "job": "7324100",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s0__2026-09-15_16-10-10",
+  "kind": "hnp"
+ },
+ "baseline_noise_s0": {
+  "job": "7324103",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_noise_s0__2026-09-15_16-10-19",
+  "kind": "baseline"
+ },
+ "baseline_random_s0": {
+  "job": "7324106",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_random_s0__2026-09-15_16-10-32",
+  "kind": "baseline"
+ },
+ "baseline_pgd_s0": {
+  "job": "7324108",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_pgd_s0__2026-09-15_16-10-55",
+  "kind": "baseline"
+ },
+ "hnp_s1": {
+  "job": "7324114",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s1__2026-09-15_16-11-12",
+  "kind": "hnp"
+ },
+ "baseline_noise_s1": {
+  "job": "7324115",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_noise_s1__2026-09-15_16-11-22",
+  "kind": "baseline"
+ },
+ "baseline_random_s1": {
+  "job": "7324116",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_random_s1__2026-09-15_16-11-32",
+  "kind": "baseline"
+ },
+ "baseline_pgd_s1": {
+  "job": "7324217",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_pgd_s1__2026-09-15_16-11-40",
+  "kind": "baseline"
+ },
+ "hnp_s2": {
+  "job": "7324218",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s2__2026-09-15_16-11-48",
+  "kind": "hnp"
+ },
+ "baseline_noise_s2": {
+  "job": "7324219",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_noise_s2__2026-09-15_16-12-04",
+  "kind": "baseline"
+ },
+ "baseline_random_s2": {
+  "job": "7324222",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_random_s2__2026-09-15_16-12-14",
+  "kind": "baseline"
+ },
+ "baseline_pgd_s2": {
+  "job": "7324323",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_pgd_s2__2026-09-15_16-12-27",
+  "kind": "baseline"
+ },
+ "abl_tau0.1_s0": {
+  "job": "7324338",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.1_s0__2026-09-15_16-12-53",
+  "kind": "ablation"
+ },
+ "abl_margin0.1_s0": {
+  "job": "7324357",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin0.1_s0__2026-09-15_16-13-15",
+  "kind": "ablation"
+ },
+ "abl_headonly_s0": {
+  "job": "7324360",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_headonly_s0__2026-09-15_16-13-49",
+  "kind": "ablation"
+ },
+ "abl_tau0.5_s0": {
+  "job": "7324368",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.5_s0__2026-09-15_16-14-07",
+  "kind": "ablation"
+ },
+ "abl_margin1.0_s0": {
+  "job": "7324369",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin1.0_s0__2026-09-15_16-14-19",
+  "kind": "ablation"
+ },
+ "abl_prefinput_s0": {
+  "job": "7324370",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_prefinput_s0__2026-09-15_16-14-30",
+  "kind": "ablation"
+ },
+ "e1_R0_s0": {
+  "job": "7324396",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R0_s0__2026-09-15_16-19-29",
+  "kind": "e1",
+  "target": "R0"
+ },
+ "e1_R3_s0": {
+  "job": "7324397",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R3_s0__2026-09-15_16-19-42",
+  "kind": "e1",
+  "target": "R3"
+ },
+ "e1_R0_s1": {
+  "job": "7324398",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R0_s1__2026-09-15_16-20-08",
+  "kind": "e1",
+  "target": "R0"
+ },
+ "e1_R3_s1": {
+  "job": "7324399",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R3_s1__2026-09-15_16-20-43",
+  "kind": "e1",
+  "target": "R3"
+ },
+ "e1_R0_s2": {
+  "job": "7324401",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R0_s2__2026-09-15_16-20-59",
+  "kind": "e1",
+  "target": "R0"
+ },
+ "e1_R3_s2": {
+  "job": "7324404",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R3_s2__2026-09-15_16-21-19",
+  "kind": "e1",
+  "target": "R3"
+ },
+ "e1_baseline_noise_s0": {
+  "job": "7324406",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_noise_s0__2026-09-15_16-21-29",
+  "kind": "e1",
+  "target": "baseline_noise"
+ },
+ "e1_baseline_pgd_s0": {
+  "job": "7324409",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_pgd_s0__2026-09-15_16-21-39",
+  "kind": "e1",
+  "target": "baseline_pgd"
+ },
+ "e1_baseline_random_s0": {
+  "job": "7324410",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_random_s0__2026-09-15_16-21-49",
+  "kind": "e1",
+  "target": "baseline_random"
+ },
+ "e1_baseline_noise_s1": {
+  "job": "7324411",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_noise_s1__2026-09-15_16-22-05",
+  "kind": "e1",
+  "target": "baseline_noise"
+ },
+ "e1_baseline_pgd_s1": {
+  "job": "7324413",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_pgd_s1__2026-09-15_16-22-19",
+  "kind": "e1",
+  "target": "baseline_pgd"
+ },
+ "e1_baseline_random_s1": {
+  "job": "7324414",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_random_s1__2026-09-15_16-22-27",
+  "kind": "e1",
+  "target": "baseline_random"
+ },
+ "e1_baseline_noise_s2": {
+  "job": "7324415",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_noise_s2__2026-09-15_16-22-35",
+  "kind": "e1",
+  "target": "baseline_noise"
+ },
+ "e1_baseline_pgd_s2": {
+  "job": "7324416",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_pgd_s2__2026-09-15_16-22-45",
+  "kind": "e1",
+  "target": "baseline_pgd"
+ },
+ "e1_baseline_random_s2": {
+  "job": "7324418",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_random_s2__2026-09-15_16-22-57",
+  "kind": "e1",
+  "target": "baseline_random"
+ },
+ "e1_R1_s0": {
+  "job": "7324422",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R1_s0__2026-09-15_16-23-07",
+  "kind": "e1",
+  "target": "R1"
+ },
+ "e1_R2_s0": {
+  "job": "7324423",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R2_s0__2026-09-15_16-23-27",
+  "kind": "e1",
+  "target": "R2"
+ },
+ "e1_R1_s1": {
+  "job": "7324424",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R1_s1__2026-09-15_16-23-46",
+  "kind": "e1",
+  "target": "R1"
+ },
+ "e1_R2_s1": {
+  "job": "7324430",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R2_s1__2026-09-15_16-24-07",
+  "kind": "e1",
+  "target": "R2"
+ },
+ "e1_R1_s2": {
+  "job": "7324435",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R1_s2__2026-09-15_16-24-30",
+  "kind": "e1",
+  "target": "R1"
+ },
+ "e1_R2_s2": {
+  "job": "7324439",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R2_s2__2026-09-15_16-25-13",
+  "kind": "e1",
+  "target": "R2"
+ },
+ "e2_R1_s0": {
+  "job": "7324443",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_R1_s0__2026-09-15_16-25-46",
+  "kind": "e2",
+  "predictor": "R1"
+ },
+ "e2_R2_s0": {
+  "job": "7324445",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_R2_s0__2026-09-15_16-26-03",
+  "kind": "e2",
+  "predictor": "R2"
+ },
+ "e2_R3_s0": {
+  "job": "7324448",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_R3_s0__2026-09-15_16-26-26",
+  "kind": "e2",
+  "predictor": "R3"
+ },
+ "e2_baseline_noise_s0": {
+  "job": "7324450",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_baseline_noise_s0__2026-09-15_16-26-44",
+  "kind": "e2",
+  "predictor": "baseline_noise"
+ },
+ "e2_baseline_pgd_s0": {
+  "job": "7324459",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_baseline_pgd_s0__2026-09-15_16-26-55",
+  "kind": "e2",
+  "predictor": "baseline_pgd"
+ },
+ "e2_baseline_random_s0": {
+  "job": "7324460",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_baseline_random_s0__2026-09-15_16-27-32",
+  "kind": "e2",
+  "predictor": "baseline_random"
+ },
+ "e2_R1_s1": {
+  "job": "7324483",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_R1_s1__2026-09-15_16-30-09",
+  "kind": "e2",
+  "predictor": "R1"
+ },
+ "e2_R2_s1": {
+  "job": "7324484",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_R2_s1__2026-09-15_16-30-23",
+  "kind": "e2",
+  "predictor": "R2"
+ },
+ "e2_R3_s1": {
+  "job": "7324485",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_R3_s1__2026-09-15_16-30-36",
+  "kind": "e2",
+  "predictor": "R3"
+ },
+ "e2_baseline_noise_s1": {
+  "job": "7324494",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_baseline_noise_s1__2026-09-15_16-32-43",
+  "kind": "e2",
+  "predictor": "baseline_noise"
+ },
+ "e2_baseline_pgd_s1": {
+  "job": "7324495",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_baseline_pgd_s1__2026-09-15_16-33-00",
+  "kind": "e2",
+  "predictor": "baseline_pgd"
+ },
+ "e2_baseline_random_s1": {
+  "job": "7324498",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_baseline_random_s1__2026-09-15_16-33-26",
+  "kind": "e2",
+  "predictor": "baseline_random"
+ },
+ "e2_R1_s2": {
+  "job": "7324503",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_R1_s2__2026-09-15_16-33-52",
+  "kind": "e2",
+  "predictor": "R1"
+ },
+ "e2_R2_s2": {
+  "job": "7324506",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_R2_s2__2026-09-15_16-34-15",
+  "kind": "e2",
+  "predictor": "R2"
+ },
+ "e2_R3_s2": {
+  "job": "7324512",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_R3_s2__2026-09-15_16-34-35",
+  "kind": "e2",
+  "predictor": "R3"
+ },
+ "e2_baseline_noise_s2": {
+  "job": "7324516",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_baseline_noise_s2__2026-09-15_16-35-14",
+  "kind": "e2",
+  "predictor": "baseline_noise"
+ },
+ "e2_baseline_pgd_s2": {
+  "job": "7324523",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_baseline_pgd_s2__2026-09-15_16-35-51",
+  "kind": "e2",
+  "predictor": "baseline_pgd"
+ },
+ "e2_baseline_random_s2": {
+  "job": "7324528",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_baseline_random_s2__2026-09-15_16-36-48",
+  "kind": "e2",
+  "predictor": "baseline_random"
+ },
+ "e2_abl_tau0p1_s0_s0": {
+  "job": "7324955",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_abl_tau0p1_s0_s0__2026-09-15_17-28-50",
+  "kind": "e2",
+  "predictor": "abl_tau0p1_s0"
+ },
+ "e2_abl_margin0p1_s0_s0": {
+  "job": "7324957",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_abl_margin0p1_s0_s0__2026-09-15_17-29-09",
+  "kind": "e2",
+  "predictor": "abl_margin0p1_s0"
+ },
+ "e2_abl_headonly_s0_s0": {
+  "job": "7324959",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_abl_headonly_s0_s0__2026-09-15_17-29-37",
+  "kind": "e2",
+  "predictor": "abl_headonly_s0"
+ },
+ "e2_abl_margin1p0_s0_s0": {
+  "job": "7324961",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_abl_margin1p0_s0_s0__2026-09-15_17-30-44",
+  "kind": "e2",
+  "predictor": "abl_margin1p0_s0"
+ },
+ "e2_abl_prefinput_s0_s0": {
+  "job": "7324962",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_abl_prefinput_s0_s0__2026-09-15_17-31-08",
+  "kind": "e2",
+  "predictor": "abl_prefinput_s0"
+ },
+ "e3_grpo_R0_s0": {
+  "job": "7324964",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R0_s0__2026-09-15_17-32-04",
+  "kind": "e3_grpo",
+  "reward": "R0"
+ },
+ "e3_grpo_R3_s0": {
+  "job": "7324965",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R3_s0__2026-09-15_17-32-19",
+  "kind": "e3_grpo",
+  "reward": "R3"
+ },
+ "e3_grpo_baseline_noise_s0": {
+  "job": "7324968",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_noise_s0__2026-09-15_17-32-38",
+  "kind": "e3_grpo",
+  "reward": "baseline_noise"
+ },
+ "e3_grpo_baseline_pgd_s0": {
+  "job": "7324969",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_pgd_s0__2026-09-15_17-33-15",
+  "kind": "e3_grpo",
+  "reward": "baseline_pgd"
+ },
+ "e3_grpo_baseline_random_s0": {
+  "job": "7324970",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_random_s0__2026-09-15_17-33-42",
+  "kind": "e3_grpo",
+  "reward": "baseline_random"
+ },
+ "e3_eval_s0": {
+  "job": "7324971",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_eval_s0__2026-09-15_17-34-11",
+  "kind": "e3_eval"
+ },
+ "e3_grpo_R0_s1": {
+  "job": "7324972",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R0_s1__2026-09-15_17-34-28",
+  "kind": "e3_grpo",
+  "reward": "R0"
+ },
+ "e3_grpo_R3_s1": {
+  "job": "7324975",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R3_s1__2026-09-15_17-35-04",
+  "kind": "e3_grpo",
+  "reward": "R3"
+ },
+ "e3_grpo_baseline_noise_s1": {
+  "job": "7324977",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_noise_s1__2026-09-15_17-36-30",
+  "kind": "e3_grpo",
+  "reward": "baseline_noise"
+ },
+ "e3_grpo_baseline_pgd_s1": {
+  "job": "7324978",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_pgd_s1__2026-09-15_17-37-14",
+  "kind": "e3_grpo",
+  "reward": "baseline_pgd"
+ },
+ "e3_grpo_baseline_random_s1": {
+  "job": "7324981",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_random_s1__2026-09-15_17-37-50",
+  "kind": "e3_grpo",
+  "reward": "baseline_random"
+ },
+ "e3_eval_s1": {
+  "job": "7324982",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_eval_s1__2026-09-15_17-38-39",
+  "kind": "e3_eval"
+ },
+ "e3_grpo_R0_s2": {
+  "job": "7324984",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R0_s2__2026-09-15_17-39-30",
+  "kind": "e3_grpo",
+  "reward": "R0"
+ },
+ "e3_grpo_R3_s2": {
+  "job": "7324991",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R3_s2__2026-09-15_17-40-21",
+  "kind": "e3_grpo",
+  "reward": "R3"
+ },
+ "e3_grpo_baseline_noise_s2": {
+  "job": "7324993",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_noise_s2__2026-09-15_17-41-22",
+  "kind": "e3_grpo",
+  "reward": "baseline_noise"
+ },
+ "e3_grpo_baseline_pgd_s2": {
+  "job": "7324995",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_pgd_s2__2026-09-15_17-41-55",
+  "kind": "e3_grpo",
+  "reward": "baseline_pgd"
+ },
+ "e3_grpo_baseline_random_s2": {
+  "job": "7324999",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_random_s2__2026-09-15_17-42-42",
+  "kind": "e3_grpo",
+  "reward": "baseline_random"
+ },
+ "e3_eval_s2": {
+  "job": "7325001",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_eval_s2__2026-09-15_17-43-05",
+  "kind": "e3_eval"
+ },
+ "e2_abl_tau0p5_s0_s0": {
+  "job": "7325642",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_abl_tau0p5_s0_s0__2026-09-15_19-36-31",
+  "kind": "e2",
+  "predictor": "abl_tau0p5_s0"
+ },
+ "ms_s0": {
+  "job": "7326899",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s0__2026-09-15_23-15-22",
+  "kind": "multispace"
+ },
+ "ms_s1": {
+  "job": "7326900",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s1__2026-09-15_23-15-22",
+  "kind": "multispace"
+ },
+ "ms_s2": {
+  "job": "7326901",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s2__2026-09-15_23-15-22",
+  "kind": "multispace"
+ },
+ "e1_R3ms_s0": {
+  "job": "7326903",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R3ms_s0__2026-09-15_23-15-44",
+  "kind": "e1",
+  "target": "R3ms"
+ },
+ "e2_R3ms_s0": {
+  "job": "7326904",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_R3ms_s0__2026-09-15_23-15-44",
+  "kind": "e2",
+  "predictor": "R3ms"
+ },
+ "e1_R3ms_s1": {
+  "job": "7326905",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R3ms_s1__2026-09-15_23-15-44",
+  "kind": "e1",
+  "target": "R3ms"
+ },
+ "e2_R3ms_s1": {
+  "job": "7326906",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_R3ms_s1__2026-09-15_23-15-45",
+  "kind": "e2",
+  "predictor": "R3ms"
+ },
+ "e1_R3ms_s2": {
+  "job": "7326907",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R3ms_s2__2026-09-15_23-15-45",
+  "kind": "e1",
+  "target": "R3ms"
+ },
+ "e2_R3ms_s2": {
+  "job": "7326908",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e2_eval_R3ms_s2__2026-09-15_23-15-45",
+  "kind": "e2",
+  "predictor": "R3ms"
+ },
+ "e1seed_R0_s0": {
+  "job": "7329948",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attacker_seeds_R0_s0__2026-09-16_03-24-00",
+  "kind": "e1_attacker_seeds",
+  "target": "R0"
+ },
+ "e1seed_R3_s0": {
+  "job": "7329949",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attacker_seeds_R3_s0__2026-09-16_03-24-00",
+  "kind": "e1_attacker_seeds",
+  "target": "R3"
+ },
+ "e1seed_R3ms_s0": {
+  "job": "7329950",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attacker_seeds_R3ms_s0__2026-09-16_03-24-01",
+  "kind": "e1_attacker_seeds",
+  "target": "R3ms"
+ },
+ "e3_grpo_R2_s0": {
+  "job": "7330344",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R2_s0__2026-09-16_05-13-55",
+  "kind": "e3_grpo",
+  "reward": "R2"
+ },
+ "e3_eval_R2_s0": {
+  "job": "7330345",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_eval_R2_s0__2026-09-16_05-13-55",
+  "kind": "e3_eval_r2"
+ },
+ "bench_sslmos": {
+  "job": "7330645",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_sslmos_s0__2026-09-16_05-51-23",
+  "kind": "bench",
+  "target": "sslmos"
+ },
+ "bench_utmos": {
+  "job": "7330646",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_utmos_s0__2026-09-16_05-51-23",
+  "kind": "bench",
+  "target": "utmos"
+ },
+ "bench_nisqa": {
+  "job": "7330647",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_nisqa_s0__2026-09-16_05-51-23",
+  "kind": "bench",
+  "target": "nisqa"
+ },
+ "bench_dnsmos": {
+  "job": "7330648",
+  "run_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_dnsmos_s0__2026-09-16_05-51-23",
+  "kind": "bench",
+  "target": "dnsmos"
+ }
+}

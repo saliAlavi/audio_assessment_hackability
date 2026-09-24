@@ -1,0 +1,1443 @@
+{
+ "repo": "saliAlavi/audio_assessment_hackability",
+ "tag": "checkpoints-v1",
+ "orig_runs_dir": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability",
+ "results_bundle": {
+  "asset": "run_results.tar.gz",
+  "size": 74322361,
+  "sha256": "d5993b5957e708e721d8baaa59e61923fe53351c17b890029f693ecf082cec9d"
+ },
+ "pointers": {
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_noise_s0__2026-09-15_16-10-19/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_noise_s0__2026-09-15_16-10-19/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_noise_s1__2026-09-15_16-11-22/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_noise_s1__2026-09-15_16-11-22/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_noise_s2__2026-09-15_16-12-04/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_noise_s2__2026-09-15_16-12-04/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_pgd_s0__2026-09-15_16-10-55/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_pgd_s0__2026-09-15_16-10-55/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_pgd_s1__2026-09-15_16-11-40/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_pgd_s1__2026-09-15_16-11-40/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_pgd_s2__2026-09-15_16-12-27/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_pgd_s2__2026-09-15_16-12-27/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_random_s0__2026-09-15_16-10-32/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_random_s0__2026-09-15_16-10-32/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_random_s1__2026-09-15_16-11-32/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_random_s1__2026-09-15_16-11-32/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_random_s2__2026-09-15_16-12-14/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_random_s2__2026-09-15_16-12-14/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_headonly_s0__2026-09-15_16-13-49/round1/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_headonly_s0__2026-09-15_16-13-49/round1/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_headonly_s0__2026-09-15_16-13-49/round2/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_headonly_s0__2026-09-15_16-13-49/round2/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_headonly_s0__2026-09-15_16-13-49/round3/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_headonly_s0__2026-09-15_16-13-49/round3/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin0.1_s0__2026-09-15_16-13-15/round1/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin0.1_s0__2026-09-15_16-13-15/round1/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin0.1_s0__2026-09-15_16-13-15/round2/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin0.1_s0__2026-09-15_16-13-15/round2/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin0.1_s0__2026-09-15_16-13-15/round3/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin0.1_s0__2026-09-15_16-13-15/round3/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin1.0_s0__2026-09-15_16-14-19/round1/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin1.0_s0__2026-09-15_16-14-19/round1/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin1.0_s0__2026-09-15_16-14-19/round2/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin1.0_s0__2026-09-15_16-14-19/round2/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin1.0_s0__2026-09-15_16-14-19/round3/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin1.0_s0__2026-09-15_16-14-19/round3/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s0__2026-09-15_23-15-22/round1/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s0__2026-09-15_23-15-22/round1/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s0__2026-09-15_23-15-22/round2/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s0__2026-09-15_23-15-22/round2/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s0__2026-09-15_23-15-22/round3/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s0__2026-09-15_23-15-22/round3/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s1__2026-09-15_23-15-22/round1/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s1__2026-09-15_23-15-22/round1/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s1__2026-09-15_23-15-22/round2/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s1__2026-09-15_23-15-22/round2/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s1__2026-09-15_23-15-22/round3/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s1__2026-09-15_23-15-22/round3/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s2__2026-09-15_23-15-22/round1/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s2__2026-09-15_23-15-22/round1/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s2__2026-09-15_23-15-22/round2/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s2__2026-09-15_23-15-22/round2/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s2__2026-09-15_23-15-22/round3/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s2__2026-09-15_23-15-22/round3/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_prefinput_s0__2026-09-15_16-14-30/round1/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_prefinput_s0__2026-09-15_16-14-30/round1/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_prefinput_s0__2026-09-15_16-14-30/round2/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_prefinput_s0__2026-09-15_16-14-30/round2/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_prefinput_s0__2026-09-15_16-14-30/round3/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_prefinput_s0__2026-09-15_16-14-30/round3/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s0__2026-09-15_16-10-10/round1/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s0__2026-09-15_16-10-10/round1/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s0__2026-09-15_16-10-10/round2/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s0__2026-09-15_16-10-10/round2/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s0__2026-09-15_16-10-10/round3/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s0__2026-09-15_16-10-10/round3/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s1__2026-09-15_16-11-12/round1/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s1__2026-09-15_16-11-12/round1/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s1__2026-09-15_16-11-12/round2/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s1__2026-09-15_16-11-12/round2/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s1__2026-09-15_16-11-12/round3/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s1__2026-09-15_16-11-12/round3/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s2__2026-09-15_16-11-48/round1/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s2__2026-09-15_16-11-48/round1/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s2__2026-09-15_16-11-48/round2/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s2__2026-09-15_16-11-48/round2/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s2__2026-09-15_16-11-48/round3/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s2__2026-09-15_16-11-48/round3/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.1_s0__2026-09-15_16-12-53/round1/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.1_s0__2026-09-15_16-12-53/round1/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.1_s0__2026-09-15_16-12-53/round2/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.1_s0__2026-09-15_16-12-53/round2/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.1_s0__2026-09-15_16-12-53/round3/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.1_s0__2026-09-15_16-12-53/round3/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.5_s0__2026-09-15_16-14-07/round1/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.5_s0__2026-09-15_16-14-07/round1/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.5_s0__2026-09-15_16-14-07/round2/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.5_s0__2026-09-15_16-14-07/round2/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.5_s0__2026-09-15_16-14-07/round3/done.json": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.5_s0__2026-09-15_16-14-07/round3/predictor/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R0_s0__2026-09-15_17-32-04/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R0_s0__2026-09-15_17-32-04/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R0_s1__2026-09-15_17-34-28/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R0_s1__2026-09-15_17-34-28/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R0_s2__2026-09-15_17-39-30/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R0_s2__2026-09-15_17-39-30/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R2_s0__2026-09-16_05-13-55/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R2_s0__2026-09-16_05-13-55/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R3_s0__2026-09-15_17-32-19/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R3_s0__2026-09-15_17-32-19/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R3_s1__2026-09-15_17-35-04/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R3_s1__2026-09-15_17-35-04/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R3_s2__2026-09-15_17-40-21/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R3_s2__2026-09-15_17-40-21/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_noise_s0__2026-09-15_17-32-38/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_noise_s0__2026-09-15_17-32-38/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_noise_s1__2026-09-15_17-36-30/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_noise_s1__2026-09-15_17-36-30/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_noise_s2__2026-09-15_17-41-22/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_noise_s2__2026-09-15_17-41-22/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_pgd_s0__2026-09-15_17-33-15/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_pgd_s0__2026-09-15_17-33-15/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_pgd_s1__2026-09-15_17-37-14/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_pgd_s1__2026-09-15_17-37-14/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_pgd_s2__2026-09-15_17-41-55/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_pgd_s2__2026-09-15_17-41-55/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_random_s0__2026-09-15_17-33-42/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_random_s0__2026-09-15_17-33-42/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_random_s1__2026-09-15_17-37-50/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_random_s1__2026-09-15_17-37-50/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_random_s2__2026-09-15_17-42-42/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_random_s2__2026-09-15_17-42-42/checkpoints/last.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/train_r0_s0__2026-09-15_15-31-19/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/train_r0_s0__2026-09-15_15-31-19/checkpoints/best.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/train_r0_s1__2026-09-15_15-31-19/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/train_r0_s1__2026-09-15_15-31-19/checkpoints/best.pt",
+  "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/train_r0_s2__2026-09-15_15-31-19/results/selected_checkpoint.txt": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/train_r0_s2__2026-09-15_15-31-19/checkpoints/best.pt"
+ },
+ "assets": [
+  {
+   "asset": "baseline_noise_s0.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_noise_s0__2026-09-15_16-10-19/checkpoints/last.pt",
+   "role": "selected",
+   "size": 377563524,
+   "sha256": "c50e3f6fdd0a2c81e631e800d66b9bef7c95434da290c1ee0b061fbbf5684749"
+  },
+  {
+   "asset": "baseline_noise_s1.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_noise_s1__2026-09-15_16-11-22/checkpoints/last.pt",
+   "role": "selected",
+   "size": 377563524,
+   "sha256": "a30e52587e6d8a20e152b56b4652da4c434ba57a92e6913b4b08697505aad1ef"
+  },
+  {
+   "asset": "baseline_noise_s2.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_noise_s2__2026-09-15_16-12-04/checkpoints/last.pt",
+   "role": "selected",
+   "size": 377563524,
+   "sha256": "807f8400df2a3d5edb08c603ce892e1cfc74b2ff45a9dcb3d2d52c15f627a99e"
+  },
+  {
+   "asset": "baseline_pgd_s0.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_pgd_s0__2026-09-15_16-10-55/checkpoints/last.pt",
+   "role": "selected",
+   "size": 377563524,
+   "sha256": "ec9580bf638648b12f2e30896b49e555a3bb4974575df9c9580918e4cab6be7b"
+  },
+  {
+   "asset": "baseline_pgd_s1.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_pgd_s1__2026-09-15_16-11-40/checkpoints/last.pt",
+   "role": "selected",
+   "size": 377563524,
+   "sha256": "689f94b665b0cdc799cfc8f5cd5b044ef44703b9eb6983accec669c2247ed6b2"
+  },
+  {
+   "asset": "baseline_pgd_s2.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_pgd_s2__2026-09-15_16-12-27/checkpoints/last.pt",
+   "role": "selected",
+   "size": 377563524,
+   "sha256": "7ba6024b45d879dd2b064ce338e3dc22a60b81648eaa1c909888d3ebf8272692"
+  },
+  {
+   "asset": "baseline_random_s0.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_random_s0__2026-09-15_16-10-32/checkpoints/last.pt",
+   "role": "selected",
+   "size": 377563588,
+   "sha256": "4eba63c636d0ac719f7a4479c3330594b3df35492b289a8c5c55136e9fd271d6"
+  },
+  {
+   "asset": "baseline_random_s1.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_random_s1__2026-09-15_16-11-32/checkpoints/last.pt",
+   "role": "selected",
+   "size": 377563588,
+   "sha256": "83f0054fbcc33bfb2c6f672cd3bf672885e8bf0cfdeb70251e3860fcef1ed14b"
+  },
+  {
+   "asset": "baseline_random_s2.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_random_s2__2026-09-15_16-12-14/checkpoints/last.pt",
+   "role": "selected",
+   "size": 377563588,
+   "sha256": "01b49a9243ead90c118f54bec9f3cf8229f4b429674cdfff85b604a5f6dac461"
+  },
+  {
+   "asset": "e1_R0_s0.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R0_s0__2026-09-15_16-19-29/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "259dd57168ba415853f8a30e5bb9d9f679fbf29da49cea10e5281972c1e76332"
+  },
+  {
+   "asset": "e1_R0_s0.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R0_s0__2026-09-15_16-19-29/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "51bc63c923d09cfa470446a7f9c08dd24cc526cb9058764df31347c769b99cae"
+  },
+  {
+   "asset": "e1_R0_s1.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R0_s1__2026-09-15_16-20-08/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "190f3e73da360810213ffa866f05a9b56149940aa6467fbc27bab2f7da78592a"
+  },
+  {
+   "asset": "e1_R0_s1.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R0_s1__2026-09-15_16-20-08/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "f017a4535facbb371e5a30a4af1f67fc30e127861f239b77123a389dbb4e0afc"
+  },
+  {
+   "asset": "e1_R0_s2.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R0_s2__2026-09-15_16-20-59/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "5c51880aadf6d179ecaad39e6586a64a30cfead3eaa7d6e989371ef788810f4a"
+  },
+  {
+   "asset": "e1_R0_s2.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R0_s2__2026-09-15_16-20-59/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "96e12c54557d7df7487ea169a7ab26b61403ec8ae4550403d79390d4fc28d1ae"
+  },
+  {
+   "asset": "e1_R1_s0.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R1_s0__2026-09-15_16-23-07/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "cbe2ec7f642b9051b73c06e5f93810d78d66c9b1bce9f8f5c2b93d51b8faa5a5"
+  },
+  {
+   "asset": "e1_R1_s0.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R1_s0__2026-09-15_16-23-07/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "e0da17dd3448ad3b5395e890d20d6eb3c8a81ceb1c115a9fcafc1831fef474a5"
+  },
+  {
+   "asset": "e1_R1_s1.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R1_s1__2026-09-15_16-23-46/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "6fd9153f14f7cacc37a78cbb36545f47b5f35e7f3ffa4ecddb9da1a9f632e011"
+  },
+  {
+   "asset": "e1_R1_s1.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R1_s1__2026-09-15_16-23-46/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "1ccb1c13c5eb49be46b91909725b2bfb27c00e45f256892ad7bc65dea9e7c3e5"
+  },
+  {
+   "asset": "e1_R1_s2.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R1_s2__2026-09-15_16-24-30/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "edb9524bd25ff7f84032a172811a37af7c6481d3ee0b497735f166017dbf5a38"
+  },
+  {
+   "asset": "e1_R1_s2.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R1_s2__2026-09-15_16-24-30/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "ab93a8b54445f9bd47c1fdc440d501b2556d309a271b3d213888098af9425635"
+  },
+  {
+   "asset": "e1_R2_s0.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R2_s0__2026-09-15_16-23-27/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "d9aba2e75cf4744f67da1b02adbfc85316ba21737ee3592eb253a6bbdb46a30b"
+  },
+  {
+   "asset": "e1_R2_s0.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R2_s0__2026-09-15_16-23-27/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "18bc802333641cec34b9e959e3883f89f6d217655dd3b480e3b7289eb62b7dbd"
+  },
+  {
+   "asset": "e1_R2_s1.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R2_s1__2026-09-15_16-24-07/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "3f27db36e98b1d5723f9c76eaa1b5fbea923f3de7d1a7e73175803a2a820695f"
+  },
+  {
+   "asset": "e1_R2_s1.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R2_s1__2026-09-15_16-24-07/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "89ed96bb7700899ddbd4dfe4ef4ea21bcdabd31d567752c906707fbf3b9707d4"
+  },
+  {
+   "asset": "e1_R2_s2.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R2_s2__2026-09-15_16-25-13/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "a00d1bd75df19c1e4b046941d9920a7e013bc4903bcae37bd0b89fcaf95bcdca"
+  },
+  {
+   "asset": "e1_R2_s2.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R2_s2__2026-09-15_16-25-13/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "03d1a2449f6557d133f8963d19237bd5d40a06cfa66d7f74517626d44d6e744a"
+  },
+  {
+   "asset": "e1_R3_s0.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R3_s0__2026-09-15_16-19-42/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "6e7d3ea69aeabd2cc45a70dd2d7c7915b866ab6aca7901252285d02c14ac4d7b"
+  },
+  {
+   "asset": "e1_R3_s0.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R3_s0__2026-09-15_16-19-42/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "7f5c3678cc37e55090c2b538a69906f1242c0ed7f90a959ffe0a32f6a855257d"
+  },
+  {
+   "asset": "e1_R3_s1.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R3_s1__2026-09-15_16-20-43/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "5b9a7d7b2292ce7cbe28a90d7b2e5f63edef49f6edd13dcbc889aea7c33e0ea5"
+  },
+  {
+   "asset": "e1_R3_s1.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R3_s1__2026-09-15_16-20-43/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "1832b88b1a87660490ee7f607ac9caab2c375dcc36111b08e5b8f08e24fabef0"
+  },
+  {
+   "asset": "e1_R3_s2.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R3_s2__2026-09-15_16-21-19/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "7d5429a82bf6d0e7090cfbc3fe8fecc5fcf2bd49384ad7746271d7c47c071947"
+  },
+  {
+   "asset": "e1_R3_s2.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R3_s2__2026-09-15_16-21-19/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "61e6881e0b357b258825b939fc3e2916c8853e6e137c46a95f811dc4c9085990"
+  },
+  {
+   "asset": "e1_R3ms_s0.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R3ms_s0__2026-09-15_23-15-44/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "dd486bf180426b2cf9f83737e00a12c5b7400c594d7af6eda8fd00e49672b3de"
+  },
+  {
+   "asset": "e1_R3ms_s0.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R3ms_s0__2026-09-15_23-15-44/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "2ad6d2ac9875c81093d8bfad8fe5efdc703b38213834b0a65b48f9cfb1e520a3"
+  },
+  {
+   "asset": "e1_R3ms_s1.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R3ms_s1__2026-09-15_23-15-44/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "ad5217a7ff925f4f241576d5268816722adf4ff91aac2693273ba136ef3ff7e6"
+  },
+  {
+   "asset": "e1_R3ms_s1.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R3ms_s1__2026-09-15_23-15-44/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "d935fbc3447ff7c8ceba9e056e72c08d4ea07bafc440bd610971ecaac1d1bd44"
+  },
+  {
+   "asset": "e1_R3ms_s2.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R3ms_s2__2026-09-15_23-15-45/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "26f25894503a09ab5e601af49e113fec2e93acc84e285a3ad2a4f1d714fa29a9"
+  },
+  {
+   "asset": "e1_R3ms_s2.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_R3ms_s2__2026-09-15_23-15-45/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "9e8214b698451fa43bd99705f48c0b7cc85a06510501781f5a29a76405b79b73"
+  },
+  {
+   "asset": "e1_baseline_noise_s0.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_noise_s0__2026-09-15_16-21-29/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "d3c8b228576aa5ff70e03fe77a4a4f315f845d9d0365afd50f031975511b0617"
+  },
+  {
+   "asset": "e1_baseline_noise_s0.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_noise_s0__2026-09-15_16-21-29/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "1b776dd040f61fef142d915b03e82d155e52675a6fd9a01443db9bc6e0077eb5"
+  },
+  {
+   "asset": "e1_baseline_noise_s1.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_noise_s1__2026-09-15_16-22-05/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "bf297e518943fb7322d107703abd6827e2892f7c1439da75b03990c949064637"
+  },
+  {
+   "asset": "e1_baseline_noise_s1.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_noise_s1__2026-09-15_16-22-05/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "ecc61cb38305f8be3cf5b8ac13b8fcd0b8c12cfc7328966e45be9ab940914cee"
+  },
+  {
+   "asset": "e1_baseline_noise_s2.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_noise_s2__2026-09-15_16-22-35/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "8bd28e8810c9277c08fa7714341aa310dd84ca5b8e4a1545b0cf86cda109df85"
+  },
+  {
+   "asset": "e1_baseline_noise_s2.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_noise_s2__2026-09-15_16-22-35/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "d8b0bc963c86a85f4881103450312c43b43da815ffb6c20b5aa1267d05b7941a"
+  },
+  {
+   "asset": "e1_baseline_pgd_s0.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_pgd_s0__2026-09-15_16-21-39/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "0b74c9582863ae8271749e131622eca98d8aa02705361f6117629ca9097f1815"
+  },
+  {
+   "asset": "e1_baseline_pgd_s0.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_pgd_s0__2026-09-15_16-21-39/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "1a1d712ef90b7f36d50dcfe17e8ef5ae5fbadb5816368d2ffb91c46c151b3b50"
+  },
+  {
+   "asset": "e1_baseline_pgd_s1.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_pgd_s1__2026-09-15_16-22-19/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "fcdfc8703e6ab747c7e8d3a706ad789f819a41a2b92498eb7c92ed318c4422df"
+  },
+  {
+   "asset": "e1_baseline_pgd_s1.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_pgd_s1__2026-09-15_16-22-19/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "9a720d396ebde9f2f787c3f33f26c74d6b523a32915d8d10c0bac29772d70a86"
+  },
+  {
+   "asset": "e1_baseline_pgd_s2.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_pgd_s2__2026-09-15_16-22-45/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265402,
+   "sha256": "11f239c25a7947fc6a7f6b05e42b00957638f95248b83ace51207c712651de10"
+  },
+  {
+   "asset": "e1_baseline_pgd_s2.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_pgd_s2__2026-09-15_16-22-45/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "a413a0805253e05271b8c3edc3a3b1f2010bf65a7e0c0259bd14185e4fdb1ef0"
+  },
+  {
+   "asset": "e1_baseline_random_s0.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_random_s0__2026-09-15_16-21-49/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265466,
+   "sha256": "1166789bbb958283dffda9cd2b3009e22c69d95e63c1645c0083a91025ea1158"
+  },
+  {
+   "asset": "e1_baseline_random_s0.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_random_s0__2026-09-15_16-21-49/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "2bcf77d05f84343964dd786f0f5ed06887e2baa89c3b1966842e3b722be230f7"
+  },
+  {
+   "asset": "e1_baseline_random_s1.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_random_s1__2026-09-15_16-22-27/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265466,
+   "sha256": "52dc94a23411b55073c01bf06a7455ce308d1b384ae0c7308a634f3e9857102e"
+  },
+  {
+   "asset": "e1_baseline_random_s1.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_random_s1__2026-09-15_16-22-27/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "e55a53e0dba7e43a42a43f74b4c8836cc7f1e06aaba6d2268ac9aff072b04a86"
+  },
+  {
+   "asset": "e1_baseline_random_s2.checkpoints.attacker_grpo_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_random_s2__2026-09-15_16-22-57/checkpoints/attacker_grpo_dac.pt",
+   "role": "attacker",
+   "size": 10265466,
+   "sha256": "ba4bc7cfc948cb52e3d97347e9b6f77ad3b1ab5329c9d4caf10c30806b622577"
+  },
+  {
+   "asset": "e1_baseline_random_s2.checkpoints.attacker_grpo_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attack_baseline_random_s2__2026-09-15_16-22-57/checkpoints/attacker_grpo_encodec.pt",
+   "role": "attacker",
+   "size": 4746118,
+   "sha256": "4c41aee1d7127eb4ea9b31d044fc6c574aa9bee4560463e7324dda0d80e97c8d"
+  },
+  {
+   "asset": "e1seed_R0_s0.checkpoints.attacker_grpo_encodec_a1.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attacker_seeds_R0_s0__2026-09-16_03-24-00/checkpoints/attacker_grpo_encodec_a1.pt",
+   "role": "attacker",
+   "size": 4745279,
+   "sha256": "2031fbb8eafb3ef44007334b1eddd446e865b9cb515c7b0cf6258571650a025a"
+  },
+  {
+   "asset": "e1seed_R0_s0.checkpoints.attacker_grpo_encodec_a2.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attacker_seeds_R0_s0__2026-09-16_03-24-00/checkpoints/attacker_grpo_encodec_a2.pt",
+   "role": "attacker",
+   "size": 4745279,
+   "sha256": "929608bda4ec6f4eee5d62968683e607c8258b8bad116dd658527a48bf510843"
+  },
+  {
+   "asset": "e1seed_R0_s0.checkpoints.attacker_grpo_encodec_a3.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attacker_seeds_R0_s0__2026-09-16_03-24-00/checkpoints/attacker_grpo_encodec_a3.pt",
+   "role": "attacker",
+   "size": 4745279,
+   "sha256": "6cac61de301d87092e9355a328a2f94a49daac85146f39d369fc2c8431d5efdf"
+  },
+  {
+   "asset": "e1seed_R0_s0.checkpoints.attacker_grpo_encodec_a4.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attacker_seeds_R0_s0__2026-09-16_03-24-00/checkpoints/attacker_grpo_encodec_a4.pt",
+   "role": "attacker",
+   "size": 4745279,
+   "sha256": "2d8357bdf67e7897eb53f8651d00c5aac96f1ad9bdcfed3c7d97f7ef8a984250"
+  },
+  {
+   "asset": "e1seed_R0_s0.checkpoints.attacker_grpo_encodec_a5.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attacker_seeds_R0_s0__2026-09-16_03-24-00/checkpoints/attacker_grpo_encodec_a5.pt",
+   "role": "attacker",
+   "size": 4745279,
+   "sha256": "704ffe1a0b66db71303f6e986a6701cbc1badf98095e91e67cd88d6f19d656a5"
+  },
+  {
+   "asset": "e1seed_R3_s0.checkpoints.attacker_grpo_encodec_a1.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attacker_seeds_R3_s0__2026-09-16_03-24-00/checkpoints/attacker_grpo_encodec_a1.pt",
+   "role": "attacker",
+   "size": 4745279,
+   "sha256": "5b807bb8c1aabfc4fc257308ceb0fde939242d139f2ba253eed6b00df872d237"
+  },
+  {
+   "asset": "e1seed_R3_s0.checkpoints.attacker_grpo_encodec_a2.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attacker_seeds_R3_s0__2026-09-16_03-24-00/checkpoints/attacker_grpo_encodec_a2.pt",
+   "role": "attacker",
+   "size": 4745279,
+   "sha256": "08cebacb804f3c90ed0da0e676647946df6fd52415000376a98c11ea3c51a39a"
+  },
+  {
+   "asset": "e1seed_R3_s0.checkpoints.attacker_grpo_encodec_a3.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attacker_seeds_R3_s0__2026-09-16_03-24-00/checkpoints/attacker_grpo_encodec_a3.pt",
+   "role": "attacker",
+   "size": 4745279,
+   "sha256": "2d57971945c5937ccd99259eb21ad744103c9572989a70877234b23973b1524c"
+  },
+  {
+   "asset": "e1seed_R3_s0.checkpoints.attacker_grpo_encodec_a4.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attacker_seeds_R3_s0__2026-09-16_03-24-00/checkpoints/attacker_grpo_encodec_a4.pt",
+   "role": "attacker",
+   "size": 4745279,
+   "sha256": "810c40e35e153cc10ae9a7bbcf776c2115a3b0af245e4d429a05677f4147d7d7"
+  },
+  {
+   "asset": "e1seed_R3_s0.checkpoints.attacker_grpo_encodec_a5.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attacker_seeds_R3_s0__2026-09-16_03-24-00/checkpoints/attacker_grpo_encodec_a5.pt",
+   "role": "attacker",
+   "size": 4745279,
+   "sha256": "0193391a5efe32eb73fce9f2e49d9c176025aa5804a28c9cf66427e9711083af"
+  },
+  {
+   "asset": "e1seed_R3ms_s0.checkpoints.attacker_grpo_encodec_a1.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attacker_seeds_R3ms_s0__2026-09-16_03-24-01/checkpoints/attacker_grpo_encodec_a1.pt",
+   "role": "attacker",
+   "size": 4745279,
+   "sha256": "c2611ebebd44f0aa7eed2223dfef71a229e85dde85884a92b65021258f556e06"
+  },
+  {
+   "asset": "e1seed_R3ms_s0.checkpoints.attacker_grpo_encodec_a2.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attacker_seeds_R3ms_s0__2026-09-16_03-24-01/checkpoints/attacker_grpo_encodec_a2.pt",
+   "role": "attacker",
+   "size": 4745279,
+   "sha256": "f7f7448c7a4604cf29a2fff76847ae0653a24b3bef854aca0da25a12cd54188c"
+  },
+  {
+   "asset": "e1seed_R3ms_s0.checkpoints.attacker_grpo_encodec_a3.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attacker_seeds_R3ms_s0__2026-09-16_03-24-01/checkpoints/attacker_grpo_encodec_a3.pt",
+   "role": "attacker",
+   "size": 4745279,
+   "sha256": "2d0be3b5356ad551f2b3db62e37ce89daafec6f0a7fd4f38390c8dc84aa17ca9"
+  },
+  {
+   "asset": "e1seed_R3ms_s0.checkpoints.attacker_grpo_encodec_a4.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attacker_seeds_R3ms_s0__2026-09-16_03-24-01/checkpoints/attacker_grpo_encodec_a4.pt",
+   "role": "attacker",
+   "size": 4745279,
+   "sha256": "98c75a3c137e3d4f3bacceb17011cba4806935d73788dc949d6ac87d7d093e48"
+  },
+  {
+   "asset": "e1seed_R3ms_s0.checkpoints.attacker_grpo_encodec_a5.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/e1_attacker_seeds_R3ms_s0__2026-09-16_03-24-01/checkpoints/attacker_grpo_encodec_a5.pt",
+   "role": "attacker",
+   "size": 4745279,
+   "sha256": "57ad6509d795d4e41ea763ba63e1cb85ff43bbb08120386eff4b1fdac521d550"
+  },
+  {
+   "asset": "abl_headonly_s0.round1.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_headonly_s0__2026-09-15_16-13-49/round1/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "392491f32af6f85a54be4b47eec5624c019cfb52c614b93ce97e490a52b75109"
+  },
+  {
+   "asset": "abl_headonly_s0.round1.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_headonly_s0__2026-09-15_16-13-49/round1/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "eb5dbd14c814f75a5a6568c1178afed527994c38853d38c3d320779b918ff3a2"
+  },
+  {
+   "asset": "abl_headonly_s0.round2.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_headonly_s0__2026-09-15_16-13-49/round2/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "f454da1fec99f427bb6250630e921a6bf78a51647b735bdbe1165a131822ac5c"
+  },
+  {
+   "asset": "abl_headonly_s0.round2.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_headonly_s0__2026-09-15_16-13-49/round2/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "1bfd4a24142efb8a89f396d38d62c5030ab669dcec626ddc80a68dce732739d3"
+  },
+  {
+   "asset": "abl_headonly_s0.round3.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_headonly_s0__2026-09-15_16-13-49/round3/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "39f162103cdec9e981c6abad780995943ffe9ac9586b30cd5ddb6ab6832a2dfc"
+  },
+  {
+   "asset": "abl_headonly_s0.round3.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_headonly_s0__2026-09-15_16-13-49/round3/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "9c788889ec56f05e372a0df6ef076d296377a759f880fd93d840952b356b0e79"
+  },
+  {
+   "asset": "abl_margin0.1_s0.round1.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin0.1_s0__2026-09-15_16-13-15/round1/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "015551489a535bb714723b106f51ec3c664d0dea5b86fca9c0fbc028b8fd7030"
+  },
+  {
+   "asset": "abl_margin0.1_s0.round1.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin0.1_s0__2026-09-15_16-13-15/round1/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "429c4442cc949b4397e7ee4c79ad8e4c1cc32fb4de9e30818ad0ec353c47067c"
+  },
+  {
+   "asset": "abl_margin0.1_s0.round2.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin0.1_s0__2026-09-15_16-13-15/round2/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "80c4563f0aecd827ff9b230c892d848768525c528ddc6425578b2e0fe8ec4635"
+  },
+  {
+   "asset": "abl_margin0.1_s0.round2.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin0.1_s0__2026-09-15_16-13-15/round2/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "02e79ae30275525e28367c632c950b75fd77c824512db55a68270dfa171a93f5"
+  },
+  {
+   "asset": "abl_margin0.1_s0.round3.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin0.1_s0__2026-09-15_16-13-15/round3/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "bf49f4b55dc96b5834074017fdfceeeabd4062af75b4313a3feda4d7325c7dec"
+  },
+  {
+   "asset": "abl_margin0.1_s0.round3.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin0.1_s0__2026-09-15_16-13-15/round3/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "4059584fefebf106f77cb23b6eb038d309a0c8c73783f1df82cdc968360bbb43"
+  },
+  {
+   "asset": "abl_margin1.0_s0.round1.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin1.0_s0__2026-09-15_16-14-19/round1/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "805ab176adddc8913749c69d934403b594867f8646ee42c0b9f078b1e0716a3e"
+  },
+  {
+   "asset": "abl_margin1.0_s0.round1.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin1.0_s0__2026-09-15_16-14-19/round1/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "f0a6c7ba93326a47fde13ed1f3f7dbc135e38ba174f9ca7916e6ef61398bde5e"
+  },
+  {
+   "asset": "abl_margin1.0_s0.round2.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin1.0_s0__2026-09-15_16-14-19/round2/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "65c7aa01584ff98013bed2d111d827a3da2037b6d632b8980712bb39539a8047"
+  },
+  {
+   "asset": "abl_margin1.0_s0.round2.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin1.0_s0__2026-09-15_16-14-19/round2/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "c67a8554963c879815cfc1503f60de0f97f4bd6513c3e73c0565231afc1ff630"
+  },
+  {
+   "asset": "abl_margin1.0_s0.round3.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin1.0_s0__2026-09-15_16-14-19/round3/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "44d84b9a602e2fb08ec102b30f9a27ac1c83c7d6754cd1fb14dc38423e5b685a"
+  },
+  {
+   "asset": "abl_margin1.0_s0.round3.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_margin1.0_s0__2026-09-15_16-14-19/round3/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "25e0c6248d7e7f90a7172f9ffd6f74e89cd20f2cb58b8528bff313a23ed09922"
+  },
+  {
+   "asset": "ms_s0.round1.attacker_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s0__2026-09-15_23-15-22/round1/attacker_dac.pt",
+   "role": "attacker",
+   "size": 10267291,
+   "sha256": "4e3e8a3d5f5163e62077483f0c4082f61313562e02e4ef4af2d302e967bab8e6"
+  },
+  {
+   "asset": "ms_s0.round1.attacker_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s0__2026-09-15_23-15-22/round1/attacker_encodec.pt",
+   "role": "attacker",
+   "size": 4748007,
+   "sha256": "3b7c05ffa3b32bec2d43f5ca8e4130c737ae97e4fa4828e242cac1350cfe456e"
+  },
+  {
+   "asset": "ms_s0.round1.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s0__2026-09-15_23-15-22/round1/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "f1de10fa82fdb0eff2c50e1175ac80119107d4f1ec9ccb855dee49e25647f7e4"
+  },
+  {
+   "asset": "ms_s0.round2.attacker_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s0__2026-09-15_23-15-22/round2/attacker_dac.pt",
+   "role": "attacker",
+   "size": 10267291,
+   "sha256": "c306443f54c33fd14e7349412f6b2a2fbd6bb3af30c498b08bf3d1ce7b34fe5f"
+  },
+  {
+   "asset": "ms_s0.round2.attacker_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s0__2026-09-15_23-15-22/round2/attacker_encodec.pt",
+   "role": "attacker",
+   "size": 4748007,
+   "sha256": "84f555eba3d7862ba4abbe00191072c7798e252199c58397006c8c726559fb9a"
+  },
+  {
+   "asset": "ms_s0.round2.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s0__2026-09-15_23-15-22/round2/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "5cb4fae7a40bfc34d1d2f55fc11b5de60dc6b7f173f46e676f7b88f2765d183a"
+  },
+  {
+   "asset": "ms_s0.round3.attacker_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s0__2026-09-15_23-15-22/round3/attacker_dac.pt",
+   "role": "attacker",
+   "size": 10267291,
+   "sha256": "a7d0284a61e75e8b2fa648982e4d17cdaa1d0180745f466dc2f403ea18c220ec"
+  },
+  {
+   "asset": "ms_s0.round3.attacker_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s0__2026-09-15_23-15-22/round3/attacker_encodec.pt",
+   "role": "attacker",
+   "size": 4748007,
+   "sha256": "dbe70c50c68561d78e676bd0febf9a921b4edc054323f947c952e348098f1f9e"
+  },
+  {
+   "asset": "ms_s0.round3.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s0__2026-09-15_23-15-22/round3/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "e4b266a3924f0907dd830c42789548b83fbd6a423f6ea9480e9b2133762adcf9"
+  },
+  {
+   "asset": "ms_s1.round1.attacker_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s1__2026-09-15_23-15-22/round1/attacker_dac.pt",
+   "role": "attacker",
+   "size": 10267291,
+   "sha256": "9e6566fa63605bc89d10cdaba258f51ca39fb7e2e0b024f1ac626dc352fb44a4"
+  },
+  {
+   "asset": "ms_s1.round1.attacker_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s1__2026-09-15_23-15-22/round1/attacker_encodec.pt",
+   "role": "attacker",
+   "size": 4748007,
+   "sha256": "56e5d1630a3ebfb03a0a18e2def98f6362c6d9290c6b6e8458fe85ccab86fad1"
+  },
+  {
+   "asset": "ms_s1.round1.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s1__2026-09-15_23-15-22/round1/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "60577711ae827932692c4a5551b52fe3c9f771064e8ffb09bff2fef25de370aa"
+  },
+  {
+   "asset": "ms_s1.round2.attacker_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s1__2026-09-15_23-15-22/round2/attacker_dac.pt",
+   "role": "attacker",
+   "size": 10267291,
+   "sha256": "880202cc32e39aa19bb315cbae2aa9fde7e5732bea5aa45ec1fae64f4de0ba26"
+  },
+  {
+   "asset": "ms_s1.round2.attacker_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s1__2026-09-15_23-15-22/round2/attacker_encodec.pt",
+   "role": "attacker",
+   "size": 4748007,
+   "sha256": "065197e8c3522c2f47671e6ca78e3b998804a5d45f0e3c769ae3783a741c9095"
+  },
+  {
+   "asset": "ms_s1.round2.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s1__2026-09-15_23-15-22/round2/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "5e0d3c411691e44bc69416a4c31f6e93e9a590424e3139f001db43ffe0fade6a"
+  },
+  {
+   "asset": "ms_s1.round3.attacker_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s1__2026-09-15_23-15-22/round3/attacker_dac.pt",
+   "role": "attacker",
+   "size": 10267291,
+   "sha256": "9c1106ad814e2efb714fac8bc1f896ce8f414d618b705023032912cdc0ef1448"
+  },
+  {
+   "asset": "ms_s1.round3.attacker_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s1__2026-09-15_23-15-22/round3/attacker_encodec.pt",
+   "role": "attacker",
+   "size": 4748007,
+   "sha256": "8f78c1364e314e46d7ed1288a93c326541349a238174c184f1cecbade18be2bd"
+  },
+  {
+   "asset": "ms_s1.round3.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s1__2026-09-15_23-15-22/round3/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "2552c743be00501d24b251523a254599299f0f7de515c45234526a9acea38e30"
+  },
+  {
+   "asset": "ms_s2.round1.attacker_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s2__2026-09-15_23-15-22/round1/attacker_dac.pt",
+   "role": "attacker",
+   "size": 10267291,
+   "sha256": "72631eca304208d7085e544a25898e32f8b7bbd648f94452184e500b5515a23a"
+  },
+  {
+   "asset": "ms_s2.round1.attacker_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s2__2026-09-15_23-15-22/round1/attacker_encodec.pt",
+   "role": "attacker",
+   "size": 4748007,
+   "sha256": "380f5875eaf081481de47ed41a8866f18d2fd13c97233479e68f267c1ab9dc92"
+  },
+  {
+   "asset": "ms_s2.round1.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s2__2026-09-15_23-15-22/round1/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "c02c9002d1c54d9ff0b48f4b4633e03973e942a09fdd3f8b351ff10253df44c5"
+  },
+  {
+   "asset": "ms_s2.round2.attacker_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s2__2026-09-15_23-15-22/round2/attacker_dac.pt",
+   "role": "attacker",
+   "size": 10267291,
+   "sha256": "d2a7bb6523d25762ad7cf976b2a494f611b7c1f843414b70e03317b796dde0b5"
+  },
+  {
+   "asset": "ms_s2.round2.attacker_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s2__2026-09-15_23-15-22/round2/attacker_encodec.pt",
+   "role": "attacker",
+   "size": 4748007,
+   "sha256": "ce4f102d403416461bacf2bef5f557d22bf5fdc2940d4d1956aa882f45eea66c"
+  },
+  {
+   "asset": "ms_s2.round2.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s2__2026-09-15_23-15-22/round2/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "164fb77978dad700d69194b13faa35f2b8a6de6545ae29e45099057eba1de9fc"
+  },
+  {
+   "asset": "ms_s2.round3.attacker_dac.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s2__2026-09-15_23-15-22/round3/attacker_dac.pt",
+   "role": "attacker",
+   "size": 10267291,
+   "sha256": "571c9948a3c672a0a72da16be858e31887fb3559aed33c4cab8891d93c79f644"
+  },
+  {
+   "asset": "ms_s2.round3.attacker_encodec.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s2__2026-09-15_23-15-22/round3/attacker_encodec.pt",
+   "role": "attacker",
+   "size": 4748007,
+   "sha256": "87f1da7e21450f717552258ce8c2f3b900fada3db643659f2c10f584db9185de"
+  },
+  {
+   "asset": "ms_s2.round3.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_multispace_s2__2026-09-15_23-15-22/round3/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "6379a6fb3bc0338d2cd743b588ea3a205dd6c8a3a863966477dc1417e93683b5"
+  },
+  {
+   "asset": "abl_prefinput_s0.round1.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_prefinput_s0__2026-09-15_16-14-30/round1/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "07edd34094a74f29e137fc9436863ea8fc32393742ac258b0e37c391ceaddc13"
+  },
+  {
+   "asset": "abl_prefinput_s0.round1.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_prefinput_s0__2026-09-15_16-14-30/round1/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "4954a0647c33a5048797900e0c9e2b6751b13940e34af902ab14d2b7edd2830f"
+  },
+  {
+   "asset": "abl_prefinput_s0.round2.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_prefinput_s0__2026-09-15_16-14-30/round2/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "5265d677689ce93aa8fe418ec852fbd65a21595031dd432ce70a3848c6ffd430"
+  },
+  {
+   "asset": "abl_prefinput_s0.round2.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_prefinput_s0__2026-09-15_16-14-30/round2/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "20ad953557582ce0ddaf602798e23050f060601a44287494feb636f31930f94c"
+  },
+  {
+   "asset": "abl_prefinput_s0.round3.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_prefinput_s0__2026-09-15_16-14-30/round3/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "ca6750815c3b8628222a0c9c2d58d1e30ba483c7e5eff4e338a75a852696f41b"
+  },
+  {
+   "asset": "abl_prefinput_s0.round3.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_prefinput_s0__2026-09-15_16-14-30/round3/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "da3db878f45ff4f78573baa30113bf16a7d121d8e2db22b8611e890d08ea32bf"
+  },
+  {
+   "asset": "hnp_s0.round1.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s0__2026-09-15_16-10-10/round1/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "8c2c490d5f7be35c5b51698b3480a378265461ab11d2554619a5e68ba463307e"
+  },
+  {
+   "asset": "hnp_s0.round1.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s0__2026-09-15_16-10-10/round1/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "ef3107ca1d425d23bfa8bbfe3fcba4eaa28f59a1650a54bba1e1544fa4993040"
+  },
+  {
+   "asset": "hnp_s0.round2.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s0__2026-09-15_16-10-10/round2/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "011fe9a3ec77c8990b72ae2a009932af72254c32376e6f11c0e81e2c023f817c"
+  },
+  {
+   "asset": "hnp_s0.round2.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s0__2026-09-15_16-10-10/round2/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "a40e6ff2bdda5771ecbb6d2e8c7b4b5df37cd35d66686cc8beaec220ab494e93"
+  },
+  {
+   "asset": "hnp_s0.round3.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s0__2026-09-15_16-10-10/round3/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "285db61fbdd067b95151868f0bb81fc4bc23795f3a9037d39db5b0e52263d008"
+  },
+  {
+   "asset": "hnp_s0.round3.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s0__2026-09-15_16-10-10/round3/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "8143e72356c0b498166de123e547da828d7e864fb12049375a87c2edc2f79a7a"
+  },
+  {
+   "asset": "hnp_s1.round1.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s1__2026-09-15_16-11-12/round1/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "2e88983da9fca65c0e0fae7ef34632f2f92bcc6036a6c702fdf114a9e4272245"
+  },
+  {
+   "asset": "hnp_s1.round1.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s1__2026-09-15_16-11-12/round1/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "7c7f7faa2ab8258ad2b309884720f8f3f4926c9faf107f7909a943fdc4b8f570"
+  },
+  {
+   "asset": "hnp_s1.round2.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s1__2026-09-15_16-11-12/round2/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "8ee2d3bfed410c9d5d803618e456112cce80820811f6b48db592d22030974219"
+  },
+  {
+   "asset": "hnp_s1.round2.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s1__2026-09-15_16-11-12/round2/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "3fef121397ee0054c776e943251b22eb0db1ced42dc5af71a0ad3b93d531eebf"
+  },
+  {
+   "asset": "hnp_s1.round3.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s1__2026-09-15_16-11-12/round3/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "ec038d16c378e280939b20d6929fd1a38a8d5b96a00f2e08cbbb9252bfbd3bb4"
+  },
+  {
+   "asset": "hnp_s1.round3.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s1__2026-09-15_16-11-12/round3/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "9c075faa065df23a7a5498a151c80048de0a05f7b5541bd62329afe2afcbfcc9"
+  },
+  {
+   "asset": "hnp_s2.round1.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s2__2026-09-15_16-11-48/round1/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "de876a23cd478c866d7327bb299e051fa43b7fff937942299778be96f57450bc"
+  },
+  {
+   "asset": "hnp_s2.round1.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s2__2026-09-15_16-11-48/round1/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "eabceeb93fa3b0f310117bc2be3fc0dd9fb538ed8beff2da822976c7114a1262"
+  },
+  {
+   "asset": "hnp_s2.round2.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s2__2026-09-15_16-11-48/round2/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "fe1a55add2425ca34144a8704986006ccd6330aed9f8a81b86a28fef54e156cb"
+  },
+  {
+   "asset": "hnp_s2.round2.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s2__2026-09-15_16-11-48/round2/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "ca89eace686478c1a02af928e862034bd4673c0ae6ac9b9fc1c9dacca3fabe53"
+  },
+  {
+   "asset": "hnp_s2.round3.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s2__2026-09-15_16-11-48/round3/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "f1e7b048bfb24d019c6f7320cf052ce1f76e0e5bf3280dd39993ad46f26dbf6c"
+  },
+  {
+   "asset": "hnp_s2.round3.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s2__2026-09-15_16-11-48/round3/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "f97d84ca85b579655e2ba7d677aaafd30147e9d9f903f86fc079dc3c8d4ad901"
+  },
+  {
+   "asset": "abl_tau0.1_s0.round1.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.1_s0__2026-09-15_16-12-53/round1/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "1fcb7613926ede5e3f3a2d8efe74d116e50da60c6d803263a50af67e48cd19cf"
+  },
+  {
+   "asset": "abl_tau0.1_s0.round1.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.1_s0__2026-09-15_16-12-53/round1/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "c11b4530dc89be3aa2479479d9423a7c81a374638586f9679989abeba93ba7b7"
+  },
+  {
+   "asset": "abl_tau0.1_s0.round2.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.1_s0__2026-09-15_16-12-53/round2/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "638e6c7f1342c12a62f94081fee73622f6adf6b3210036894b0070b4e29843e2"
+  },
+  {
+   "asset": "abl_tau0.1_s0.round2.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.1_s0__2026-09-15_16-12-53/round2/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "2132a7d65033e5266bae5b6513e556940db01c045c9807616cb555f30c701a7b"
+  },
+  {
+   "asset": "abl_tau0.1_s0.round3.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.1_s0__2026-09-15_16-12-53/round3/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "e3cbe5ca698c48aa790ed48d187f542908c197f96f1b5e48b3f179a89e35869e"
+  },
+  {
+   "asset": "abl_tau0.1_s0.round3.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.1_s0__2026-09-15_16-12-53/round3/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "2243ecb0720a9382cf0b566472fbafaf57d3bc73a4bff7077935027b0a400805"
+  },
+  {
+   "asset": "abl_tau0.5_s0.round1.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.5_s0__2026-09-15_16-14-07/round1/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "86757f578efacfed3863d9bb136cb75d0fa2d6787e6b6b0d6004c4f2daa0654c"
+  },
+  {
+   "asset": "abl_tau0.5_s0.round1.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.5_s0__2026-09-15_16-14-07/round1/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "be23ef5e3b1a645b6de0bf5cc06da80beed6c66589b8e7c336bf3d231276007c"
+  },
+  {
+   "asset": "abl_tau0.5_s0.round2.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.5_s0__2026-09-15_16-14-07/round2/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "b9aa1c18eb4563064838bbc5014a52a11d2ef748d17704723b850362c45fe31c"
+  },
+  {
+   "asset": "abl_tau0.5_s0.round2.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.5_s0__2026-09-15_16-14-07/round2/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "30fe7c5a315d918f349acbb6d037988446f23a094748fefa52ee5f03c2a79983"
+  },
+  {
+   "asset": "abl_tau0.5_s0.round3.attacker.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.5_s0__2026-09-15_16-14-07/round3/attacker.pt",
+   "role": "attacker",
+   "size": 4742543,
+   "sha256": "827c1b470777080844afab17727ac12e82ecb8b604d21280315356a9b5c79dc6"
+  },
+  {
+   "asset": "abl_tau0.5_s0.round3.predictor.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_tau0.5_s0__2026-09-15_16-14-07/round3/predictor/last.pt",
+   "role": "loop_predictor",
+   "size": 377563588,
+   "sha256": "9a1c33268388260d9228aee197228b669c0e173907c9fbb48e929017ed89c8e0"
+  },
+  {
+   "asset": "bench_dnsmos.checkpoints.attacker_a0.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_dnsmos_s0__2026-09-16_05-51-23/checkpoints/attacker_a0.pt",
+   "role": "attacker",
+   "size": 4739656,
+   "sha256": "6a29dcbf88ee99f1d336621991bf692a3747e0442bbf99876207c93ed13c7720"
+  },
+  {
+   "asset": "bench_dnsmos.checkpoints.attacker_a1.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_dnsmos_s0__2026-09-16_05-51-23/checkpoints/attacker_a1.pt",
+   "role": "attacker",
+   "size": 4739656,
+   "sha256": "0cc5ddb1047d503264efbc9fdaef88ae2cf6589b80357fbcac9a0b3d239168cf"
+  },
+  {
+   "asset": "bench_dnsmos.checkpoints.attacker_a2.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_dnsmos_s0__2026-09-16_05-51-23/checkpoints/attacker_a2.pt",
+   "role": "attacker",
+   "size": 4739656,
+   "sha256": "2353bf860e4f87c0267011a96233672646579b5dc0626afa2d7bd2845704af93"
+  },
+  {
+   "asset": "bench_dnsmos.checkpoints.attacker_a3.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_dnsmos_s0__2026-09-16_05-51-23/checkpoints/attacker_a3.pt",
+   "role": "attacker",
+   "size": 4739656,
+   "sha256": "6724ea5bb2387f09c7b99f7425c04892c28411ac525cd6d2b40d7775cd837e31"
+  },
+  {
+   "asset": "bench_dnsmos.checkpoints.attacker_a4.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_dnsmos_s0__2026-09-16_05-51-23/checkpoints/attacker_a4.pt",
+   "role": "attacker",
+   "size": 4739656,
+   "sha256": "d84229927e434ec1c7a06120780177f45ad938697b987c585ae35106cb99488e"
+  },
+  {
+   "asset": "bench_nisqa.checkpoints.attacker_a0.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_nisqa_s0__2026-09-16_05-51-23/checkpoints/attacker_a0.pt",
+   "role": "attacker",
+   "size": 4739656,
+   "sha256": "fba086082f3095c2f7b4ab4d878a70895d2f93d073d473538b8bebcc8bcc94f6"
+  },
+  {
+   "asset": "bench_nisqa.checkpoints.attacker_a1.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_nisqa_s0__2026-09-16_05-51-23/checkpoints/attacker_a1.pt",
+   "role": "attacker",
+   "size": 4739656,
+   "sha256": "3e810c98b4605611d28d62b21b12de0c1169646343335abbd280af0c7e2a25d7"
+  },
+  {
+   "asset": "bench_nisqa.checkpoints.attacker_a2.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_nisqa_s0__2026-09-16_05-51-23/checkpoints/attacker_a2.pt",
+   "role": "attacker",
+   "size": 4739656,
+   "sha256": "bb3d5fd1106a46788bcc3289f1f1218d8b88033ebb9a0524e4649a852d8c22ea"
+  },
+  {
+   "asset": "bench_nisqa.checkpoints.attacker_a3.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_nisqa_s0__2026-09-16_05-51-23/checkpoints/attacker_a3.pt",
+   "role": "attacker",
+   "size": 4739656,
+   "sha256": "fa6ce9ff0878e6d770c76f1ef14ee8a5234c42c7ad1dc33ee25dfafd9ffa2187"
+  },
+  {
+   "asset": "bench_nisqa.checkpoints.attacker_a4.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_nisqa_s0__2026-09-16_05-51-23/checkpoints/attacker_a4.pt",
+   "role": "attacker",
+   "size": 4739656,
+   "sha256": "0e5553c745d55f89fa56dff61e6c70b1f30ed028115558aa7e7f5b934d9c0ef6"
+  },
+  {
+   "asset": "bench_sslmos.checkpoints.attacker_a0.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_sslmos_s0__2026-09-16_05-51-23/checkpoints/attacker_a0.pt",
+   "role": "attacker",
+   "size": 4739784,
+   "sha256": "0960e6333bca03178626e5e16201f8b9297156f42f19f161935cbc4d52ddadca"
+  },
+  {
+   "asset": "bench_sslmos.checkpoints.attacker_a1.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_sslmos_s0__2026-09-16_05-51-23/checkpoints/attacker_a1.pt",
+   "role": "attacker",
+   "size": 4739784,
+   "sha256": "8d8e572882e4466e898a0833aa0d2b12d6a9beeb31e865cbd6db58966584197b"
+  },
+  {
+   "asset": "bench_sslmos.checkpoints.attacker_a2.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_sslmos_s0__2026-09-16_05-51-23/checkpoints/attacker_a2.pt",
+   "role": "attacker",
+   "size": 4739784,
+   "sha256": "a1c745fccfff67ab703624736aeca9aa5cfa8cf277af4638978eaab3a842886a"
+  },
+  {
+   "asset": "bench_sslmos.checkpoints.attacker_a3.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_sslmos_s0__2026-09-16_05-51-23/checkpoints/attacker_a3.pt",
+   "role": "attacker",
+   "size": 4739784,
+   "sha256": "a4fe4a0ba92cc66b711c06efe3b85e00ae42566f482f1739d0c5bb441e176e54"
+  },
+  {
+   "asset": "bench_sslmos.checkpoints.attacker_a4.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_sslmos_s0__2026-09-16_05-51-23/checkpoints/attacker_a4.pt",
+   "role": "attacker",
+   "size": 4739784,
+   "sha256": "7fb01647257d9915affc47d0973d93c6f7580250548172d49781d006a457f782"
+  },
+  {
+   "asset": "bench_utmos.checkpoints.attacker_a0.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_utmos_s0__2026-09-16_05-51-23/checkpoints/attacker_a0.pt",
+   "role": "attacker",
+   "size": 4739656,
+   "sha256": "1af6da8ce1a91c11dd1c046400728e12c139ebdfea8834517880a72c55897b7e"
+  },
+  {
+   "asset": "bench_utmos.checkpoints.attacker_a1.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_utmos_s0__2026-09-16_05-51-23/checkpoints/attacker_a1.pt",
+   "role": "attacker",
+   "size": 4739656,
+   "sha256": "dff14f0b304b4eed092c07819c34df07f98c9be3a4e63afeb574ec61d5d72666"
+  },
+  {
+   "asset": "bench_utmos.checkpoints.attacker_a2.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_utmos_s0__2026-09-16_05-51-23/checkpoints/attacker_a2.pt",
+   "role": "attacker",
+   "size": 4739656,
+   "sha256": "7c86f7dfd4ff9b533b760e4b64a50457fe84368aec894f7498acc32913f6cedd"
+  },
+  {
+   "asset": "bench_utmos.checkpoints.attacker_a3.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_utmos_s0__2026-09-16_05-51-23/checkpoints/attacker_a3.pt",
+   "role": "attacker",
+   "size": 4739656,
+   "sha256": "8780a1b8a6698a7b0713f1809f444d64be4133fb3291a5c620f214109fd090e8"
+  },
+  {
+   "asset": "bench_utmos.checkpoints.attacker_a4.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/metric_bench_utmos_s0__2026-09-16_05-51-23/checkpoints/attacker_a4.pt",
+   "role": "attacker",
+   "size": 4739656,
+   "sha256": "ebfc4d42640ef195ce91994cc1fb957a08b91a7c71371e49a82945e39d45bb2e"
+  },
+  {
+   "asset": "e3_grpo_R0_s0.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R0_s0__2026-09-15_17-32-04/checkpoints/last.pt",
+   "role": "selected",
+   "size": 20336927,
+   "sha256": "fd9af8f3572211ad1baf688f97a92123f08e1cbb53f8c2d130772d03343a470c"
+  },
+  {
+   "asset": "e3_grpo_R0_s1.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R0_s1__2026-09-15_17-34-28/checkpoints/last.pt",
+   "role": "selected",
+   "size": 20336927,
+   "sha256": "2c970f0216803e14358fea27d0dd4b33a487a3de268aa6026c6d7aa799d13bc1"
+  },
+  {
+   "asset": "e3_grpo_R0_s2.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R0_s2__2026-09-15_17-39-30/checkpoints/last.pt",
+   "role": "selected",
+   "size": 20336927,
+   "sha256": "ea6f918888efa45f0146a6b5616f30576dc17524e835b93208b5dfc7ffc235fd"
+  },
+  {
+   "asset": "e3_grpo_R2_s0.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R2_s0__2026-09-16_05-13-55/checkpoints/last.pt",
+   "role": "selected",
+   "size": 20336991,
+   "sha256": "77b945ef02fe602158c8ae7f50d02a340230d798ad1389d3aa21026e3feaae59"
+  },
+  {
+   "asset": "e3_grpo_R3_s0.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R3_s0__2026-09-15_17-32-19/checkpoints/last.pt",
+   "role": "selected",
+   "size": 20336927,
+   "sha256": "c123acd791f93108af17f24fb4d783fdc33210eb8291c57fbdb1e0f4ab57bd0b"
+  },
+  {
+   "asset": "e3_grpo_R3_s1.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R3_s1__2026-09-15_17-35-04/checkpoints/last.pt",
+   "role": "selected",
+   "size": 20336927,
+   "sha256": "54181294cbb351a1f91078e78cc7abbb2bf2841717ae6d9524d3ea816f4fb297"
+  },
+  {
+   "asset": "e3_grpo_R3_s2.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_R3_s2__2026-09-15_17-40-21/checkpoints/last.pt",
+   "role": "selected",
+   "size": 20336927,
+   "sha256": "3a9fd3701d14dd0ac45114ebf7143aab5c261e38540c84eb8a4989b582425cc1"
+  },
+  {
+   "asset": "e3_grpo_baseline_noise_s0.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_noise_s0__2026-09-15_17-32-38/checkpoints/last.pt",
+   "role": "selected",
+   "size": 20336991,
+   "sha256": "ef897ac6f455915ea96662699246b0e25c5afdb982e1cad0767d9d31427a12f3"
+  },
+  {
+   "asset": "e3_grpo_baseline_noise_s1.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_noise_s1__2026-09-15_17-36-30/checkpoints/last.pt",
+   "role": "selected",
+   "size": 20336991,
+   "sha256": "7c9c41a156bb8d5f38fcae4678ef5cd53bd15a10cc3219b31de3157b87fdfdf0"
+  },
+  {
+   "asset": "e3_grpo_baseline_noise_s2.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_noise_s2__2026-09-15_17-41-22/checkpoints/last.pt",
+   "role": "selected",
+   "size": 20336991,
+   "sha256": "9cb5662a0111040874ac63bf2732013bceb858f562a3b505ac2e5b8d25ea70d7"
+  },
+  {
+   "asset": "e3_grpo_baseline_pgd_s0.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_pgd_s0__2026-09-15_17-33-15/checkpoints/last.pt",
+   "role": "selected",
+   "size": 20336991,
+   "sha256": "72ecb5bf5a6c9da3aebb9ff40d99598e511c537f2e05a1053a57742690456aac"
+  },
+  {
+   "asset": "e3_grpo_baseline_pgd_s1.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_pgd_s1__2026-09-15_17-37-14/checkpoints/last.pt",
+   "role": "selected",
+   "size": 20336991,
+   "sha256": "cf561674d47bb4fdcd9419e02365049b192f228ee2036e4687b594356f636305"
+  },
+  {
+   "asset": "e3_grpo_baseline_pgd_s2.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_pgd_s2__2026-09-15_17-41-55/checkpoints/last.pt",
+   "role": "selected",
+   "size": 20336991,
+   "sha256": "fd6e14fc163b70345b2ee7b81464da6efac646312c0645880345b9c10a5a15b2"
+  },
+  {
+   "asset": "e3_grpo_baseline_random_s0.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_random_s0__2026-09-15_17-33-42/checkpoints/last.pt",
+   "role": "selected",
+   "size": 20336991,
+   "sha256": "88aaf6d7c83e5b754125a084f39d9bb92a8cca0e6f13f6fe535dc6ae0afce467"
+  },
+  {
+   "asset": "e3_grpo_baseline_random_s1.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_random_s1__2026-09-15_17-37-50/checkpoints/last.pt",
+   "role": "selected",
+   "size": 20336991,
+   "sha256": "ca71ee41d36de079333467c02e1b2dfe00eb1922ca77850e5bc94bdc03412240"
+  },
+  {
+   "asset": "e3_grpo_baseline_random_s2.checkpoints.last.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_grpo_baseline_random_s2__2026-09-15_17-42-42/checkpoints/last.pt",
+   "role": "selected",
+   "size": 20336991,
+   "sha256": "60b00d9359e85007e19039cc4efc6b4d539d1c8a341595faca58eae2e07f9603"
+  },
+  {
+   "asset": "se_pretrain_s0__2026-09-15_16-10-03.checkpoints.best.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_pretrain_s0__2026-09-15_16-10-03/checkpoints/best.pt",
+   "role": "referenced",
+   "size": 10399260,
+   "sha256": "341ebf72a87791601932e63c657bc26572a1dfe8adbbe253189089ed03bc3ca4"
+  },
+  {
+   "asset": "se_pretrain_s1__2026-09-15_16-10-15.checkpoints.best.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_pretrain_s1__2026-09-15_16-10-15/checkpoints/best.pt",
+   "role": "referenced",
+   "size": 10399260,
+   "sha256": "44801a1317396966bc1ee5f20afe737bda76b66123c46150850b0d901f7d49af"
+  },
+  {
+   "asset": "se_pretrain_s2__2026-09-15_16-10-21.checkpoints.best.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_pretrain_s2__2026-09-15_16-10-21/checkpoints/best.pt",
+   "role": "referenced",
+   "size": 10399260,
+   "sha256": "87bf9263a179b38aca0f6cb87637fcd309213a79f20ad5d5e472956bcf12fdd1"
+  },
+  {
+   "asset": "r0_s0.checkpoints.best.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/train_r0_s0__2026-09-15_15-31-19/checkpoints/best.pt",
+   "role": "selected",
+   "size": 377563524,
+   "sha256": "06ffe2e13d698ec58b3815cd54d19a1656a498794ecde26010326041946a8db6"
+  },
+  {
+   "asset": "r0_s1.checkpoints.best.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/train_r0_s1__2026-09-15_15-31-19/checkpoints/best.pt",
+   "role": "selected",
+   "size": 377563524,
+   "sha256": "ec80a3c9f2f313e2b2852b1c5dfbd474f6e1e70e68137a59366d35d263f4454f"
+  },
+  {
+   "asset": "r0_s2.checkpoints.best.pt",
+   "orig_path": "/fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/train_r0_s2__2026-09-15_15-31-19/checkpoints/best.pt",
+   "role": "selected",
+   "size": 377563524,
+   "sha256": "af56e47ac5d68eb757446e316b355532559ebbcf5ea1071823415b92fb8adc2c"
+  }
+ ]
+}

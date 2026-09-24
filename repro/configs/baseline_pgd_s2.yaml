@@ -1,0 +1,48 @@
+config_name: baseline_pgd
+task: train_predictor
+phase: main
+seed: 2
+run_name: baseline_pgd_s2__2026-09-15_16-12-27
+init_ckpt: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/train_r0_s2__2026-09-15_15-31-19/results/selected_checkpoint.txt
+model:
+  pretrained: facebook/wav2vec2-base
+  freeze_feature_encoder: true
+  freeze_encoder: false
+data:
+  corpus: bvcc
+  max_seconds: 6.0
+  num_workers: 8
+train:
+  pair_source: pgd
+  steps: 4500
+  batch_size: 8
+  pair_batch_size: 8
+  lr_encoder: 1.0e-05
+  lr_head: 0.0001
+  weight_decay: 0.01
+  warmup_steps: 100
+  cosine: false
+  grad_clip: 1.0
+  w_mse: 1.0
+  w_rank: 1.0
+  margin: 0.5
+  noise_snr_db:
+  - 5.0
+  - 30.0
+  pgd:
+    eps: 0.002
+    steps: 5
+    step_size: 0.0005
+  log_every: 25
+  eval_every: 500
+  select: last
+  pairs_csv: null
+  val_pairs_csv: null
+eval:
+  batch_size: 16
+  max_seconds: 20.0
+  n_boot: 1000
+wandb:
+  entity: alialavi
+  mode: online
+  group: null

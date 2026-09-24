@@ -14,6 +14,7 @@ Outputs (markdown + CSV) go to ``analysis/out/``:
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -22,16 +23,18 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+from hackpatch.repro import load_registry  # noqa: E402
 from hackpatch.utils import paths  # noqa: E402
 
-OUT = ROOT / "analysis" / "out"
-PROJ = paths.SCRATCH_DIR / "projects" / paths.project_name()
+# Overridable so the notebooks can point the analysis at released or recomputed run outputs.
+OUT = Path(os.environ.get("HACKPATCH_ANALYSIS_OUT", ROOT / "analysis" / "out"))
+PROJ = Path(os.environ.get("HACKPATCH_RUNS_DIR", paths.SCRATCH_DIR / "projects" / paths.project_name()))
 SEEDS = [0, 1, 2]
 TARGET_ORDER = ["R0", "R1", "R2", "R3", "R3ms", "baseline_noise", "baseline_pgd", "baseline_random"]
 
 
 def registry() -> dict:
-    return json.loads((PROJ / "_campaign.json").read_text())
+    return load_registry(PROJ)
 
 
 def mean_sd(x: pd.Series) -> str:
@@ -398,7 +401,7 @@ def main() -> None:
         f = OUT / path
         if f.exists():
             doc += ["", f"## {title}", "", f.read_text()]
-    (ROOT / "docs" / "results.md").write_text("\n".join(doc))
+    Path(os.environ.get("HACKPATCH_RESULTS_MD", ROOT / "docs" / "results.md")).write_text("\n".join(doc))
     print("\n".join(report))
 
 

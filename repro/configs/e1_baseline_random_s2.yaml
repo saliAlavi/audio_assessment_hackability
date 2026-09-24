@@ -1,0 +1,98 @@
+config_name: e1_attack
+task: attack_eval
+phase: main
+seed: 2
+run_name: e1_attack_baseline_random_s2__2026-09-15_16-22-57
+target_name: baseline_random
+target_ckpt: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_random_s2__2026-09-15_16-12-14/results/selected_checkpoint.txt
+transfer_attacker_ckpt: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s2__2026-09-15_16-11-48/round1/attacker.pt
+model:
+  pretrained: facebook/wav2vec2-base
+  freeze_feature_encoder: true
+  freeze_encoder: false
+data:
+  corpus: bvcc
+  max_seconds: 6.0
+  num_workers: 8
+e1:
+  eval_set: bvcc/test
+  max_utts: null
+  judges:
+  - utmos
+  - dnsmos
+attackers:
+- name: grpo_encodec
+  type: grpo
+- name: grpo_dac
+  type: grpo
+  attack_overrides:
+    codec:
+      name: dac_16khz
+      quantize: true
+- name: pgd_wave
+  type: pgd
+  pgd:
+    eps: 0.002
+    steps: 50
+    step_size: 0.0002
+    batch_size: 8
+- name: random_encodec
+  type: random
+attack:
+  codec:
+    name: encodec_24khz
+    quantize: false
+    encodec_bandwidth: 24.0
+  policy:
+    hidden: 256
+    layers: 4
+    kernel: 5
+    init_log_std: -1.0
+  action_hop: 0
+  budget_mode: sphere
+  eps: 0.5
+  budget_penalty: 0.0
+  group_size: 8
+  batch_size: 8
+  crop_seconds: 3.0
+  steps: 2000
+  lr: 0.001
+  ppo_epochs: 2
+  clip: 0.2
+  adv_eps: 0.0001
+  grad_clip: 1.0
+  log_every: 10
+  apply:
+    n_samples: 3
+    batch_size: 16
+    chunk_utts: 512
+    max_seconds: 20.0
+detect:
+  tau: 0.3
+  measures:
+  - estoi
+  - sisdr
+  - wer
+  - sbs
+  margins:
+    estoi: 0.02
+    sisdr: 1.0
+    wer: 0.0
+    sbs: 0.02
+  panel_batch: 64
+panel:
+  device: cuda
+  asr_model: openai/whisper-small
+  measures:
+  - estoi
+  - sisdr
+  - wer
+  - sbs
+eval:
+  batch_size: 16
+  max_seconds: 20.0
+  n_boot: 1000
+wandb:
+  entity: alialavi
+  mode: online
+  group: null

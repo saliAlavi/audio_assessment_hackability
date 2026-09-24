@@ -1,0 +1,64 @@
+config_name: se_grpo
+task: se_grpo
+phase: main
+seed: 0
+run_name: se_grpo_baseline_pgd_s0__2026-09-15_17-33-15
+init_ckpt: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/se_pretrain_s0__2026-09-15_16-10-03/checkpoints/best.pt
+policy:
+  action_bands: 32
+  init_log_std: -1.0
+  min_log_std: -3.0
+  max_log_std: 0.0
+reward:
+  ckpt: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/baseline_pgd_s0__2026-09-15_16-10-55/results/selected_checkpoint.txt
+  pretrained: facebook/wav2vec2-base
+  cross_ckpts:
+    R0: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/train_r0_s0__2026-09-15_15-31-19/results/selected_checkpoint.txt
+    R3: /fs/scratch/PAS2301/alialavi/projects/audio_assessment_hackability/hack_loop_s0__2026-09-15_16-10-10/round3/done.json
+grpo:
+  steps: 2500
+  batch_size: 16
+  group_size: 8
+  crop_seconds: 3.0
+  lr: 0.0001
+  lr_log_std: 0.001
+  learn_sigma: true
+  betas:
+  - 0.9
+  - 0.999
+  ppo_epochs: 2
+  clip: 0.2
+  adv_eps: 0.0001
+  grad_clip: 1.0
+  kl_mode: loss
+  kl_coef: 0.0
+  log_every: 10
+  eval_every: 250
+data:
+  train_split: train
+  num_workers: 6
+  max_train_utts: null
+  subset_seed: 0
+eval:
+  split: val
+  n_utts: 150
+  subset_seed: 0
+  reference_rows:
+  - noisy
+  - clean
+metrics:
+  external:
+  - dnsmos
+  - nisqa
+  - utmos
+  - spk_sim
+  - pesq
+  panel:
+  - estoi
+  - sisdr
+  wer: true
+  asr_model: openai/whisper-small
+wandb:
+  entity: alialavi
+  mode: online
+  group: null
