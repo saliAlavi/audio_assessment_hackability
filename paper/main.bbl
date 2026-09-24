@@ -22,191 +22,191 @@
 \BIBdecl
 
 \bibitem{asonitis2026limits}
-\BIBentryALTinterwordspacing
 A.~Asonitis, J.~P. Zuluaga~Gomez, F.~Verdini, A.~Farhadipour, M.~Razavi, P.-E.
   Honnet, and V.~Avijeet, ``The limits of reference-free speech quality metrics
   as evaluators and rewards on modern text-to-speech,''
-  \emph{arXiv:2609.13150}, 2026. [Online]. Available:
-  \url{https://arxiv.org/abs/2609.13150}
-\BIBentrySTDinterwordspacing
+  \emph{arXiv:2609.13150}, 2026.
 
 \bibitem{huang2026attacking}
-\BIBentryALTinterwordspacing
 W.-C. Huang and T.~Toda, ``Attacking {UTMOS}: Probing the robustness of a
-  speech quality assessment model,'' \emph{arXiv:2606.31105}, 2026. [Online].
-  Available: \url{https://arxiv.org/abs/2606.31105}
-\BIBentrySTDinterwordspacing
+  speech quality assessment model,'' \emph{arXiv:2606.31105}, 2026.
 
 \bibitem{kumar2025rlhf}
-\BIBentryALTinterwordspacing
 A.~Kumar, A.~Perrault, and D.~S. Williamson, ``Using {RLHF} to align speech
   enhancement approaches to mean-opinion quality scores,'' in \emph{Proc.
-  ICASSP}, 2025. [Online]. Available: \url{https://arxiv.org/abs/2410.13182}
-\BIBentrySTDinterwordspacing
+  ICASSP}, 2025.
 
 \bibitem{wang2026flowsegrpo}
-\BIBentryALTinterwordspacing
 H.~Wang, B.~Tian, Y.~Jiang, Z.~Pan, S.~Zhao, B.~Ma, D.~Chen, and X.~Li,
   ``{FlowSE-GRPO}: Training flow matching speech enhancement via online
-  reinforcement learning,'' in \emph{Proc. ICASSP}, 2026. [Online]. Available:
-  \url{https://arxiv.org/abs/2601.16483}
-\BIBentrySTDinterwordspacing
+  reinforcement learning,'' in \emph{Proc. ICASSP}, 2026.
 
 \bibitem{berdoz2026gspo}
-\BIBentryALTinterwordspacing
 F.~Berdoz, L.~A. Lanzend{\"o}rfer, A.~Asonitis, and R.~Wattenhofer,
   ``Post-training speech enhancement language models with perceptual rewards,''
-  in \emph{Proc. Interspeech}, 2026. [Online]. Available:
-  \url{https://arxiv.org/abs/2606.21458}
-\BIBentrySTDinterwordspacing
+  in \emph{Proc. Interspeech}, 2026.
 
 \bibitem{deoliveira2024pesqetarian}
-\BIBentryALTinterwordspacing
 D.~de~Oliveira, S.~Welker, J.~Richter, and T.~Gerkmann, ``The {PESQetarian}: On
   the relevance of {Goodhart's} law for speech enhancement,'' in \emph{Proc.
-  Interspeech}, 2024. [Online]. Available:
-  \url{https://arxiv.org/abs/2406.03460}
-\BIBentrySTDinterwordspacing
-
-\bibitem{wang2025sqase}
-\BIBentryALTinterwordspacing
-W.~Wang, W.~Zhang, C.~Li, J.~Shi, S.~Watanabe, and Y.~Qian, ``Improving speech
-  enhancement with multi-metric supervision from learned quality assessment,''
-  in \emph{Proc. ASRU}, 2025. [Online]. Available:
-  \url{https://arxiv.org/abs/2506.12260}
-\BIBentrySTDinterwordspacing
-
-\bibitem{bukharin2025advrm}
-\BIBentryALTinterwordspacing
-A.~Bukharin, H.~Qian, S.~Sun, A.~Renduchintala, S.~Singhal, Z.~Wang,
-  O.~Kuchaiev, O.~Delalleau, and T.~Zhao, ``Adversarial training of reward
-  models,'' \emph{arXiv:2504.06141}, 2025. [Online]. Available:
-  \url{https://arxiv.org/abs/2504.06141}
-\BIBentrySTDinterwordspacing
+  Interspeech}, 2024.
 
 \bibitem{lin2022robustness}
-\BIBentryALTinterwordspacing
 H.-Y. Lin, H.-H. Tseng, and Y.~Tsao, ``On the robustness of non-intrusive
   speech quality model by adversarial examples,'' \emph{arXiv:2211.06508},
-  2022. [Online]. Available: \url{https://arxiv.org/abs/2211.06508}
-\BIBentrySTDinterwordspacing
+  2022.
 
 \bibitem{ren2023eventtrojan}
-\BIBentryALTinterwordspacing
 Y.~Ren, K.~Shen, Z.~Ye, and D.~Yan, ``{EventTrojan}: Manipulating non-intrusive
   speech quality assessment via imperceptible events,'' \emph{arXiv:2309.01480
-  (ICME 2024)}, 2023. [Online]. Available:
-  \url{https://arxiv.org/abs/2309.01480}
-\BIBentrySTDinterwordspacing
+  (ICME 2024)}, 2023.
+
+\bibitem{wang2025sqase}
+W.~Wang, W.~Zhang, C.~Li, J.~Shi, S.~Watanabe, and Y.~Qian, ``Improving speech
+  enhancement with multi-metric supervision from learned quality assessment,''
+  in \emph{Proc. ASRU}, 2025.
+
+\bibitem{he2024emilia}
+H.~He, Z.~Shang, C.~Wang, X.~Li, Y.~Gu, H.~Hua, L.~Liu, C.~Yang, J.~Li, P.~Shi,
+  Y.~Wang, K.~Chen, P.~Zhang, and Z.~Wu, ``{Emilia}: An extensive,
+  multilingual, and diverse speech dataset for large-scale speech generation,''
+  in \emph{Proc. SLT}, 2024.
+
+\bibitem{ma2024wenetspeech4tts}
+L.~Ma, D.~Guo, K.~Song, Y.~Jiang, S.~Wang, L.~Xue, W.~Xu, H.~Zhao, B.~Zhang,
+  and L.~Xie, ``{WenetSpeech4TTS}: A 12,800-hour {Mandarin} {TTS} corpus for
+  large speech generation model benchmark,'' in \emph{Proc. Interspeech}, 2024.
+
+\bibitem{peirolilja2022monitoring}
+A.~Peir{\'o}-Lilja, G.~C{\'a}mbara, M.~Farr{\'u}s, and J.~Luque, ``Naturalness
+  and intelligibility monitoring for text-to-speech evaluation,'' in
+  \emph{Proc. Speech Prosody}, 2022.
+
+\bibitem{nakata2024utduss}
+W.~Nakata, K.~Yamauchi, D.~Yang, H.~Hyodo, and Y.~Saito, ``{UTDUSS}:
+  {UTokyo-SaruLab} system for {Interspeech} 2024 speech processing using
+  discrete speech unit challenge,'' \emph{arXiv:2403.13720}, 2024.
+
+\bibitem{chang2024discrete}
+X.~Chang, J.~Shi, J.~Tian, Y.~Wu, Y.~Tang, Y.~Wu, S.~Watanabe, Y.~Adi, X.~Chen,
+  and Q.~Jin, ``The {Interspeech} 2024 challenge on speech processing using
+  discrete units,'' in \emph{Proc. Interspeech}, 2024.
+
+\bibitem{bukharin2025advrm}
+A.~Bukharin, H.~Qian, S.~Sun, A.~Renduchintala, S.~Singhal, Z.~Wang,
+  O.~Kuchaiev, O.~Delalleau, and T.~Zhao, ``Adversarial training of reward
+  models,'' \emph{arXiv:2504.06141}, 2025.
 
 \bibitem{wang2026rrpo}
-\BIBentryALTinterwordspacing
 C.~Wang, C.~Gao, Y.~Xiang, Z.~Du, K.~An, H.~Zhao, Q.~Chen, X.~Li, Y.~Gao, and
   Y.~Li, ``{RRPO}: Robust reward policy optimization for {LLM}-based emotional
-  {TTS},'' in \emph{Proc. ICASSP}, 2026. [Online]. Available:
-  \url{https://arxiv.org/abs/2512.04552}
-\BIBentrySTDinterwordspacing
+  {TTS},'' in \emph{Proc. ICASSP}, 2026.
 
 \bibitem{liu2024iqadefense}
-\BIBentryALTinterwordspacing
 Y.~Liu, C.~Yang, D.~Li, J.~Ding, and T.~Jiang, ``Defense against adversarial
   attacks on no-reference image quality models with gradient norm
-  regularization,'' in \emph{Proc. CVPR}, 2024. [Online]. Available:
-  \url{https://arxiv.org/abs/2403.11397}
-\BIBentrySTDinterwordspacing
+  regularization,'' in \emph{Proc. CVPR}, 2024.
 
 \bibitem{cheng2024apo}
-\BIBentryALTinterwordspacing
 P.~Cheng, Y.~Yang, J.~Li, Y.~Dai, T.~Hu, P.~Cao, N.~Du, and X.~Li,
   ``Adversarial preference optimization: Enhancing your alignment via {RM-LLM}
-  game,'' in \emph{Findings of ACL}, 2024. [Online]. Available:
-  \url{https://arxiv.org/abs/2311.08045}
-\BIBentrySTDinterwordspacing
+  game,'' in \emph{Findings of ACL}, 2024.
 
 \bibitem{hong2025cooper}
-\BIBentryALTinterwordspacing
 H.~Hong, Y.~Yan, X.~Wu, G.~Hou, W.~Zhang, W.~Lu, Y.~Shen, and J.~Xiao,
   ``Cooper: Co-optimizing policy and reward models in reinforcement learning
-  for large language models,'' \emph{arXiv:2508.05613}, 2025. [Online].
-  Available: \url{https://arxiv.org/abs/2508.05613}
-\BIBentrySTDinterwordspacing
+  for large language models,'' \emph{arXiv:2508.05613}, 2025.
 
 \bibitem{wolf2025iterated}
-\BIBentryALTinterwordspacing
 L.~Wolf, R.~Kirk, and M.~Musolesi, ``Reward model overoptimisation in iterated
-  {RLHF},'' \emph{arXiv:2505.18126}, 2025. [Online]. Available:
-  \url{https://arxiv.org/abs/2505.18126}
-\BIBentrySTDinterwordspacing
+  {RLHF},'' \emph{arXiv:2505.18126}, 2025.
 
 \bibitem{coste2024ensembles}
-\BIBentryALTinterwordspacing
 T.~Coste, U.~Anwar, R.~Kirk, and D.~Krueger, ``Reward model ensembles help
-  mitigate overoptimization,'' in \emph{Proc. ICLR}, 2024. [Online]. Available:
-  \url{https://arxiv.org/abs/2310.02743}
-\BIBentrySTDinterwordspacing
+  mitigate overoptimization,'' in \emph{Proc. ICLR}, 2024.
 
 \bibitem{eisenstein2024helping}
-\BIBentryALTinterwordspacing
 J.~Eisenstein, C.~Nagpal, A.~Agarwal, A.~Beirami, A.~D'Amour, D.~Dvijotham,
   A.~Fisch, K.~Heller, S.~Pfohl, D.~Ramachandran, P.~Shaw, and J.~Berant,
   ``Helping or herding? reward model ensembles mitigate but do not eliminate
-  reward hacking,'' in \emph{Proc. COLM}, 2024. [Online]. Available:
-  \url{https://arxiv.org/abs/2312.09244}
-\BIBentrySTDinterwordspacing
+  reward hacking,'' in \emph{Proc. COLM}, 2024.
 
 \bibitem{zhong2026hackerfixer}
-\BIBentryALTinterwordspacing
 Z.~Zhong, I.~Segal, I.~Bercovich, S.~Saxena, K.~Zhang, and A.~Raghunathan,
   ``Hardening agent benchmarks with adversarial hacker-fixer loops,''
-  \emph{arXiv:2606.08960}, 2026. [Online]. Available:
-  \url{https://arxiv.org/abs/2606.08960}
-\BIBentrySTDinterwordspacing
+  \emph{arXiv:2606.08960}, 2026.
 
 \bibitem{wu2026gapt}
-\BIBentryALTinterwordspacing
 Y.~Wu, S.~Brade, A.~T. Ma, T.-J. Fowler, E.~Yang, B.~Banar, A.~Courville,
   N.~Jaques, and C.-Z.~A. Huang, ``Generative adversarial post-training
   mitigates reward hacking in live human-{AI} music interaction,'' in
-  \emph{Proc. ICLR}, 2026. [Online]. Available:
-  \url{https://arxiv.org/abs/2511.17879}
-\BIBentrySTDinterwordspacing
+  \emph{Proc. ICLR}, 2026.
 
 \bibitem{defossez2023encodec}
-\BIBentryALTinterwordspacing
 A.~D{\'e}fossez, J.~Copet, G.~Synnaeve, and Y.~Adi, ``High fidelity neural
-  audio compression,'' in \emph{TMLR}, 2023. [Online]. Available:
-  \url{https://arxiv.org/abs/2210.13438}
-\BIBentrySTDinterwordspacing
+  audio compression,'' in \emph{TMLR}, 2023.
 
 \bibitem{shao2024grpo}
-\BIBentryALTinterwordspacing
 Z.~Shao, P.~Wang, Q.~Zhu, R.~Xu, J.~Song \emph{et~al.}, ``{DeepSeekMath}:
   Pushing the limits of mathematical reasoning in open language models,''
-  \emph{arXiv:2402.03300}, 2024. [Online]. Available:
-  \url{https://arxiv.org/abs/2402.03300}
-\BIBentrySTDinterwordspacing
+  \emph{arXiv:2402.03300}, 2024.
 
 \bibitem{saeki2024speechbertscore}
-\BIBentryALTinterwordspacing
 T.~Saeki, S.~Maiti, S.~Takamichi, S.~Watanabe, and H.~Saruwatari,
   ``{SpeechBERTScore}: Reference-aware automatic evaluation of speech
   generation leveraging {NLP} evaluation metrics,'' in \emph{Proc.
-  Interspeech}, 2024. [Online]. Available:
-  \url{https://arxiv.org/abs/2401.16812}
-\BIBentrySTDinterwordspacing
+  Interspeech}, 2024.
 
 \bibitem{kumar2023dac}
-\BIBentryALTinterwordspacing
 R.~Kumar, P.~Seetharaman, A.~Luebs, I.~Kumar, and K.~Kumar, ``High-fidelity
   audio compression with improved {RVQGAN},'' in \emph{Proc. NeurIPS}, 2023.
-  [Online]. Available: \url{https://arxiv.org/abs/2306.06546}
-\BIBentrySTDinterwordspacing
 
 \bibitem{cooper2022generalization}
-\BIBentryALTinterwordspacing
 E.~Cooper, W.-C. Huang, T.~Toda, and J.~Yamagishi, ``Generalization ability of
-  {MOS} prediction networks,'' in \emph{Proc. ICASSP}, 2022. [Online].
-  Available: \url{https://arxiv.org/abs/2110.02635}
-\BIBentrySTDinterwordspacing
+  {MOS} prediction networks,'' in \emph{Proc. ICASSP}, 2022.
+
+\bibitem{cooper2021bvcc}
+E.~Cooper and J.~Yamagishi, ``How do voices from past speech synthesis
+  challenges compare today?'' in \emph{Proc. SSW}, 2021.
+
+\bibitem{huang2022voicemos}
+W.-C. Huang, E.~Cooper, Y.~Tsao, H.-M. Wang, T.~Toda, and J.~Yamagishi, ``The
+  {VoiceMOS} challenge 2022,'' in \emph{Proc. Interspeech}, 2022.
+
+\bibitem{wu2019blizzard}
+Z.~Wu, Z.~Xie, and S.~King, ``The {Blizzard} challenge 2019,'' in \emph{Proc.
+  Blizzard Challenge Workshop}, 2019.
+
+\bibitem{mittag2021nisqa}
+G.~Mittag, B.~Naderi, A.~Chehadi, and S.~M{\"o}ller, ``{NISQA}: A deep
+  {CNN}-self-attention model for multidimensional speech quality prediction
+  with crowdsourced datasets,'' in \emph{Proc. Interspeech}, 2021.
+
+\bibitem{maniati2022somos}
+G.~Maniati, A.~Vioni, N.~Ellinas, K.~Nikitaras, K.~Klapsas, J.~S. Sung, G.~Jho,
+  A.~Chalamandaris, and P.~Tsiakoulis, ``{SOMOS}: The {Samsung} open {MOS}
+  dataset for the evaluation of neural text-to-speech synthesis,'' in
+  \emph{Proc. Interspeech}, 2022.
+
+\bibitem{chen2022inqss}
+Y.-W. Chen and Y.~Tsao, ``{InQSS}: A speech intelligibility and quality
+  assessment model using a multi-task learning network,'' in \emph{Proc.
+  Interspeech}, 2022.
+
+\bibitem{cooper2023voicemos}
+E.~Cooper, W.-C. Huang, Y.~Tsao, H.-M. Wang, T.~Toda, and J.~Yamagishi, ``The
+  {VoiceMOS} challenge 2023: Zero-shot subjective speech quality prediction for
+  multiple domains,'' in \emph{Proc. ASRU}, 2023.
+
+\bibitem{zhang2024urgent}
+W.~Zhang, R.~Scheibler, K.~Saijo, S.~Cornell, C.~Li, Z.~Ni, J.~Pirklbauer,
+  M.~Sach, S.~Watanabe, T.~Fingscheidt, and Y.~Qian, ``{URGENT} challenge:
+  Universality, robustness, and generalizability for speech enhancement,'' in
+  \emph{Proc. Interspeech}, 2024.
+
+\bibitem{saijo2025urgent}
+K.~Saijo, W.~Zhang, S.~Cornell, R.~Scheibler, C.~Li, Z.~Ni, A.~Kumar, M.~Sach,
+  Y.~Fu, W.~Wang, T.~Fingscheidt, and S.~Watanabe, ``{Interspeech} 2025
+  {URGENT} speech enhancement challenge,'' in \emph{Proc. Interspeech}, 2025.
 
 \end{thebibliography}

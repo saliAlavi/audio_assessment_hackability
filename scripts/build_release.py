@@ -125,8 +125,9 @@ def build_bundle(reg: dict, out: Path) -> None:
         for rel in EXTRA_FILES:
             if (PROJ / rel).exists():
                 tar.add(PROJ / rel, arcname=rel)
-        for v in reg.values():
-            rd = Path(v["run_dir"])
+        # The enhancer pre-training runs predate the registry; include their outputs too.
+        pretrain = [max(p for p in PROJ.glob(f"se_pretrain_s{s}__*") if "smoke" not in p.name) for s in (0, 1, 2)]
+        for rd in [Path(v["run_dir"]) for v in reg.values()] + pretrain:
             for pat in RESULT_GLOBS:
                 for f in sorted(rd.glob(pat)):
                     tar.add(f, arcname=str(f.relative_to(PROJ)))

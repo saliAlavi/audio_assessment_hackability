@@ -406,8 +406,12 @@ def fetch_results() -> Path:
     m = manifest()["results_bundle"]
     dest = ARTIFACTS / "runs"
     tgz = ARTIFACTS / RESULTS_BUNDLE
-    if not (dest / "_campaign.json").exists():
-        if not (tgz.exists() and tgz.stat().st_size == m["size"]):
+    stamp = dest / ".bundle_sha256"
+    if not (stamp.exists() and stamp.read_text() == m["sha256"]):
+        if dest.exists():
+            shutil.rmtree(dest)
+        if not (tgz.exists() and _sha256(tgz) == m["sha256"]):
+            tgz.unlink(missing_ok=True)
             _download(RESULTS_BUNDLE, tgz, _release_assets())
             if _sha256(tgz) != m["sha256"]:
                 raise RuntimeError("sha256 mismatch for the results bundle")
@@ -418,6 +422,7 @@ def fetch_results() -> Path:
         for v in reg.values():
             v["run_dir"] = str(dest / Path(v["run_dir"]).name)
         (dest / "_campaign.json").write_text(json.dumps(reg, indent=1))
+        stamp.write_text(m["sha256"])
     return dest
 
 
@@ -574,3 +579,35 @@ def show_pdf(path: Path, dpi: int = 200):
     with tempfile.TemporaryDirectory() as tmp:
         subprocess.run(["pdftoppm", "-png", "-r", str(dpi), "-singlefile", str(path), f"{tmp}/fig"], check=True)
         return Image(filename=f"{tmp}/fig.png")
+
+
+def diff_text(new: Path, ref: Path) -> str:
+    """Unified diff of a regenerated text artifact (e.g. a ``.tex`` table) against the committed one."""
+    import difflib
+
+    a, b = Path(ref).read_text().splitlines(), Path(new).read_text().splitlines()
+    d = list(difflib.unified_diff(a, b, "committed", "regenerated", lineterm=""))
+    return "identical to the committed file" if not d else "\n".join(d)
+
+
+def compare_csv(new: Path, ref: Path):
+    """Largest absolute difference per numeric column of a regenerated CSV vs the committed one.
+
+    Rows are aligned by the non-numeric columns (e.g. target, attacker) plus row order within them.
+
+    Returns:
+        A Series ``column -> max |diff|`` (NaN where a column is missing in one of the files).
+    """
+    import pandas as pd
+
+    a, b = pd.read_csv(ref), pd.read_csv(new)
+    keys = [c for c in a.columns if a[c].dtype == object and c in b]
+    if keys:
+        a = a.sort_values(keys, kind="stable").reset_index(drop=True)
+        b = b.sort_values(keys, kind="stable").reset_index(drop=True)
+    num = [c for c in a.columns if c not in keys and pd.api.types.is_numeric_dtype(a[c])]
+    out = {}
+    for c in num:
+        out[c] = float((pd.to_numeric(b[c], errors="coerce").astype(float) - a[c].astype(float)).abs().max()) \
+            if c in b and len(a) == len(b) else float("nan")
+    return pd.Series(out, name="max_abs_diff")
