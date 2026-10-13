@@ -1,0 +1,3 @@
+# Installed with --no-deps (see requirements.txt): their metadata pins protobuf<3.20.
+descript-audiotools==0.7.2
+descript-audio-codec==1.0.0

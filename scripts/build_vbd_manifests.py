@@ -26,6 +26,7 @@ job (it is I/O-bound; many threads help)::
 from __future__ import annotations
 
 import argparse
+import os
 import time
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -36,8 +37,10 @@ import soundfile as sf
 
 from hackpatch.utils import paths
 
-#: VoiceBank-DEMAND at 16 kHz (read-only project storage).
-VBD_ROOT = Path("/fs/ess/PAS2301/Data/Speech/datasets_voicebank/noisy-vctk-16k")
+#: VoiceBank-DEMAND resampled to 16 kHz (``{clean,noisy}_{trainset_28spk,testset}_wav_16k/`` + ``*_txt/``),
+#: under ``HACKPATCH_DATA_ROOT`` (default: the original cluster's read-only project storage).
+VBD_ROOT = Path(os.environ.get("HACKPATCH_DATA_ROOT", "/fs/ess/PAS2301/Data/Speech")) / "datasets_voicebank" / \
+    "noisy-vctk-16k"
 #: Training speakers held out for validation (one female, one male).
 VAL_SPEAKERS = ("p226", "p287")
 #: Output columns of every VBD manifest.

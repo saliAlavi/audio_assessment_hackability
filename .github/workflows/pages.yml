@@ -1,0 +1,36 @@
+# Publishes website/ (the project page) to GitHub Pages. Repository settings: Pages -> Source: GitHub Actions.
+name: Project page
+
+on:
+  push:
+    branches: [main]
+    paths: ["website/**", "paper/tables/**", "analysis/out/bench_summary.csv", ".github/workflows/pages.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check the page matches the paper's tables and results
+        run: python3 website/build.py --check
+      - name: Collect the site
+        run: mkdir _site && cp -r website/index.html website/static _site/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

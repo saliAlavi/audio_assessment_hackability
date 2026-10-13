@@ -16,3 +16,12 @@ paper/*.synctex.gz
 
 # Notebook outputs of recomputed evaluations (the committed tables live in analysis/out and paper/)
 notebooks/out/
+
+# Private, machine- and agent-specific files: kept locally, never committed
+.claude/
+LOG.md
+lit/
+docs/implementation.md
+docs/lit_review.md
+docs/e3_pilot.md
+scripts/env.local.sh

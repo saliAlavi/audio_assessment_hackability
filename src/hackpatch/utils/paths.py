@@ -25,8 +25,10 @@ import os
 import subprocess
 from pathlib import Path
 
-#: Root of all large storage. Overridable by env var for portability/tests.
-SCRATCH_DIR = Path(os.environ.get("SCRATCH_DIR", "/fs/scratch/PAS2301/alialavi"))
+_ORIGINAL_SCRATCH = Path("/fs/scratch/PAS2301/alialavi")
+#: Root of all large storage: ``$SCRATCH_DIR``, else the original cluster's scratch, else ``~/hackpatch_scratch``.
+SCRATCH_DIR = Path(os.environ.get("SCRATCH_DIR")
+                   or (_ORIGINAL_SCRATCH if _ORIGINAL_SCRATCH.is_dir() else Path.home() / "hackpatch_scratch"))
 
 
 def project_name() -> str:

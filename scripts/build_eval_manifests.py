@@ -3,6 +3,7 @@
 
 Deterministically (re)creates, via :func:`hackpatch.data.manifests.write_manifest_csv`:
 
+* ``bvcc_{train,val,test}``       VMC'22 main track (BVCC): R0 training data and the in-domain test set.
 * ``bvcc_ood_{train,val,test}``   VMC'22 OOD track (Chinese Blizzard 2019).
 * ``nisqa_test_{for,p501,livetalk}``  NISQA corpus test sets (overall ``mos``).
 * ``somos_test``                   SOMOS split1 *clean* test list, audios_16000.
@@ -16,6 +17,9 @@ Usage::
     python scripts/build_eval_manifests.py                 # all corpora + checks + doc
     python scripts/build_eval_manifests.py --only nisqa vmc23
     python scripts/build_eval_manifests.py --no-doc
+    python scripts/build_eval_manifests.py --data-root /data/speech   # elsewhere (or HACKPATCH_DATA_ROOT)
+
+The corpora are read from ``--data-root`` in the layout of ``docs/eval_corpora.md``.
 
 URGENT audio is stored in HF parquet shards; the first run extracts the raw
 (already-encoded) audio bytes to ``data/audio/`` next to the shards (no
@@ -39,7 +43,8 @@ import soundfile as sf
 from hackpatch.data.manifests import COLUMNS, write_manifest_csv
 from hackpatch.utils import paths
 
-SPEECH = Path("/fs/ess/PAS2301/Data/Speech")
+#: Root of the local corpora (layout in docs/eval_corpora.md); ``--data-root`` or ``HACKPATCH_DATA_ROOT``.
+SPEECH = Path(os.environ.get("HACKPATCH_DATA_ROOT", "/fs/ess/PAS2301/Data/Speech"))
 MOS = SPEECH / "MOS_datasets"
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DOC = PROJECT_ROOT / "docs" / "eval_corpora.md"
@@ -66,6 +71,21 @@ def _frame(utt_id, path, mos, system, corpus: str, split: str) -> pd.DataFrame:
 # --------------------------------------------------------------------------- #
 # Local corpora
 # --------------------------------------------------------------------------- #
+def build_bvcc() -> list[Built]:
+    """VMC'22 main track (BVCC). Official train/val/test lists, kept in list order (R0 training reads by row)."""
+    root = MOS / "bvcc" / "main" / "DATA"
+    out = []
+    for split, fname, n in [("train", "train_mos_list.txt", 4974), ("val", "val_mos_list.txt", 1066),
+                            ("test", "test_mos_list.txt", 1066)]:
+        lst = pd.read_csv(root / "sets" / fname, header=None, names=["wav", "mos"])
+        df = pd.DataFrame({"utt_id": lst["wav"].str.replace(".wav", "", regex=False),
+                           "path": [str(root / "wav" / w) for w in lst["wav"]],
+                           "mos": lst["mos"].astype(float), "system": lst["wav"].str.split("-").str[0]})
+        df["corpus"], df["split"] = "bvcc", split
+        out.append(Built("bvcc", split, df, n, f"local `{root}/sets/{fname}` (VMC'22 main track)"))
+    return out
+
+
 def build_bvcc_ood() -> list[Built]:
     """VMC'22 OOD track (BC2019, Mandarin). Official labeled train/val/test lists.
 
@@ -226,7 +246,7 @@ def build_urgent() -> list[Built]:
     return out
 
 
-BUILDERS = {"bvcc_ood": build_bvcc_ood, "nisqa": build_nisqa, "somos": build_somos,
+BUILDERS = {"bvcc": build_bvcc, "bvcc_ood": build_bvcc_ood, "nisqa": build_nisqa, "somos": build_somos,
             "tmhintqi": build_tmhintqi, "vmc23": build_vmc23, "urgent": build_urgent}
 
 
@@ -309,27 +329,63 @@ DOC_NOTES = """
   `system` = submission id; `utt_id` = `{system_id}__fileid_XXXXXX` (the HF
   `sample_id` alone is not unique across systems). Audio bytes extracted unchanged
   (flac, 8-48 kHz) to
-  `/fs/scratch/PAS2301/alialavi/datasets/audio_assessment_hackability_urgent2{4,5}_sqa/data/audio`.
+  `$SCRATCH_DIR/datasets/audio_assessment_hackability_urgent2{4,5}_sqa/data/audio`.
   URGENT 2026 Track 2 uses `urgent2024-sqa/blind_test_mos` as its public test set.
 """
 
 
+DOC_SOURCES = """
+## Getting the data
+
+The corpora are not redistributed. Download each one and lay it out under one data root
+(`--data-root`, or `HACKPATCH_DATA_ROOT` for this script and `scripts/build_vbd_manifests.py`):
+
+| corpus | where to get it | terms | path under the data root |
+|---|---|---|---|
+| BVCC (VMC'22 main track) | [Zenodo 10691660](https://zenodo.org/records/10691660), `main.tar.gz` (its scripts fetch the audio) | Blizzard Challenge terms: non-commercial research, no redistribution | `MOS_datasets/bvcc/main/DATA/{wav,sets}` |
+| VMC'22 OOD track | same record, `ood.tar.gz` (its script fetches the Blizzard 2019 release) | as above | `MOS_datasets/bc19/ood/DATA/{wav,sets}` |
+| NISQA Corpus | [DepositOnce](https://depositonce.tu-berlin.de/items/3b08adda-9fe5-485a-ae0b-813c89975235) (mirror: [Zenodo 4728081](https://zenodo.org/records/4728081)) | per subset, see the [NISQA wiki](https://github.com/gabrielmittag/NISQA/wiki/NISQA-Corpus) | `NISQA_Corpus/NISQA_TEST_{FOR,P501,LIVETALK}` |
+| SOMOS | [Zenodo 7119399](https://zenodo.org/records/7119399) | CC BY-NC-SA 4.0 | `MOS_datasets/somos/{audios_16000,training_files}` |
+| TMHINT-QI | [InQSS repository](https://github.com/yuwchen/InQSS) (`TMHINTQI.zip`) | none stated | `TMHINTQI/{raw_data.csv,test}` |
+| VoiceMOS'23 test sets | no official download: the [SHEET recipe](https://github.com/unilight/sheet/blob/main/egs/vmc23/local/data_download.sh) fetches the audio and holds the [answer keys](https://github.com/unilight/sheet/tree/main/egs/vmc23/answers) | none stated | `MOS_datasets/vmc23/{answers,track1,track2,track3}` |
+| URGENT'24 / '25 SQA | Hugging Face [urgent2024-sqa](https://huggingface.co/datasets/urgent-challenge/urgent2024-sqa), [urgent2025-sqa](https://huggingface.co/datasets/urgent-challenge/urgent2025-sqa), split `blind_test_mos` | CC BY-NC-SA 4.0 | not under the data root (below) |
+| VoiceBank-DEMAND (E3) | [Edinburgh DataShare](https://datashare.ed.ac.uk/handle/10283/2791) | CC BY 4.0 | `datasets_voicebank/noisy-vctk-16k` (below) |
+
+URGENT goes to scratch; this script extracts the audio from the parquet shards on its first run:
+
+```bash
+for y in 24 25; do
+  hf download urgent-challenge/urgent20${y}-sqa --repo-type dataset --include "data/blind_test_mos/*" "README.md" \\
+    --local-dir "$SCRATCH_DIR/datasets/audio_assessment_hackability_urgent${y}_sqa/data/hf"
+done
+```
+
+VoiceBank-DEMAND is released at 48 kHz. Resample `{clean,noisy}_{trainset_28spk,testset}_wav` to 16 kHz into
+`{clean,noisy}_{trainset_28spk,testset}_wav_16k/` and copy `{trainset_28spk,testset}_txt/` next to them. The original
+runs used an existing 16 kHz copy, so a different resampler can move the E3 (Table III) numbers slightly.
+"""
+
+
 def write_doc(stats: list[dict], extra_notes: str = "") -> None:
-    mdir = paths.cache_dir("manifests")
+    mdir = f"$SCRATCH_DIR/cache/{paths.cache_dir('manifests', create=False).name}"
     lines = [DOC_HEADER.format(mdir=mdir)]
     for s in stats:
         lines.append(f"| {s['corpus']} | {s['split']} | {s['n_utt']} | {s['n_sys']} | "
                      f"{s['mos_mean']:.3f} | {s['mos_std']:.3f} | "
                      f"{s['mos_min']:.2f}-{s['mos_max']:.2f} | {s['sr']} | {s['source']} |\n")
-    DOC.write_text("".join(lines) + DOC_NOTES + extra_notes)
+    DOC.write_text("".join(lines) + DOC_NOTES + DOC_SOURCES + extra_notes)
     print("wrote", DOC)
 
 
 def main() -> None:
+    global SPEECH, MOS
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--only", nargs="+", choices=sorted(BUILDERS), default=sorted(BUILDERS))
     ap.add_argument("--no-doc", action="store_true", help="do not rewrite docs/eval_corpora.md")
+    ap.add_argument("--data-root", type=Path, default=SPEECH,
+                    help="root of the corpora, laid out as in docs/eval_corpora.md (default: %(default)s)")
     args = ap.parse_args()
+    SPEECH, MOS = args.data_root, args.data_root / "MOS_datasets"
 
     order = [k for k in BUILDERS if k in args.only]
     stats = []

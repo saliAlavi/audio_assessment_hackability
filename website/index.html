@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>How Hackable Is Your Speech Quality Metric?</title>
+<meta name="description" content="A corrected protocol for measuring how easily speech quality predictors are hacked, a benchmark of SSL-MOS, UTMOS, NISQA and DNSMOS, and an audit of attack-detect-patch defences. Paper, code, checkpoints and reproduction notebooks.">
+<link rel="canonical" href="https://salialavi.github.io/audio_assessment_hackability/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="How Hackable Is Your Speech Quality Metric?">
+<meta property="og:description" content="Same attacker, same budget: NISQA is hacked on 90% of utterances, SSL-MOS 21%, DNSMOS 14%, UTMOS 6%. A corrected protocol, a benchmark, and what patching buys.">
+<meta property="og:url" content="https://salialavi.github.io/audio_assessment_hackability/">
+<meta property="og:image" content="https://salialavi.github.io/audio_assessment_hackability/static/social.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23141821'/%3E%3Crect x='5' y='20' width='4' height='7' rx='1' fill='%238fb8e3'/%3E%3Crect x='11' y='16' width='4' height='11' rx='1' fill='%238fb8e3'/%3E%3Crect x='17' y='12' width='4' height='15' rx='1' fill='%238fb8e3'/%3E%3Crect x='23' y='5' width='4' height='22' rx='1' fill='%23e2692a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* Layout: one 68rem frame with a 16px+ gutter. Prose keeps a ~42rem measure on the left; figures, tables and
+   the opening benchmark use the full frame. The opening pairs the claim (left) with the chart it rests on. */
+:root {
+  --paper: #f5f6f8;
+  --surface: #ffffff;
+  --ink: #141821;
+  --ink-2: #434c5d;
+  --muted: #687285;
+  --rule: #d9dee6;
+  --tint: #e9edf3;
+  --link: #1a5e9c;
+  --corrected: #1f6fb5;   /* corrected reference, as in the paper's Fig. 2 */
+  --naive: #d0581a;       /* naive reference */
+  --plate: #ffffff;       /* the paper's figures sit on white in both themes */
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.3rem;
+  --step-2: clamp(1.45rem, 1.2rem + 0.9vw, 1.8rem);
+  --step-3: clamp(2.1rem, 1.3rem + 3vw, 3.4rem);
+  --frame: 68rem;
+  --measure: 42rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0e1117; --surface: #151a22; --ink: #e6e9ef; --ink-2: #b2bac8; --muted: #8a93a5;
+    --rule: #283040; --tint: #1d2430; --link: #86bdf0; --corrected: #3a8ad6; --naive: #e2692a;
+    --plate: #f3f4f6; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0e1117; --surface: #151a22; --ink: #e6e9ef; --ink-2: #b2bac8; --muted: #8a93a5;
+  --rule: #283040; --tint: #1d2430; --link: #86bdf0; --corrected: #3a8ad6; --naive: #e2692a;
+  --plate: #f3f4f6; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  font-optical-sizing: auto;
+}
+img, svg { max-width: 100%; }
+a { color: var(--link); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--corrected); outline-offset: 3px; border-radius: 3px; }
+sub, sup { font-size: 0.72em; line-height: 0; }
+i.m { font-style: italic; }
+
+.wrap { max-width: var(--frame); margin-inline: auto; padding-inline: max(16px, 4vw); }
+.prose { max-width: var(--measure); }
+.prose > * + * { margin-top: 0.9em; }
+p { margin: 0; }
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; text-wrap: balance; letter-spacing: -0.01em; margin: 0; }
+h2 { font-size: var(--step-2); line-height: 1.2; }
+h3 { font-size: var(--step-1); font-weight: 500; line-height: 1.3; }
+.eyebrow {
+  font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------------------------------------------------------------- opening */
+.opening { padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(2rem, 5vw, 3.5rem); display: grid; gap: 2.5rem; }
+@media (min-width: 60rem) { .opening { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: start; gap: 3.5rem; } }
+.claim { display: grid; gap: 1.25rem; min-width: 0; }
+h1 { font-size: var(--step-3); line-height: 1.04; }
+.subtitle { font-size: var(--step-1); font-style: italic; color: var(--ink-2); line-height: 1.35; }
+.authors { display: grid; gap: 0.15rem; }
+.authors .names { font-family: var(--font-display); font-weight: 500; font-size: 1.1rem; }
+.authors .affil { color: var(--muted); font-size: var(--step--1); }
+.lede { color: var(--ink-2); max-width: 36rem; }
+.links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.9rem; border-radius: 999px;
+  border: 1px solid var(--rule); background: var(--surface); color: var(--ink); text-decoration: none;
+  font-family: var(--font-display); font-weight: 500; font-size: 0.95rem;
+}
+.btn:hover { border-color: var(--ink-2); }
+.btn-primary { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.btn-primary:hover { border-color: var(--ink); opacity: 0.9; }
+.btn .meta { font-family: var(--font-mono); font-size: 0.75rem; opacity: 0.75; }
+
+/* ---------------------------------------------------------- benchmark chart */
+.bench-card {
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 12px;
+  padding: clamp(1rem, 3vw, 1.6rem); display: grid; gap: 1.1rem; min-width: 0;
+}
+.bench-card h2 { font-size: var(--step-1); font-weight: 500; }
+.bench-card .sub { color: var(--muted); font-size: var(--step--1); line-height: 1.5; }
+.bench { display: grid; gap: 0.35rem; }
+.bench-row, .bench-axis {
+  display: grid; grid-template-columns: 7.8rem minmax(0, 1fr) 3.4rem; align-items: center; gap: 0.75rem;
+}
+.bench-row { position: relative; padding-block: 0.4rem; border-radius: 6px; cursor: default; }
+.bench-row:hover, .bench-row:focus-visible { background: var(--tint); }
+.bench-name { font-family: var(--font-display); font-weight: 500; font-size: 0.95rem; padding-left: 0.35rem; }
+.bench-value { font-family: var(--font-mono); font-size: 0.9rem; text-align: right; padding-right: 0.35rem; font-variant-numeric: tabular-nums; }
+.bench-track {
+  position: relative; height: 24px;
+  background: linear-gradient(to right, var(--rule) 1px, transparent 1px) 0 0 / 25% 100% repeat-x;
+  border-right: 1px solid var(--rule);
+}
+.bench-bar {
+  position: absolute; left: 0; top: 4px; bottom: 4px; width: calc(var(--mean) * 100%);
+  background: var(--corrected); border-radius: 0 4px 4px 0;
+}
+.bench-range {
+  position: absolute; top: 50%; height: 2px; margin-top: -1px;
+  left: calc(var(--lo) * 100%); width: calc((var(--hi) - var(--lo)) * 100%); background: var(--ink);
+}
+.bench-range::before, .bench-range::after {
+  content: ""; position: absolute; top: -5px; width: 2px; height: 12px; background: var(--ink);
+}
+.bench-range::before { left: -1px; }
+.bench-range::after { right: -1px; }
+.bench-naive {
+  position: absolute; top: 50%; left: calc(var(--naive-asr) * 100%); width: 10px; height: 10px;
+  margin: -5px 0 0 -5px; border-radius: 50%; background: var(--naive); box-shadow: 0 0 0 2px var(--surface);
+}
+.bench-tip {
+  position: absolute; z-index: 3; left: 8.55rem; right: 0; top: calc(100% + 2px);
+  background: var(--ink); color: var(--paper); font-size: 0.82rem; line-height: 1.45; padding: 0.55rem 0.7rem;
+  border-radius: 6px; opacity: 0; pointer-events: none; transform: translateY(-3px);
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+.bench-row:hover .bench-tip, .bench-row:focus-visible .bench-tip { opacity: 1; transform: none; }
+.bench-axis { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+.bench-axis .ticks { position: relative; height: 1rem; }
+.bench-axis .ticks span { position: absolute; transform: translateX(-50%); }
+.bench-axis .ticks span:first-child { transform: none; }
+.bench-axis .ticks span:last-child { transform: translateX(-100%); }
+.legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; font-size: 0.82rem; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 0.45rem; }
+.key-bar { width: 18px; height: 12px; background: var(--corrected); border-radius: 0 3px 3px 0; }
+.key-range { width: 18px; height: 2px; background: var(--ink); position: relative; }
+.key-range::before, .key-range::after { content: ""; position: absolute; top: -4px; width: 2px; height: 10px; background: var(--ink); }
+.key-range::before { left: 0; }
+.key-range::after { right: 0; }
+.key-naive { width: 10px; height: 10px; border-radius: 50%; background: var(--naive); }
+@media (max-width: 30rem) {
+  .bench-row, .bench-axis { grid-template-columns: minmax(0, 1fr) 3.4rem; }
+  .bench-name { grid-column: 1 / -1; }
+  .bench-axis > span:first-child { display: none; }
+  .bench-tip { left: 0; }
+}
+
+/* ---------------------------------------------------------------- sections */
+main > section { padding-block: clamp(2.25rem, 5vw, 3.5rem); border-top: 1px solid var(--rule); display: grid; gap: 1.5rem; }
+.abstract { font-size: 1.02rem; color: var(--ink-2); }
+
+.flaws { display: grid; gap: 1.25rem; }
+@media (min-width: 52rem) { .flaws { grid-template-columns: 1fr 1fr; } }
+.flaw { display: grid; gap: 0.8rem; align-content: start; min-width: 0; }
+.flaw p { color: var(--ink-2); }
+.rules { display: grid; gap: 0.5rem; margin-block: 0.25rem; }
+.rule {
+  display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); align-items: baseline; gap: 0.75rem;
+  padding: 0.55rem 0.8rem; border-radius: 8px; background: var(--surface); border: 1px solid var(--rule);
+}
+.rule-label { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 0.45rem; }
+.rule-label::before { content: ""; width: 9px; height: 9px; border-radius: 50%; flex: none; }
+.rule-naive .rule-label::before { background: var(--naive); }
+.rule-corrected .rule-label::before { background: var(--corrected); }
+.math { font-family: var(--font-body); font-size: 1.12rem; white-space: nowrap; overflow-x: auto; }
+.math i { font-style: italic; }
+
+figure { margin: 0; display: grid; gap: 0.75rem; min-width: 0; }
+.plate { background: var(--plate); border-radius: 10px; padding: clamp(0.75rem, 2.5vw, 1.5rem); overflow-x: auto; border: 1px solid var(--rule); }
+.plate img { display: block; margin-inline: auto; height: auto; }
+.plate-method img { width: min(100%, 44rem); }
+.plate-results img { width: 100%; min-width: 40rem; }
+.caption { font-size: 0.92rem; color: var(--ink-2); max-width: 52rem; line-height: 1.55; }
+.caption b { font-family: var(--font-display); font-weight: 500; color: var(--ink); }
+
+.findings { display: grid; gap: 1rem; padding: 0; margin: 0; list-style: none; }
+@media (min-width: 52rem) { .findings { grid-template-columns: 1fr 1fr; gap: 1.25rem 2.5rem; } }
+.findings li { display: grid; gap: 0.3rem; min-width: 0; }
+.findings h3 { font-size: 1.05rem; }
+.findings p { color: var(--ink-2); font-size: 0.98rem; }
+
+.table-scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums lining-nums; font-size: 0.93rem; }
+th, td { padding: 0.5rem 0.85rem; text-align: right; white-space: nowrap; }
+thead th { font-family: var(--font-display); font-weight: 500; font-size: 0.85rem; color: var(--ink-2); border-bottom: 1px solid var(--rule); }
+thead tr:first-child th.group { border-bottom: 1px solid var(--rule); text-align: center; }
+thead tr + tr th { border-bottom: 1px solid var(--rule); }
+tbody th { text-align: left; font-weight: 400; }
+thead th:first-child, tbody th { text-align: left; }
+tbody tr + tr > * { border-top: 1px solid var(--tint); }
+.sd { color: var(--muted); font-size: 0.85em; margin-left: 0.15em; }
+
+.limits { display: grid; gap: 0.6rem; padding-left: 1.2rem; margin: 0; color: var(--ink-2); max-width: var(--measure); }
+
+pre {
+  margin: 0; background: var(--tint); border-radius: 10px; padding: 1rem 1.1rem; overflow-x: auto;
+  font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.6; color: var(--ink);
+}
+code { font-family: var(--font-mono); font-size: 0.88em; }
+pre code { font-size: inherit; }
+.repro { display: grid; gap: 1.5rem; }
+@media (min-width: 60rem) { .repro { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: start; } }
+.repro-map td, .repro-map th { text-align: left; }
+.repro-map td { font-family: var(--font-mono); font-size: 0.82rem; white-space: normal; }
+.repro-map tbody th { white-space: nowrap; }
+.cmt { color: var(--muted); }
+
+.cite { display: grid; gap: 0.75rem; }
+.cite-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.copy {
+  font-family: var(--font-display); font-weight: 500; font-size: 0.9rem; padding: 0.4rem 0.85rem; border-radius: 999px;
+  border: 1px solid var(--rule); background: var(--surface); color: var(--ink); cursor: pointer;
+}
+.copy:hover { border-color: var(--ink-2); }
+
+footer { padding-block: 2rem 3rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: 0.85rem; }
+footer .wrap { display: grid; gap: 0.35rem; }
+
+@media (prefers-reduced-motion: reduce) { .bench-tip { transition: none; } }
+</style>
+</head>
+<body>
+<header class="wrap opening">
+  <div class="claim">
+    <p class="eyebrow">arXiv 2610.10899 &middot; 2026</p>
+    <h1>How Hackable Is Your Speech Quality Metric?</h1>
+    <p class="subtitle">A Corrected Protocol, a Benchmark, and What Patching Buys</p>
+    <div class="authors">
+      <span class="names">Ali Alavi &middot; Donald S. Williamson</span>
+      <span class="affil">Department of Computer Science and Engineering, The Ohio State University</span>
+    </div>
+    <p class="lede">Speech quality predictors such as NISQA, DNSMOS and UTMOS are now used as training rewards, so it
+      matters how much score an optimiser can extract without improving the audio. We fix two flaws in how that is
+      measured, benchmark four widely used predictors under one protocol, and audit whether patching a predictor on
+      its own hacks makes it a safer reward.</p>
+    <nav class="links" aria-label="Paper, code and data">
+      <a class="btn btn-primary" href="https://arxiv.org/abs/2610.10899">Paper <span class="meta">arXiv</span></a>
+      <a class="btn" href="https://arxiv.org/pdf/2610.10899">PDF</a>
+      <a class="btn" href="https://github.com/saliAlavi/audio_assessment_hackability">Code</a>
+      <a class="btn" href="https://github.com/saliAlavi/audio_assessment_hackability/releases/tag/checkpoints-v1">Checkpoints <span class="meta">19.3 GB</span></a>
+      <a class="btn" href="#cite">Cite</a>
+    </nav>
+  </div>
+
+  <section class="bench-card" aria-labelledby="bench-heading">
+    <div>
+      <h2 id="bench-heading">Utterances hacked by the same attacker</h2>
+      <p class="sub">One black-box attacker per predictor in the EnCodec latent space, perturbation size &epsilon; = 0.5,
+        500 BVCC test utterances, five attackers each. A hack raises the score more than &tau; = 0.3 MOS above the
+        codec round trip while an independent panel says the audio got worse.</p>
+    </div>
+    <div class="bench" role="list">
+      <!-- BEGIN generated:bench-chart -->
+<div class="bench-row" role="listitem" tabindex="0" style="--mean:0.8960;--lo:0.8760;--hi:0.9160;--naive-asr:0.8388">
+  <span class="bench-name">NISQA</span>
+  <span class="bench-track" aria-hidden="true"><span class="bench-bar"></span><span class="bench-range"></span><span class="bench-naive"></span></span>
+  <span class="bench-value">89.6%</span>
+  <span class="bench-tip">NISQA: hacked on 89.6% of utterances (mean of 5 attackers), 87.6% to 91.6% across attackers; 83.9% under the naive reference. Mean gain +0.954 MOS; codec round-trip offset +0.14 MOS.</span>
+</div>
+<div class="bench-row" role="listitem" tabindex="0" style="--mean:0.2048;--lo:0.1360;--hi:0.2520;--naive-asr:0.1700">
+  <span class="bench-name">SSL-MOS</span>
+  <span class="bench-track" aria-hidden="true"><span class="bench-bar"></span><span class="bench-range"></span><span class="bench-naive"></span></span>
+  <span class="bench-value">20.5%</span>
+  <span class="bench-tip">SSL-MOS: hacked on 20.5% of utterances (mean of 5 attackers), 13.6% to 25.2% across attackers; 17.0% under the naive reference. Mean gain +0.191 MOS; codec round-trip offset −0.10 MOS.</span>
+</div>
+<div class="bench-row" role="listitem" tabindex="0" style="--mean:0.1356;--lo:0.0640;--hi:0.2000;--naive-asr:0.1828">
+  <span class="bench-name">DNSMOS OVRL</span>
+  <span class="bench-track" aria-hidden="true"><span class="bench-bar"></span><span class="bench-range"></span><span class="bench-naive"></span></span>
+  <span class="bench-value">13.6%</span>
+  <span class="bench-tip">DNSMOS OVRL: hacked on 13.6% of utterances (mean of 5 attackers), 6.4% to 20.0% across attackers; 18.3% under the naive reference. Mean gain +0.124 MOS; codec round-trip offset +0.02 MOS.</span>
+</div>
+<div class="bench-row" role="listitem" tabindex="0" style="--mean:0.0572;--lo:0.0420;--hi:0.0760;--naive-asr:0.0936">
+  <span class="bench-name">UTMOS22</span>
+  <span class="bench-track" aria-hidden="true"><span class="bench-bar"></span><span class="bench-range"></span><span class="bench-naive"></span></span>
+  <span class="bench-value">5.7%</span>
+  <span class="bench-tip">UTMOS22: hacked on 5.7% of utterances (mean of 5 attackers), 4.2% to 7.6% across attackers; 9.4% under the naive reference. Mean gain +0.144 MOS; codec round-trip offset −0.07 MOS.</span>
+</div>
+      <!-- END generated:bench-chart -->
+      <div class="bench-axis" aria-hidden="true">
+        <span></span>
+        <span class="ticks"><span style="left:0">0</span><span style="left:25%">25</span><span style="left:50%">50</span><span style="left:75%">75</span><span style="left:100%">100%</span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="legend">
+      <span><i class="key-bar" aria-hidden="true"></i>mean of five attackers, corrected reference</span>
+      <span><i class="key-range" aria-hidden="true"></i>range across the five</span>
+      <span><i class="key-naive" aria-hidden="true"></i>mean, naive reference</span>
+    </div>
+  </section>
+</header>
+
+<main class="wrap">
+  <section aria-labelledby="abstract-heading">
+    <h2 id="abstract-heading">Abstract</h2>
+    <div class="prose abstract">
+      <p>Speech quality predictors are increasingly used as rewards, yet no agreed measure of their hackability exists.
+        The usual measurement has two flaws. First, the perturbation reaches the predictor through a processing chain
+        (here a neural codec) that shifts the score on its own, which scoring against the raw input charges to the
+        attack. Referencing the unperturbed round trip instead changes measured hackability by up to a factor of four
+        (0.31 to 0.08 for one defence). Second, one trained attacker is a sample, not a measurement: five attackers
+        differing only in random seed reach success rates from 0.00 to 0.38 against one fixed predictor, so a defence
+        claim needs the worst case over several. Under this protocol, four published predictors differ widely: NISQA
+        is hacked on 90% of utterances, SSL-MOS on 21%, DNSMOS on 14% and UTMOS on 6%. We then audit a closed
+        attack&ndash;detect&ndash;patch loop. It hardens the predictor only in its own attack space, by less than the
+        spread between attackers; a random-perturbation baseline matches it; and it costs up to 0.30 system SRCC out
+        of domain. Enhancers post-trained against patched predictors hack them far less (PESQ &minus;0.03 versus
+        &minus;0.23). Code, preregistration and run outputs are released.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="protocol-heading">
+    <div class="prose">
+      <h2 id="protocol-heading">Two corrections to the usual measurement</h2>
+    </div>
+    <div class="prose"><p>Attacks on quality predictors are usually scored by comparing the attacked audio with the
+      original recording, and reported for one trained attacker. Both choices change the answer.</p></div>
+    <div class="flaws">
+      <article class="flaw">
+        <h3>Reference the codec round trip</h3>
+        <div class="rules" role="list">
+          <div class="rule rule-naive" role="listitem"><span class="rule-label">Naive</span>
+            <span class="math"><i>R</i>(<i>y</i>) &minus; <i>R</i>(<i>x</i>) &gt; <i>&tau;</i></span></div>
+          <div class="rule rule-corrected" role="listitem"><span class="rule-label">Corrected</span>
+            <span class="math"><i>R</i>(<i>y</i>) &minus; <i>R</i>(<i>x&#770;</i>) &gt; <i>&tau;</i></span></div>
+        </div>
+        <p>The perturbation reaches the predictor through a neural codec, and the codec moves the score on its own:
+          by &minus;0.10 MOS for SSL-MOS, &minus;0.07 for UTMOS, +0.02 for DNSMOS and +0.14 for NISQA, and by up to
+          +0.95 for a patched predictor. Scoring against the raw input <i>x</i> charges that offset to the attack.
+          Scoring against the zero-perturbation round trip <i>x&#770;</i> moves the multi-space defence from
+          apparently catastrophic (0.306) to among the most robust (0.082).</p>
+      </article>
+      <article class="flaw">
+        <h3>Report the worst of several attackers</h3>
+        <p>An attacker is itself a trained model. Five attackers that differ only in random seed reach success rates
+          from 0.000 to 0.261 against the undefended predictor R<sub>0</sub> and from 0.000 to 0.382 against the
+          patched R<sub>3</sub>, a spread as large as every defence effect we measure.</p>
+        <p>Between predictors the spread is small relative to the differences (NISQA 0.876&ndash;0.916 against UTMOS
+          0.042&ndash;0.076), so the benchmark ranking holds where defence comparisons do not. We report the worst of
+          five attackers.</p>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="method-heading">
+    <div class="prose">
+      <h2 id="method-heading">Attacker, detector and patch loop</h2>
+      <p>A policy trained with group relative policy optimisation (GRPO) adds one offset to the codec latents of each
+        utterance, rescaled to a fixed size &epsilon;. It sees only the predictor's scores, so any predictor can be a
+        target. An output counts as a hack only if its score rises and at least one independent measure (ESTOI,
+        SI-SDR, SpeechBERTScore or the Whisper word error rate) says it got worse. No human labels are used. Each
+        hack becomes a preference pair <i>x&#770;</i> &#8827; <i>y</i>, and the predictor is fine-tuned on its
+        regression loss plus a margin ranking loss over every hack found so far.</p>
+    </div>
+    <figure>
+      <div class="plate plate-method"><img src="static/method.svg" width="680" height="410" alt="Diagram of the loop. Clean speech x is encoded by a codec; a GRPO policy adds a perturbation delta of size epsilon to the latent z; the codec decoder produces the attacked output y. A dashed path with delta equal to zero gives the round trip x-hat. The predictor R_{k-1} scores y and returns the reward to the policy. A detector flags a hack when the score gain exceeds tau and one of ESTOI, SI-SDR, WER or SpeechBERTScore is worse than for x-hat; flagged outputs become pairs x-hat preferred over y, which patch the predictor into R_k for the next round."></div>
+      <p class="caption"><b>Fig. 1.</b> The attack&ndash;detect&ndash;patch loop. A GRPO policy perturbs codec latents
+        at a fixed size; an output is flagged only if its score rises above that of the zero-perturbation round trip
+        <i>x&#770;</i> (dashed) and an independent panel degrades relative to <i>x&#770;</i>. Flagged pairs patch the
+        predictor; the next round retrains the attacker.</p>
+    </figure>
+  </section>
+
+  <section aria-labelledby="bench-table-heading">
+    <div class="prose">
+      <h2 id="bench-table-heading">Common predictors differ by more than an order of magnitude</h2>
+      <p>At one perturbation size NISQA is hacked on 89.6% of utterances for a mean gain of +0.954 MOS, SSL-MOS on
+        20.5%, DNSMOS OVRL on 13.6% and UTMOS on 5.7%. NISQA and DNSMOS are routinely used as reinforcement-learning
+        rewards, so the choice of reward is a first-order robustness decision, and the ranking is not predictable from
+        in-domain accuracy.</p>
+    </div>
+    <figure>
+      <div class="table-scroll">
+        <!-- BEGIN generated:table-bench -->
+<table aria-describedby="cap-table1">
+<thead>
+<tr><th scope="col">Predictor</th><th scope="col">offset</th><th scope="col">mean ASR</th><th scope="col">worst ASR</th><th scope="col">mean gain</th></tr>
+</thead>
+<tbody>
+<tr><th scope="row">SSL-MOS (BVCC)</th><td>−0.10</td><td>0.205</td><td>0.252</td><td>+0.191</td></tr>
+<tr><th scope="row">UTMOS22</th><td>−0.07</td><td>0.057</td><td>0.076</td><td>+0.144</td></tr>
+<tr><th scope="row">NISQA</th><td>+0.14</td><td>0.896</td><td>0.916</td><td>+0.954</td></tr>
+<tr><th scope="row">DNSMOS OVRL</th><td>+0.02</td><td>0.136</td><td>0.200</td><td>+0.124</td></tr>
+</tbody>
+</table>
+        <!-- END generated:table-bench -->
+      </div>
+      <p class="caption" id="cap-table1"><b>Table I.</b> Hackability of common predictors at one size (&epsilon; = 0.5,
+        EnCodec latents), five independently trained attackers each, 500 BVCC-test utterances; &ldquo;worst&rdquo; is
+        the largest of the five. Offset is the codec round trip's own score change, R(<i>x&#770;</i>) &minus;
+        R(<i>x</i>), in MOS.</p>
+    </figure>
+  </section>
+
+  <section aria-labelledby="patch-heading">
+    <div class="prose">
+      <h2 id="patch-heading">What patching buys</h2>
+      <p>We start from SSL-MOS trained on BVCC (R<sub>0</sub>) and run three rounds of the loop (R<sub>1</sub> to
+        R<sub>3</sub>), a multi-space variant that also attacks DAC latents and the waveform, and three baselines that
+        patch on noise, waveform-PGD or random latent pairs with the same loss and step budget.</p>
+    </div>
+    <ul class="findings">
+      <li><h3>It hardens only its own attack space</h3>
+        <p>EnCodec attack success falls from 0.226 (R<sub>0</sub>) to 0.050 (R<sub>1</sub>) and 0.017
+          (R<sub>2</sub>), but the R<sub>0</sub>&rarr;R<sub>3</sub> difference does not hold its sign across seeds
+          (&minus;0.073, &minus;0.039, +0.379).</p></li>
+      <li><h3>A random baseline matches it</h3>
+        <p>Pairs from random latent perturbations of the same size, with no reinforcement learning and no detector,
+          give the lowest in-space success rate of any defence (0.019 &plusmn; 0.016).</p></li>
+      <li><h3>Nothing transfers</h3>
+        <p>Against an unseen DAC attacker the EnCodec-patched predictors are worse than undefended (0.065 rising to
+          between 0.13 and 0.16), and white-box PGD succeeds on nearly every utterance. Only multi-space training
+          resists DAC (0.016), and it is the one predictor PGD does not fully break (0.841).</p></li>
+      <li><h3>Robustness costs agreement with listeners</h3>
+        <p>Out of domain, mean system SRCC falls from 0.731 to 0.690, 0.682 and 0.637 over three rounds and to 0.552
+          for the multi-space predictor; in domain the ranking holds (0.920 vs 0.922) but utterance MSE rises from
+          0.234 to 0.272.</p></li>
+    </ul>
+    <figure>
+      <div class="table-scroll">
+        <!-- BEGIN generated:table-loop -->
+<table aria-describedby="cap-table2">
+<thead>
+<tr><td></td><th scope="col">offset</th><th colspan="3" class="group">ASR by attack space</th><th colspan="2" class="group">human agreement</th></tr>
+<tr><th scope="col">Predictor</th><th scope="col">R(<i>x&#770;</i>) − R(<i>x</i>)</th><th scope="col">EnCodec</th><th scope="col">DAC</th><th scope="col">PGD</th><th scope="col">BVCC</th><th scope="col">OOD</th></tr>
+</thead>
+<tbody>
+<tr><th scope="row">R<sub>0</sub> (no defense)</th><td>−0.09<span class="sd">&plusmn;0.02</span></td><td>0.226<span class="sd">&plusmn;0.205</span></td><td>0.065<span class="sd">&plusmn;0.113</span></td><td>0.999<span class="sd">&plusmn;0.002</span></td><td>0.922<span class="sd">&plusmn;0.004</span></td><td>0.731<span class="sd">&plusmn;0.006</span></td></tr>
+<tr><th scope="row">R<sub>1</sub></th><td>−0.06<span class="sd">&plusmn;0.03</span></td><td>0.050<span class="sd">&plusmn;0.048</span></td><td>0.161<span class="sd">&plusmn;0.033</span></td><td>1.000<span class="sd">&plusmn;0.001</span></td><td>0.911<span class="sd">&plusmn;0.009</span></td><td>0.690<span class="sd">&plusmn;0.014</span></td></tr>
+<tr><th scope="row">R<sub>2</sub></th><td>0.00<span class="sd">&plusmn;0.07</span></td><td>0.017<span class="sd">&plusmn;0.006</span></td><td>0.141<span class="sd">&plusmn;0.025</span></td><td>1.000<span class="sd">&plusmn;0.000</span></td><td>0.918<span class="sd">&plusmn;0.003</span></td><td>0.682<span class="sd">&plusmn;0.008</span></td></tr>
+<tr><th scope="row">R<sub>3</sub> (EnCodec loop)</th><td>−0.27<span class="sd">&plusmn;0.25</span></td><td>0.137<span class="sd">&plusmn;0.179</span></td><td>0.127<span class="sd">&plusmn;0.031</span></td><td>1.000<span class="sd">&plusmn;0.000</span></td><td>0.920<span class="sd">&plusmn;0.001</span></td><td>0.637<span class="sd">&plusmn;0.046</span></td></tr>
+<tr><th scope="row">R<sub>3</sub><sup>multi</sup> (multi-space)</th><td>0.95<span class="sd">&plusmn;0.16</span></td><td>0.082<span class="sd">&plusmn;0.107</span></td><td>0.016<span class="sd">&plusmn;0.026</span></td><td>0.841<span class="sd">&plusmn;0.089</span></td><td>0.914<span class="sd">&plusmn;0.003</span></td><td>0.552<span class="sd">&plusmn;0.015</span></td></tr>
+<tr><th scope="row">noise pairs</th><td>−0.09<span class="sd">&plusmn;0.01</span></td><td>0.270<span class="sd">&plusmn;0.107</span></td><td>0.230<span class="sd">&plusmn;0.028</span></td><td>1.000<span class="sd">&plusmn;0.000</span></td><td>0.917<span class="sd">&plusmn;0.004</span></td><td>0.722<span class="sd">&plusmn;0.013</span></td></tr>
+<tr><th scope="row">PGD pairs</th><td>−0.08<span class="sd">&plusmn;0.02</span></td><td>0.223<span class="sd">&plusmn;0.057</span></td><td>0.225<span class="sd">&plusmn;0.044</span></td><td>0.969<span class="sd">&plusmn;0.025</span></td><td>0.909<span class="sd">&plusmn;0.001</span></td><td>0.635<span class="sd">&plusmn;0.009</span></td></tr>
+<tr><th scope="row">random-latent pairs</th><td>−0.03<span class="sd">&plusmn;0.03</span></td><td>0.019<span class="sd">&plusmn;0.016</span></td><td>0.200<span class="sd">&plusmn;0.053</span></td><td>1.000<span class="sd">&plusmn;0.000</span></td><td>0.922<span class="sd">&plusmn;0.004</span></td><td>0.696<span class="sd">&plusmn;0.010</span></td></tr>
+</tbody>
+</table>
+        <!-- END generated:table-loop -->
+      </div>
+      <p class="caption" id="cap-table2"><b>Table II.</b> Auditing the loop. Corrected-reference attack success rate per
+        attack space (fresh attacker, BVCC test) and agreement with human MOS (BVCC system SRCC; out-of-domain mean
+        over 12 sets), mean &plusmn; sd over 3 seeds.</p>
+    </figure>
+    <figure>
+      <div class="plate plate-results"><img src="static/results.svg" width="1000" height="213" alt="Two panels. (a) Bar chart of attack success rate for SSL-MOS, UTMOS22, NISQA and DNSMOS under the naive and corrected references, with error bars over five attackers; NISQA is near 0.9 and the others below 0.25. (b) Line chart of in-loop attack success rate against patch round 1 to 3: the EnCodec loop falls toward zero, multi-space DAC and PGD attacks fall, and the multi-space EnCodec attacker stays flat."></div>
+      <p class="caption"><b>Fig. 2.</b> (a) Benchmark of four common predictors at one perturbation size under the
+        naive (<i>x</i>) and corrected (<i>x&#770;</i>) ceiling references; error bars span the five attackers, and the
+        reference moves DNSMOS and NISQA in opposite directions. (b) In-loop attack success rate (BVCC train,
+        corrected reference) of the round-<i>k</i> attacker against the predictor patched in round <i>k</i> &minus; 1,
+        one line per seed.</p>
+    </figure>
+  </section>
+
+  <section aria-labelledby="downstream-heading">
+    <div class="prose">
+      <h2 id="downstream-heading">Downstream, patched predictors are safer rewards</h2>
+      <p>A small speech enhancer, pre-trained on VoiceBank-DEMAND, is post-trained with GRPO using one predictor's
+        score as its only reward. Against R<sub>0</sub> it shows the textbook hack: the reward rises by +0.263 while
+        PESQ falls by 0.226, ESTOI by 0.057 and SI-SDR by 6.1 dB. Against R<sub>3</sub> the reward rises as much
+        (+0.269) with PESQ intact (&minus;0.034), and the random-pair baseline again matches it.</p>
+    </div>
+    <figure>
+      <div class="table-scroll">
+        <!-- BEGIN generated:table-downstream -->
+<table aria-describedby="cap-table3">
+<thead>
+<tr><th scope="col">Measure</th><th scope="col">R<sub>0</sub></th><th scope="col">R<sub>3</sub></th><th scope="col">random-latent pairs</th></tr>
+</thead>
+<tbody>
+<tr><th scope="row">&Delta; own reward</th><td>0.263<span class="sd">&plusmn;0.010</span></td><td>0.269<span class="sd">&plusmn;0.028</span></td><td>0.334<span class="sd">&plusmn;0.051</span></td></tr>
+<tr><th scope="row">&Delta;PESQ</th><td>−0.226<span class="sd">&plusmn;0.170</span></td><td>−0.034<span class="sd">&plusmn;0.126</span></td><td>0.019<span class="sd">&plusmn;0.050</span></td></tr>
+<tr><th scope="row">&Delta;ESTOI</th><td>−0.057<span class="sd">&plusmn;0.010</span></td><td>−0.038<span class="sd">&plusmn;0.013</span></td><td>−0.043<span class="sd">&plusmn;0.006</span></td></tr>
+<tr><th scope="row">&Delta;SI-SDR (dB)</th><td>−6.1<span class="sd">&plusmn;1.4</span></td><td>−5.8<span class="sd">&plusmn;1.4</span></td><td>−5.7<span class="sd">&plusmn;0.6</span></td></tr>
+<tr><th scope="row">&Delta;DNSMOS</th><td>−0.075<span class="sd">&plusmn;0.031</span></td><td>−0.076<span class="sd">&plusmn;0.056</span></td><td>−0.075<span class="sd">&plusmn;0.043</span></td></tr>
+<tr><th scope="row">&Delta;NISQA</th><td>0.335<span class="sd">&plusmn;0.186</span></td><td>0.300<span class="sd">&plusmn;0.072</span></td><td>0.468<span class="sd">&plusmn;0.059</span></td></tr>
+<tr><th scope="row">&Delta;UTMOS</th><td>0.018<span class="sd">&plusmn;0.006</span></td><td>0.057<span class="sd">&plusmn;0.030</span></td><td>0.076<span class="sd">&plusmn;0.011</span></td></tr>
+</tbody>
+</table>
+        <!-- END generated:table-downstream -->
+      </div>
+      <p class="caption" id="cap-table3"><b>Table III.</b> Downstream GRPO enhancement. Change against the supervised
+        pre-trained enhancer on VoiceBank-DEMAND test, per reward predictor. Mean &plusmn; sd over 3 seeds.</p>
+    </figure>
+  </section>
+
+  <section aria-labelledby="limits-heading">
+    <div class="prose"><h2 id="limits-heading">Limitations</h2></div>
+    <ul class="limits">
+      <li>The attacker is black-box and mild. Its hacks against SSL-MOS move ESTOI by &minus;0.023 and SI-SDR by
+        &minus;1.034 dB, and two independent judges call them perceptually marginal (UTMOS &minus;0.004, DNSMOS
+        &minus;0.048; PGD moves UTMOS by +0.802). The benchmark ranks predictors against this attack family only.</li>
+      <li>We ran no listening test.</li>
+      <li>The detector is not fully independent: two panel measures are neural, and for waveform attacks its
+        reference is the input itself, so success rates are not comparable across attack families.</li>
+      <li>The patch study uses 3 seeds and one predictor family (46 A100-hours in total).</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="repro-heading">
+    <div class="prose">
+      <h2 id="repro-heading">Reproduce every number</h2>
+      <p>The release holds every checkpoint behind the paper (195 files, 19.3 GB: predictors, every patch round, all
+        attackers and enhancers), the exact configuration of each run, the per-run outputs and the preregistration.
+        Each table, figure and result has its own notebook. A notebook either re-runs the evaluation from the released
+        checkpoints on a GPU, or aggregates the released run outputs on a CPU in seconds, and then compares its numbers
+        with the paper's.</p>
+    </div>
+    <div class="repro">
+      <pre><code><span class="cmt"># environment (Python 3.11)</span>
+git clone https://github.com/saliAlavi/audio_assessment_hackability
+cd audio_assessment_hackability
+pip install -r requirements.txt
+pip install --no-deps -r requirements-nodeps.txt
+export SCRATCH_DIR=/path/with/space   <span class="cmt"># checkpoints, caches, runs</span>
+source scripts/env.sh
+
+<span class="cmt"># every number in the paper from the released outputs (CPU)</span>
+NB_SOURCE=released jupyter nbconvert --to notebook --execute \
+  notebooks/results/paper_numbers.ipynb
+
+<span class="cmt"># or re-run the evaluations from checkpoints (77 jobs, ~17 A100-hours)</span>
+NB_SOURCE=recompute NB_RUN=local jupyter nbconvert --to notebook \
+  --execute notebooks/results/paper_numbers.ipynb</code></pre>
+      <div class="table-scroll">
+        <table class="repro-map" aria-label="Notebook for each part of the paper">
+          <thead><tr><th scope="col">In the paper</th><th scope="col">Notebook</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Table I</th><td><a href="https://github.com/saliAlavi/audio_assessment_hackability/blob/main/notebooks/tables/table1_benchmark.ipynb">tables/table1_benchmark</a></td></tr>
+            <tr><th scope="row">Table II</th><td><a href="https://github.com/saliAlavi/audio_assessment_hackability/blob/main/notebooks/tables/table2_loop_audit.ipynb">tables/table2_loop_audit</a></td></tr>
+            <tr><th scope="row">Table III</th><td><a href="https://github.com/saliAlavi/audio_assessment_hackability/blob/main/notebooks/tables/table3_downstream.ipynb">tables/table3_downstream</a></td></tr>
+            <tr><th scope="row">Fig. 2</th><td><a href="https://github.com/saliAlavi/audio_assessment_hackability/blob/main/notebooks/figures/fig2_results.ipynb">figures/fig2_results</a></td></tr>
+            <tr><th scope="row">Sec. V results</th><td><a href="https://github.com/saliAlavi/audio_assessment_hackability/tree/main/notebooks/results">results/</a>, one per claim</td></tr>
+            <tr><th scope="row">Every model</th><td><a href="https://github.com/saliAlavi/audio_assessment_hackability/tree/main/notebooks/training">training/</a>, 01&ndash;13</td></tr>
+            <tr><th scope="row">All 1902 numbers</th><td><a href="https://github.com/saliAlavi/audio_assessment_hackability/blob/main/notebooks/results/paper_numbers.ipynb">results/paper_numbers</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="cite" id="cite" aria-labelledby="cite-heading">
+    <div class="cite-head">
+      <h2 id="cite-heading">Citation</h2>
+      <button class="copy" id="copy-bib" type="button">Copy BibTeX</button>
+    </div>
+    <pre id="bibtex"><code>@misc{alavi2026hackable,
+  title         = {How Hackable Is Your Speech Quality Metric? A Corrected Protocol,
+                   a Benchmark, and What Patching Buys},
+  author        = {Alavi, Ali and Williamson, Donald S.},
+  year          = {2026},
+  eprint        = {2610.10899},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  url           = {https://arxiv.org/abs/2610.10899}
+}</code></pre>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Ali Alavi and Donald S. Williamson, The Ohio State University.</span>
+    <span>Tables and chart on this page are generated from the paper's result files by <code>website/build.py</code>.</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var btn = document.getElementById("copy-bib");
+  var pre = document.getElementById("bibtex");
+  if (!btn || !pre) return;
+  function flash(text) {
+    btn.textContent = text;
+    setTimeout(function () { btn.textContent = "Copy BibTeX"; }, 1800);
+  }
+  function selectText() {
+    var range = document.createRange();
+    range.selectNodeContents(pre);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+  btn.addEventListener("click", function () {
+    var text = pre.innerText;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { flash("Copied"); }, function () {
+        selectText(); flash("Selected: press Ctrl+C");
+      });
+    } else {
+      selectText(); flash("Selected: press Ctrl+C");
+    }
+  });
+})();
+</script>
+</body>
+</html>

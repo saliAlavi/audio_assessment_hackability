@@ -14,7 +14,8 @@ release ``TAG`` holds every checkpoint those configs point to
   enhancement scoring, and the in-loop attacks of the patch loops.
 * :func:`retrain` re-runs a key's *training* from its stored config, starting
   from released upstream checkpoints (e.g. a patch loop starts from released R0).
-* :func:`submit` runs either as a Slurm job via ``scripts/repro_run.py``.
+* :func:`submit` runs either as a Slurm job via ``scripts/repro_run.py`` (account and
+  partition from ``HACKPATCH_SLURM_ACCOUNT`` / ``HACKPATCH_SLURM_PARTITION``).
 * :func:`results_registry` returns a registry whose run dirs hold released or
   recomputed outputs, for the analysis scripts.
 
@@ -22,6 +23,7 @@ Outputs go under ``{SCRATCH}/projects/{PROJECT}/{recompute,retrain}/{key}/``.
 """
 from __future__ import annotations
 
+import functools
 import hashlib
 import json
 import os
@@ -35,6 +37,8 @@ from hackpatch.utils import paths
 ROOT = Path(__file__).resolve().parents[2]
 REPO = "saliAlavi/audio_assessment_hackability"
 TAG = "checkpoints-v1"
+#: The paper (arXiv 2610.10899) whose results this package reproduces.
+ARXIV_ID = "2610.10899"
 MANIFEST = ROOT / "repro" / "checkpoints.json"
 CONFIGS = ROOT / "repro" / "configs"
 RESULTS_BUNDLE = "run_results.tar.gz"
@@ -71,7 +75,7 @@ def local_path(orig_path: str) -> Path:
 
 
 def github_token() -> str | None:
-    """Token for the (private) release: ``GITHUB_TOKEN``/``GH_TOKEN`` or the git credential store."""
+    """Token for a private release: ``GITHUB_TOKEN``/``GH_TOKEN`` or the git credential store."""
     for var in ("GITHUB_TOKEN", "GH_TOKEN"):
         if os.environ.get(var):
             return os.environ[var]
@@ -91,8 +95,9 @@ def _sha256(path: Path) -> str:
     return h.hexdigest()
 
 
+@functools.cache
 def _release_assets() -> dict[str, int]:
-    """{asset name: asset id} of the release."""
+    """{asset name: asset id} of the release (API; only needed while the repository is private)."""
     import urllib.request
 
     token = github_token()
@@ -111,14 +116,22 @@ def _release_assets() -> dict[str, int]:
         page += 1
 
 
-def _download(asset: str, dest: Path, ids: dict[str, int]) -> None:
-    token = github_token()
+def _download(asset: str, dest: Path) -> None:
+    """Downloads one release asset: anonymously from the public release URL, or, if that fails
+    (private repository), through the API with :func:`github_token`."""
     dest.parent.mkdir(parents=True, exist_ok=True)
     tmp = dest.with_suffix(dest.suffix + ".part")
-    cmd = ["curl", "-sSL", "--fail", "--retry", "3", "-o", str(tmp), "-H", "Accept: application/octet-stream"]
-    if token:
-        cmd += ["-H", f"Authorization: token {token}"]
-    subprocess.run(cmd + [f"https://api.github.com/repos/{REPO}/releases/assets/{ids[asset]}"], check=True)
+    cmd = ["curl", "-sSL", "--fail", "--retry", "3", "-o", str(tmp)]
+    public = subprocess.run(cmd + [f"https://github.com/{REPO}/releases/download/{TAG}/{asset}"],
+                            capture_output=True, text=True)
+    if public.returncode:
+        token = github_token()
+        if not token:
+            raise RuntimeError(f"cannot download {asset}: {public.stderr.strip()} (a private release needs "
+                               "GITHUB_TOKEN)")
+        subprocess.run(cmd + ["-H", "Accept: application/octet-stream", "-H", f"Authorization: token {token}",
+                              f"https://api.github.com/repos/{REPO}/releases/assets/{_release_assets()[asset]}"],
+                       check=True)
     tmp.rename(dest)
 
 
@@ -161,7 +174,6 @@ def fetch(keys: list[str] | None = None, prefer_local: bool = True, verify: bool
     Returns:
         Local paths of the fetched checkpoints.
     """
-    ids = None
     out = []
     for a in assets_for(keys, include_own):
         dest = ARTIFACTS / "checkpoints" / a["asset"]
@@ -172,9 +184,8 @@ def fetch(keys: list[str] | None = None, prefer_local: bool = True, verify: bool
                 dest.parent.mkdir(parents=True, exist_ok=True)
                 dest.symlink_to(a["orig_path"])
             else:
-                ids = ids or _release_assets()
                 print(f"[fetch] {a['asset']} ({a['size'] / 1e6:.0f} MB)", flush=True)
-                _download(a["asset"], dest, ids)
+                _download(a["asset"], dest)
                 if verify and _sha256(dest) != a["sha256"]:
                     dest.unlink()
                     raise RuntimeError(f"sha256 mismatch for {a['asset']}")
@@ -219,12 +230,16 @@ def load_config(key: str, remap_paths: bool = True):
 
 
 def _start(cfg, run_name: str, wandb_mode: str):
-    """Starts a logged run (scratch dir + manifest + W&B) with a fixed name."""
+    """Starts a logged run (scratch dir + manifest + W&B) with a fixed name.
+
+    The W&B entity is ``WANDB_ENTITY`` (unset: your default entity), not the one stored in the config.
+    """
     from omegaconf import OmegaConf
 
     from hackpatch.utils.run import init_run
 
-    cfg = OmegaConf.merge(cfg, {"run_name": run_name, "wandb": {"mode": wandb_mode}})
+    cfg = OmegaConf.merge(cfg, {"run_name": run_name,
+                                "wandb": {"mode": wandb_mode, "entity": os.environ.get("WANDB_ENTITY")}})
     return (cfg, *init_run(cfg))
 
 
@@ -328,7 +343,7 @@ def _recompute_loop(key: str, cfg, rp) -> None:
 
 
 # -------------------------------------------------------------------- retrain
-def retrain(key: str, wandb_mode: str = "online") -> Path:
+def retrain(key: str, wandb_mode: str | None = None) -> Path:
     """Re-runs the training behind one registry key from its stored config.
 
     Upstream checkpoints (the R0 a loop starts from, the predictor used as a
@@ -338,7 +353,7 @@ def retrain(key: str, wandb_mode: str = "online") -> Path:
 
     Args:
         key: Registry key of a training run (see ``TRAIN_KINDS``) or ``se_pretrain_s{seed}``.
-        wandb_mode: W&B mode for the new run.
+        wandb_mode: W&B mode for the new run; default ``HACKPATCH_WANDB_MODE``, else ``offline``.
 
     Returns:
         The output run dir ``{RUNS}/retrain/{key}``.
@@ -349,6 +364,7 @@ def retrain(key: str, wandb_mode: str = "online") -> Path:
 
     if not key.startswith("se_pretrain") and registry()[key]["kind"] not in TRAIN_KINDS:
         raise ValueError(f"{key} does not train anything; use recompute()")
+    wandb_mode = wandb_mode or os.environ.get("HACKPATCH_WANDB_MODE", "offline")
     fetch([key], include_own=False)  # upstream inputs only; this key's own outputs get retrained
     cfg = load_config(key)
     if cfg.task == "hack_loop" and cfg.loop.get("attack_spaces") is None:
@@ -367,15 +383,20 @@ def submit(key: str, mode: str = "recompute", time: str = "02:00:00", after: str
            dry_run: bool = False) -> str:
     """Submits ``scripts/repro_run.py --mode {mode} --key {key}`` as a one-GPU Slurm job.
 
+    The account and partition come from ``HACKPATCH_SLURM_ACCOUNT`` and
+    ``HACKPATCH_SLURM_PARTITION`` (set per machine in ``scripts/env.local.sh``);
+    either is left to the cluster default when unset.
+
     Returns:
         The Slurm job id (or ``"dry-run"``).
     """
     log_dir = RUNS / mode / "_logs"
     log_dir.mkdir(parents=True, exist_ok=True)
+    slurm = "".join(f"#SBATCH --{opt}={os.environ[var]}\n" for opt, var in
+                    (("account", "HACKPATCH_SLURM_ACCOUNT"), ("partition", "HACKPATCH_SLURM_PARTITION"))
+                    if os.environ.get(var))
     script = f"""#!/bin/bash
-#SBATCH --account=PAS2966
-#SBATCH --partition=nextgen
-#SBATCH --job-name={mode}_{key}
+{slurm}#SBATCH --job-name={mode}_{key}
 #SBATCH --output={log_dir}/%x_%j.out
 #SBATCH --time={time}
 #SBATCH --nodes=1
@@ -412,7 +433,7 @@ def fetch_results() -> Path:
             shutil.rmtree(dest)
         if not (tgz.exists() and _sha256(tgz) == m["sha256"]):
             tgz.unlink(missing_ok=True)
-            _download(RESULTS_BUNDLE, tgz, _release_assets())
+            _download(RESULTS_BUNDLE, tgz)
             if _sha256(tgz) != m["sha256"]:
                 raise RuntimeError("sha256 mismatch for the results bundle")
         with tarfile.open(tgz) as tar:
@@ -423,6 +444,27 @@ def fetch_results() -> Path:
             v["run_dir"] = str(dest / Path(v["run_dir"]).name)
         (dest / "_campaign.json").write_text(json.dumps(reg, indent=1))
         stamp.write_text(m["sha256"])
+    return dest
+
+
+def fetch_arxiv_source(version: str = "") -> Path:
+    """Downloads and extracts the LaTeX source of the paper as posted on arXiv.
+
+    Args:
+        version: An arXiv version such as ``"v1"``; empty for the latest.
+
+    Returns:
+        The directory holding the posted ``main.tex``, ``tables/`` and ``figs/``.
+    """
+    dest = ARTIFACTS / f"arxiv_{ARXIV_ID}{version or '_latest'}"
+    tgz = dest.parent / f"{dest.name}.tar.gz"
+    tgz.parent.mkdir(parents=True, exist_ok=True)
+    subprocess.run(["curl", "-sSL", "--fail", "--retry", "3", "-A", "hackpatch-repro", "-o", str(tgz),
+                    f"https://arxiv.org/src/{ARXIV_ID}{version}"], check=True)
+    if dest.exists():
+        shutil.rmtree(dest)
+    with tarfile.open(tgz) as tar:
+        tar.extractall(dest, filter="data")
     return dest
 
 

@@ -1,0 +1,47 @@
+# Exact versions of the environment that produced the paper's runs (Python 3.11, CUDA 12.8 wheels):
+#   pip install -r requirements.txt
+#   pip install --no-deps -r requirements-nodeps.txt
+# (pick the torch wheel index matching your CUDA if needed)
+torch==2.10.0
+torchaudio==2.10.0
+transformers==5.7.0
+huggingface_hub==1.13.0
+hydra-core==1.3.2
+omegaconf==2.3.0
+PyYAML==6.0.3
+numpy==2.4.6
+scipy==1.16.2
+pandas==2.3.3
+pyarrow==24.0.0
+joblib==1.5.2
+soundfile==0.13.1
+matplotlib==3.10.7
+pesq==0.0.4
+pystoi==0.4.1
+jiwer==4.0.0
+onnx==1.22.0
+onnx2torch==1.5.15
+wandb==0.28.1
+# runtime dependencies of descript-audio-codec / descript-audiotools (requirements-nodeps.txt), whose
+# protobuf<3.20 pin cannot coexist with onnx and wandb; the original environment ran with protobuf 7.
+einops==0.8.1
+argbind==0.3.9
+julius==0.2.7
+flatten-dict==0.4.2
+ffmpy==1.0.0
+rich==14.2.0
+randomname==0.2.1
+markdown2==2.5.4
+importlib_resources==6.5.2
+pyloudnorm==0.1.1
+torch-stoi==0.2.3
+librosa==0.11.0
+tensorboard==2.20.0
+ipython==9.6.0
+tqdm==4.67.1
+# notebooks and tests
+ipykernel==7.1.0
+nbformat==5.10.4
+nbconvert==7.16.6
+nbclient==0.10.2
+pytest==9.0.2

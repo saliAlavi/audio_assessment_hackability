@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this code, checkpoints or benchmark, please cite the paper."
+title: "How Hackable Is Your Speech Quality Metric? Code, checkpoints and reproduction notebooks"
+repository-code: "https://github.com/saliAlavi/audio_assessment_hackability"
+url: "https://salialavi.github.io/audio_assessment_hackability/"
+license: MIT
+authors:
+  - family-names: Alavi
+    given-names: Ali
+    affiliation: The Ohio State University
+  - family-names: Williamson
+    given-names: Donald S.
+    affiliation: The Ohio State University
+preferred-citation:
+  type: article
+  title: "How Hackable Is Your Speech Quality Metric? A Corrected Protocol, a Benchmark, and What Patching Buys"
+  authors:
+    - family-names: Alavi
+      given-names: Ali
+    - family-names: Williamson
+      given-names: Donald S.
+  year: 2026
+  journal: "arXiv preprint"
+  identifiers:
+    - type: other
+      value: "arXiv:2610.10899"
+  url: "https://arxiv.org/abs/2610.10899"

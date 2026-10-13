@@ -1,5 +1,5 @@
 # E3: GRPO post-training of the pre-trained enhancement model with an SSL-MOS reward (R0 or R3).
-# Hyperparameters validated on VAL by the pilot in docs/e3_pilot.md (run D1). Selection: last.pt (fixed budget).
+# Hyperparameters validated on VAL by the E3 pilot (run D1). Selection: last.pt (fixed budget).
 config_name: se_grpo
 task: se_grpo
 phase: main
