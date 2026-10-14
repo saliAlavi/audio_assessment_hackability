@@ -6,11 +6,14 @@ Nothing on the page that comes from a result is typed by hand:
 * Tables I-III   <- ``paper/tables/{table_bench,table1,table3}.tex`` (written by ``analysis/paper_assets.py``)
 * benchmark chart <- ``analysis/out/bench_summary.csv``
 * figures         <- ``paper/figs/results.pdf`` (Fig. 2) and the TikZ source of Fig. 1 in ``paper/main.tex``
+* listening examples <- ``static/audio/examples.json`` and its clips, written by
+  ``python main.py --config-name audio_examples`` (released attackers on VoiceBank-DEMAND; not a paper result)
 
 Each generated block sits between ``<!-- BEGIN generated:NAME -->`` and ``<!-- END generated:NAME -->``.
 
     python website/build.py             # rewrite the generated blocks of index.html
     python website/build.py --figures   # also re-render static/method.svg, static/results.svg, static/social.png
+    python website/build.py --audio-from <run dir>/results/audio_examples   # replace static/audio first
     python website/build.py --check     # exit 1 if a generated block is out of date (used by tests/)
 """
 from __future__ import annotations
@@ -18,7 +21,9 @@ from __future__ import annotations
 import argparse
 import csv
 import html
+import json
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -29,6 +34,8 @@ SITE = ROOT / "website"
 INDEX = SITE / "index.html"
 TABLES = ROOT / "paper" / "tables"
 BENCH_CSV = ROOT / "analysis" / "out" / "bench_summary.csv"
+AUDIO = SITE / "static" / "audio"
+AUDIO_JSON = AUDIO / "examples.json"
 
 #: Display names of the benchmark targets (``target`` column of bench_summary.csv), as in Table I.
 BENCH_NAMES = {"sslmos": "SSL-MOS", "utmos": "UTMOS22", "nisqa": "NISQA", "dnsmos": "DNSMOS OVRL"}
@@ -119,6 +126,195 @@ def bench_chart_html() -> str:
     return "\n".join(out)
 
 
+# -------------------------------------------------------------- audio examples
+#: Panel measures: name in prose, name in the measures table, how a value is printed.
+MEASURES = {"estoi": ("ESTOI", "ESTOI", lambda v: f"{v:.3f}"),
+            "sisdr": ("SI-SDR", "SI-SDR", lambda v: num(v, 1) + " dB"),
+            "wer": ("WER", "WER", lambda v: f"{100 * v:.0f}%"),
+            "sbs": ("SpeechBERTScore", '<abbr title="SpeechBERTScore">SBS</abbr>', lambda v: f"{v:.3f}")}
+#: The clips every example has besides its attacks.
+BASE_CLIPS = {"clean": ("Clean recording", "the unchanged input"),
+              "rt_encodec": ("EnCodec round trip", "encoded and decoded, no perturbation"),
+              "rt_dac": ("DAC round trip", "encoded and decoded, no perturbation")}
+REFERENCE_NAMES = {"rt_encodec": "EnCodec round trip", "rt_dac": "DAC round trip", "clean": "clean input"}
+PLAY_ICON = ('<svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>'
+             '<svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 2.5h3v11h-3zM9.5 2.5h3v11h-3z"/>'
+             '</svg>')
+
+
+def num(x: float, nd: int = 2) -> str:
+    return f"{x:.{nd}f}".replace("-", MINUS)
+
+
+def and_list(items: list[str]) -> str:
+    return items[0] if len(items) == 1 else ", ".join(items[:-1]) + " and " + items[-1]
+
+
+def bench_asr() -> dict[str, float]:
+    """Table I's mean corrected ASR per predictor."""
+    with open(BENCH_CSV) as f:
+        return {r["target"]: float(r["asr_ref_recon_mean"]) for r in csv.DictReader(f)}
+
+
+def predictor_order() -> list[str]:
+    """Predictors in the order of the benchmark chart (most hackable first)."""
+    asr = bench_asr()
+    return sorted(asr, key=lambda t: -asr[t])
+
+
+def versus_table1(attacks: list[dict]) -> str:
+    """How the examples' hack rates compare with Table I, checked rather than asserted."""
+    asr = bench_asr()
+    rate = {a["target"]: a["summary"]["hack_rate"] for a in attacks}
+    level = ("lower than" if all(rate[t] < asr[t] for t in rate) else
+             "higher than" if all(rate[t] > asr[t] for t in rate) else "different from")
+    ours = sorted(rate, key=lambda t: -rate[t])
+    same = [t for t in predictor_order() if t in rate] == ours
+    return (f"On this clean read speech the rates are {level} Table I&rsquo;s on BVCC, "
+            + ("with the predictors in the same order." if same else
+               "and the order differs: " + ", ".join(BENCH_NAMES[t] for t in ours) + "."))
+
+
+def attack_text(a: dict) -> tuple[str, str]:
+    """(title, how it attacks) of one attack."""
+    target = BENCH_NAMES[a["target"]]
+    if a["type"] == "pgd":
+        p = a["pgd"]
+        return ("Waveform PGD", f"white-box: follows {target}&rsquo;s gradient for {p['steps']} steps, every sample "
+                                f"moved by at most {p['eps']:g}")
+    if a["type"] == "random":
+        return ("Random latent direction", f"no learning: a random EnCodec-latent offset of the same size "
+                                           f"(&epsilon; = {a['eps']:g}), scored by {target}")
+    space = "EnCodec" if a["codec"] == "encodec_24khz" else "DAC"
+    if space == "EnCodec":
+        return (target, "the strongest of its five attackers in Table I")
+    return (f"{space} latents", f"black-box policy in {space} latents, &epsilon; = {a['eps']:g}, trained against "
+                                f"{target}")
+
+
+def player(src: str, img: str, label: str, ref: tuple[str, str, str] | None, seconds: float) -> str:
+    """Spectrogram, play button and (for an attack) the attacked/reference switch of one clip."""
+    data = f'data-src="{src}" data-dur="{seconds}"' + (f' data-ref="{ref[0]}"' if ref else "")
+    imgs = f'<img class="img-main" src="{img}" alt="" loading="lazy" width="640" height="128">'
+    if ref:
+        imgs += f'<img class="img-ref" src="{ref[1]}" alt="" loading="lazy" width="640" height="128">'
+    ab = ""
+    if ref:
+        ab = ('<div class="ab" role="group" aria-label="Clip to hear">'
+              '<button type="button" data-view="main" aria-pressed="true">Attacked</button>'
+              f'<button type="button" data-view="ref" aria-pressed="false">{ref[2]}</button></div>')
+    return (f'<div class="player" {data}>\n'
+            f'  <div class="spec" title="Click to play from here">{imgs}<span class="playhead"></span></div>\n'
+            f'  <div class="controls"><button class="play" type="button" aria-pressed="false" '
+            f'aria-label="Play: {html.escape(label)}">{PLAY_ICON}</button>'
+            f'<span class="time" aria-hidden="true">{seconds:.1f} s</span>{ab}</div>\n'
+            f'</div>')
+
+
+def base_card(ex: dict, clip: str, order: list[str]) -> str:
+    c = ex["clips"][clip]
+    title, sub = BASE_CLIPS[clip]
+    scores = "".join(f'<li><span>{BENCH_NAMES[p]}</span><b>{num(c["scores"][p], 3)}</b></li>' for p in order)
+    return (f'<article class="clip clip-base">\n'
+            f'<header class="clip-head"><h4>{title}</h4><p>{sub}</p></header>\n'
+            f'{player("static/" + c["wav"], "static/" + c["img"], title, None, ex["seconds"])}\n'
+            f'<ul class="scores" aria-label="Predicted quality (MOS)">{scores}</ul>\n'
+            f'</article>')
+
+
+def attack_card(ex: dict, a: dict, n_utts: int, tau: float) -> str:
+    """One attacked clip: player with its reference, the target's score change, the panel and the verdict."""
+    name, ref = a["name"], a["reference"]
+    v, y, r = ex["verdicts"][name], ex["clips"][name], ex["clips"][ref]
+    title, how = attack_text(a)
+    target, ref_name = BENCH_NAMES[a["target"]], REFERENCE_NAMES[ref]
+    worse = [MEASURES[m][0] for m, fired in v["panel"].items() if fired]
+    # Shown gains are differences of the shown (3-decimal) scores, so every card adds up; the verdict uses the
+    # unrounded gain, which differs from the shown one by at most 0.001.
+    t = a["target"]
+    to, frm, clean = y["scores"][t], r["scores"][t], ex["clips"]["clean"]["scores"][t]
+    g, g_input = round(to - frm, 3), round(to - clean, 3)
+    moved = (f"Score rises {num(g, 3)} over the {ref_name}" if g > 0 else
+             f"Score falls {num(-g, 3)} below the {ref_name}" if g < 0 else f"Score equals the {ref_name}&rsquo;s")
+    if v["hack"]:
+        verdict, why = "hack", f"{moved}, more than &tau;&nbsp;=&nbsp;{tau:g}, and the audio got worse by {and_list(worse)}."
+    elif v["ceiling"]:
+        verdict, why = "nohack", f"{moved}, more than &tau;&nbsp;=&nbsp;{tau:g}, but no panel measure says the audio got worse."
+    else:
+        verdict, why = "nohack", f"{moved}{f', less than &tau;&nbsp;=&nbsp;{tau:g}' if g > 0 else ''}."
+    badge = "Hacked" if verdict == "hack" else "Not hacked"
+    naive = "" if ref == "clean" else f' Measured from the clean input instead: {signed(g_input, 3)}.'
+    rows = "".join(
+        f'<tr><th scope="row">{MEASURES[m][1]}</th>'
+        f'<td>{MEASURES[m][2](r["panel"][m]) if ref != "clean" else "&mdash;"}</td>'
+        + (f'<td class="worse">{MEASURES[m][2](y["panel"][m])}<span class="sr-only"> (worse)</span></td>'
+           if v["panel"][m] else f'<td>{MEASURES[m][2](y["panel"][m])}</td>') + '</tr>' for m in MEASURES)
+    s = a["summary"]
+    label = f"{title} attack" if a["type"] != "grpo" or a["codec"] != "encodec_24khz" else f"attack on {title}"
+    return (
+        f'<article class="clip clip-{verdict}">\n'
+        f'<header class="clip-head"><h4>{title}</h4><span class="verdict">{badge}</span><p>{how}</p></header>\n'
+        f'{player("static/" + y["wav"], "static/" + y["img"], label, ("static/" + r["wav"], "static/" + r["img"], "Clean input" if ref == "clean" else "Round trip"), ex["seconds"])}\n'
+        f'<p class="change"><span class="who">{target} score</span><span class="from">{num(frm, 3)}</span>'
+        f'<span class="arrow" aria-label="to">&rarr;</span><span class="to">{num(to, 3)}</span>'
+        f'<span class="delta">{signed(g, 3)}</span></p>\n'
+        f'<p class="why">{why}{naive}</p>\n'
+        f'<details><summary>Panel measures and files</summary>\n'
+        f'<div class="panel-scroll"><table class="panel-table"><thead><tr><th scope="col">vs. clean</th>'
+        f'<th scope="col">{"clean" if ref == "clean" else "round trip"}</th><th scope="col">attacked</th></tr></thead>'
+        f'<tbody>{rows}</tbody></table></div>\n'
+        f'<p class="panel-key">Measured against the clean input. Red: worse than the reference by more than the '
+        f'panel&rsquo;s margin.</p>\n'
+        f'<p class="files"><a href="static/{y["wav"]}" download>attacked.wav</a> &middot; '
+        f'<a href="static/{r["wav"]}" download>{ref}.wav</a></p></details>\n'
+        f'<p class="rate">Hacks <b>{100 * s["hack_rate"]:.0f}%</b> of all {n_utts} test utterances</p>\n'
+        f'</article>')
+
+
+def audio_html() -> str:
+    """The listening examples: one tab per utterance, rendered from ``static/audio/examples.json``."""
+    doc = json.loads(AUDIO_JSON.read_text())
+    order = predictor_order()
+    strongest = BENCH_NAMES[next(a["target"] for a in doc["attacks"] if a["name"] == doc["selection"]["strongest_attack"])]
+    same_attack = sorted((a for a in doc["attacks"] if a["type"] == "grpo" and a["codec"] == "encodec_24khz"),
+                         key=lambda a: order.index(a["target"]))
+    other = [a for a in doc["attacks"] if a not in same_attack]
+    picks = {"random": "Drawn at random", "strongest": f"Largest {strongest} hack"}
+    tabs, panels = [], []
+    for i, ex in enumerate(doc["examples"]):
+        tid, pid = f"ex-tab-{i}", f"ex-panel-{i}"
+        tabs.append(
+            f'<button class="ex-tab" role="tab" id="{tid}" aria-controls="{pid}" aria-selected="{str(i == 0).lower()}" '
+            f'tabindex="{0 if i == 0 else -1}" type="button"><span class="ex-pick">{picks[ex["pick"]]}</span>'
+            f'<span class="ex-quote">&ldquo;{html.escape(ex["text"])}&rdquo;</span>'
+            f'<span class="ex-id">{ex["utt_id"]} &middot; {ex["seconds"]:.1f} s</span></button>')
+        base = [base_card(ex, c, order) for c in BASE_CLIPS if c in ex["clips"]]
+        group1 = [attack_card(ex, a, doc["n_utts"], doc["tau"]) for a in same_attack]
+        group2 = [attack_card(ex, a, doc["n_utts"], doc["tau"]) for a in other]
+        enc = same_attack[0]
+        panels.append(
+            f'<div class="ex-panel" role="tabpanel" id="{pid}" aria-labelledby="{tid}" tabindex="0"'
+            f'{"" if i == 0 else " hidden"}>\n'
+            f'<h3 class="group-title">Unchanged</h3>\n<div class="clips clips-base">\n' + "\n".join(base) + "\n</div>\n"
+            f'<h3 class="group-title">One kind of attack, four predictors</h3>\n'
+            f'<p class="group-sub">Each predictor is attacked by its own black-box policy in EnCodec latents '
+            f'(&epsilon; = {enc["eps"]:g}), which sees only that predictor&rsquo;s scores. Each card shows the '
+            f'attacked predictor&rsquo;s score. {versus_table1(same_attack)}</p>\n'
+            f'<div class="clips clips-four">\n' + "\n".join(group1) + "\n</div>\n"
+            f'<h3 class="group-title">Other attacks on {BENCH_NAMES[other[0]["target"]]}</h3>\n'
+            f'<div class="clips">\n' + "\n".join(group2) + "\n</div>\n</div>")
+    c, sel = doc["corpus"], doc["selection"]
+    others = "the utterance" if sel["n_strongest"] == 1 else f'the {sel["n_strongest"]} utterances'
+    note = (f'<p class="ex-note">Audio: {c["name"]} {c["detail"]}, by {html.escape(c["authors"])} '
+            f'(<a href="{c["url"]}">source</a>, <a href="{c["license_url"]}">{c["license"]}</a>); the attacked and '
+            f'decoded clips derived from it are shared under the same licence. Rates are over all {doc["n_utts"]} '
+            f'test utterances. The examples, {sel["min_seconds"]:g} to {sel["max_seconds"]:g} s long, are one per '
+            f'speaker drawn at random plus {others} with the largest score gain among those the {strongest} attack '
+            f'hacks.</p>')
+    return ('<div class="ex-tabs" role="tablist" aria-label="Example utterances">\n' + "\n".join(tabs) + "\n</div>\n"
+            + "\n".join(panels) + "\n" + note)
+
+
 # --------------------------------------------------------------------- figures
 def render_figures() -> None:
     """Re-renders Fig. 1 (from its TikZ source), Fig. 2 and the social preview image."""
@@ -149,7 +345,18 @@ def blocks() -> dict[str, str]:
     return {"bench-chart": bench_chart_html(),
             "table-bench": table_html(TABLES / "table_bench.tex", "cap-table1"),
             "table-loop": table_html(TABLES / "table1.tex", "cap-table2"),
-            "table-downstream": table_html(TABLES / "table3.tex", "cap-table3")}
+            "table-downstream": table_html(TABLES / "table3.tex", "cap-table3"),
+            "audio-examples": audio_html()}
+
+
+def import_audio(src: Path) -> None:
+    """Replaces ``static/audio`` with the ``audio_examples`` output of ``configs/audio_examples.yaml``."""
+    src = src.resolve()
+    if not (src / "examples.json").is_file():
+        sys.exit(f"{src} has no examples.json (expected <run dir>/results/audio_examples)")
+    if AUDIO.exists():
+        shutil.rmtree(AUDIO)
+    shutil.copytree(src, AUDIO)
 
 
 def fill(page: str, generated: dict[str, str]) -> str:
@@ -165,7 +372,11 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--check", action="store_true", help="only check that index.html is up to date")
     ap.add_argument("--figures", action="store_true", help="also re-render the figures (pdflatex, pdftocairo)")
+    ap.add_argument("--audio-from", type=Path, metavar="DIR",
+                    help="first replace static/audio with DIR (<run dir>/results/audio_examples)")
     args = ap.parse_args()
+    if args.audio_from and not args.check:
+        import_audio(args.audio_from)
     page = INDEX.read_text()
     new = fill(page, blocks())
     if args.check:

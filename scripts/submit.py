@@ -131,7 +131,7 @@ def submit_one(config_name: str, seed: int, tag: str = "", time: str = "02:00:00
         overrides=" ".join(shlex.quote(o) for o in (overrides or [])))
     # Code snapshot: exact provenance even from an uncommitted tree.
     snap = rp.root / "code_snapshot"
-    for item in ("src", "configs", "scripts", "main.py"):
+    for item in ("src", "configs", "scripts", "repro", "main.py"):
         src, dst = ROOT / item, snap / item
         if src.is_dir():
             shutil.copytree(src, dst, dirs_exist_ok=True, ignore=shutil.ignore_patterns("__pycache__"))

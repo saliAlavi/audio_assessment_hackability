@@ -180,6 +180,16 @@ Pages by `.github/workflows/pages.yml` on every push to `main` that touches it. 
 generated from `paper/tables/` and `analysis/out/`: `python website/build.py` (add `--figures` to re-render the
 figures from `paper/`); `tests/test_repro.py` fails if the page and the paper disagree.
 
+Its listening examples (`website/static/audio/`) are not a paper result. BVCC audio may not be redistributed, so
+`configs/audio_examples.yaml` applies the released attackers unchanged to the VoiceBank-DEMAND clean test set
+(CC BY 4.0), scores every clip with the four predictors and the detector panel, and picks the utterances shown by a
+fixed rule (one drawn at random per speaker, plus the largest SSL-MOS hack):
+
+```bash
+python scripts/submit.py --config-name audio_examples --time 01:30:00                # one GPU
+python website/build.py --audio-from <run dir>/results/audio_examples
+```
+
 ## License
 
 The code is released under the [MIT License](LICENSE); `src/hackpatch/metrics/_nisqa/` keeps the NISQA MIT notice.

@@ -1,0 +1,66 @@
+# Listening examples for the project page (website/, "Listen" section). Not a paper result.
+# The paper's released attackers are applied unchanged to the VoiceBank-DEMAND clean test set, whose audio may be
+# redistributed (CC BY 4.0); the paper's attack set, BVCC test, may not. Every clip is scored by the four predictors
+# and the detector panel and judged with the corrected hack rule. See src/hackpatch/attack/examples.py.
+#   python scripts/submit.py --config-name audio_examples --time 01:30:00
+#   python website/build.py --audio-from <run dir>/results/audio_examples
+config_name: audio_examples
+task: audio_examples
+phase: demo
+seed: 0
+run_name: null
+model: {pretrained: facebook/wav2vec2-base}
+data:
+  manifest: vbd/test            # scripts/build_vbd_manifests.py
+  audio_column: clean_path
+  max_utts: null                # all 824
+  attribution:
+    name: VoiceBank-DEMAND
+    detail: clean test set, speakers p232 and p257, 16 kHz
+    authors: Cassia Valentini-Botinhao, University of Edinburgh (clean speech from VCTK)
+    license: CC BY 4.0
+    license_url: https://creativecommons.org/licenses/by/4.0/
+    url: https://datashare.ed.ac.uk/handle/10283/2791
+# Released checkpoints (repro/checkpoints.json) the attacks and predictors below need.
+fetch: [r0_s0, e1_R0_s0, bench_sslmos, bench_utmos, bench_nisqa, bench_dnsmos]
+# Scoring predictors: SSL-MOS is R0 seed 0 (the target of Table I's SSL-MOS row and of E1 seed 0); the others are
+# the published models.
+predictors:
+  sslmos: r0_s0.checkpoints.best.pt
+  utmos: metric:utmos
+  nisqa: metric:nisqa
+  dnsmos: metric:dnsmos
+# Each attack: a stored attacker (its own attack config is read from the checkpoint) or waveform PGD.
+# The EnCodec attackers are, per predictor, the one of Table I's five with the highest corrected ASR
+# (results/per_attacker.csv of the bench_* runs).
+attacks:
+- {name: encodec_sslmos, type: grpo, target: sslmos, attacker: bench_sslmos.checkpoints.attacker_a1.pt}
+- {name: encodec_nisqa, type: grpo, target: nisqa, attacker: bench_nisqa.checkpoints.attacker_a4.pt}
+- {name: encodec_dnsmos, type: grpo, target: dnsmos, attacker: bench_dnsmos.checkpoints.attacker_a3.pt}
+- {name: encodec_utmos, type: grpo, target: utmos, attacker: bench_utmos.checkpoints.attacker_a0.pt}
+- {name: dac_sslmos, type: grpo, target: sslmos, attacker: e1_R0_s0.checkpoints.attacker_grpo_dac.pt}
+- name: pgd_sslmos
+  type: pgd
+  target: sslmos
+  pgd: {eps: 0.002, steps: 50, step_size: 0.0002, batch_size: 8}   # as E1 (configs/e1_attack.yaml)
+# Random directions at the same size in EnCodec latents (no learning); codec and latent statistics from E1's attacker.
+- {name: random_encodec, type: random, target: sslmos, attacker: e1_R0_s0.checkpoints.attacker_grpo_encodec.pt}
+apply: {batch_size: 16, max_seconds: 20.0}
+detect:
+  tau: 0.3
+  margins: {estoi: 0.02, sisdr: 1.0, wer: 0.0, sbs: 0.02}
+panel:
+  device: cuda
+  asr_model: openai/whisper-small
+  measures: [estoi, sisdr, wer, sbs]
+panel_chunk: 512
+# Utterances shown on the page, among those min_seconds to max_seconds long: one per speaker drawn at random, then the
+# n_strongest others with the largest corrected gain among the utterances strongest_attack hacks.
+examples:
+  speakers: [p232, p257]
+  min_seconds: 2.5
+  max_seconds: 5.0
+  strongest_attack: encodec_sslmos
+  n_strongest: 1
+  spectrogram: {n_fft: 512, hop: 128, db_range: 80.0, cmap: magma, width: 640, height: 128, quality: 82}
+wandb: {entity: alialavi, mode: online, group: null}

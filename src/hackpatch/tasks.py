@@ -75,6 +75,13 @@ def metric_bench(cfg: DictConfig, rp: RunPaths, run) -> None:
     run_metric_benchmark(cfg, rp, run)
 
 
+def audio_examples(cfg: DictConfig, rp: RunPaths, run) -> None:
+    """Listening examples for the project page: released attackers on redistributable audio, scored."""
+    from hackpatch.attack.examples import run_audio_examples
+
+    run_audio_examples(cfg, rp, run)
+
+
 def random_pairs(cfg: DictConfig, rp: RunPaths, run) -> None:
     """Builds random-latent-perturbation pairs (the no-RL baseline's pair buffer)."""
     from hackpatch.attack.random_pairs import build_random_pairs

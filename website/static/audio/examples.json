@@ -1,0 +1,946 @@
+{
+ "generated_by": {
+  "command": "python main.py --config-name audio_examples",
+  "run": "audio_examples_s0__2026-10-14_08-15-34"
+ },
+ "corpus": {
+  "name": "VoiceBank-DEMAND",
+  "detail": "clean test set, speakers p232 and p257, 16 kHz",
+  "authors": "Cassia Valentini-Botinhao, University of Edinburgh (clean speech from VCTK)",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "url": "https://datashare.ed.ac.uk/handle/10283/2791"
+ },
+ "n_utts": 824,
+ "tau": 0.3,
+ "margins": {
+  "estoi": 0.02,
+  "sisdr": 1.0,
+  "wer": 0.0,
+  "sbs": 0.02
+ },
+ "predictors": [
+  "sslmos",
+  "utmos",
+  "nisqa",
+  "dnsmos"
+ ],
+ "measures": [
+  "estoi",
+  "sisdr",
+  "wer",
+  "sbs"
+ ],
+ "selection": {
+  "speakers": [
+   "p232",
+   "p257"
+  ],
+  "min_seconds": 2.5,
+  "max_seconds": 5.0,
+  "strongest_attack": "encodec_sslmos",
+  "n_strongest": 1,
+  "spectrogram": {
+   "n_fft": 512,
+   "hop": 128,
+   "db_range": 80.0,
+   "cmap": "magma",
+   "width": 640,
+   "height": 128,
+   "quality": 82
+  }
+ },
+ "attacks": [
+  {
+   "name": "encodec_sslmos",
+   "type": "grpo",
+   "target": "sslmos",
+   "codec": "encodec_24khz",
+   "reference": "rt_encodec",
+   "checkpoint": "bench_sslmos.checkpoints.attacker_a1.pt",
+   "eps": 0.5,
+   "summary": {
+    "n": 824,
+    "hack_rate": 0.0425,
+    "ceiling_rate": 0.0425,
+    "panel_rate": 1.0,
+    "mean_gain_ref": 0.099,
+    "mean_gain_input": -0.1521
+   }
+  },
+  {
+   "name": "encodec_nisqa",
+   "type": "grpo",
+   "target": "nisqa",
+   "codec": "encodec_24khz",
+   "reference": "rt_encodec",
+   "checkpoint": "bench_nisqa.checkpoints.attacker_a4.pt",
+   "eps": 0.5,
+   "summary": {
+    "n": 824,
+    "hack_rate": 0.7633,
+    "ceiling_rate": 0.7633,
+    "panel_rate": 1.0,
+    "mean_gain_ref": 0.4705,
+    "mean_gain_input": 0.4457
+   }
+  },
+  {
+   "name": "encodec_dnsmos",
+   "type": "grpo",
+   "target": "dnsmos",
+   "codec": "encodec_24khz",
+   "reference": "rt_encodec",
+   "checkpoint": "bench_dnsmos.checkpoints.attacker_a3.pt",
+   "eps": 0.5,
+   "summary": {
+    "n": 824,
+    "hack_rate": 0.0133,
+    "ceiling_rate": 0.0133,
+    "panel_rate": 1.0,
+    "mean_gain_ref": 0.015,
+    "mean_gain_input": -0.0202
+   }
+  },
+  {
+   "name": "encodec_utmos",
+   "type": "grpo",
+   "target": "utmos",
+   "codec": "encodec_24khz",
+   "reference": "rt_encodec",
+   "checkpoint": "bench_utmos.checkpoints.attacker_a0.pt",
+   "eps": 0.5,
+   "summary": {
+    "n": 824,
+    "hack_rate": 0.0,
+    "ceiling_rate": 0.0,
+    "panel_rate": 0.9078,
+    "mean_gain_ref": -0.0165,
+    "mean_gain_input": -0.2381
+   }
+  },
+  {
+   "name": "dac_sslmos",
+   "type": "grpo",
+   "target": "sslmos",
+   "codec": "dac_16khz",
+   "reference": "rt_dac",
+   "checkpoint": "e1_R0_s0.checkpoints.attacker_grpo_dac.pt",
+   "eps": 0.5,
+   "summary": {
+    "n": 824,
+    "hack_rate": 0.0,
+    "ceiling_rate": 0.0,
+    "panel_rate": 0.1748,
+    "mean_gain_ref": -0.0499,
+    "mean_gain_input": -0.1271
+   }
+  },
+  {
+   "name": "pgd_sslmos",
+   "type": "pgd",
+   "target": "sslmos",
+   "codec": "waveform",
+   "reference": "clean",
+   "checkpoint": null,
+   "pgd": {
+    "eps": 0.002,
+    "steps": 50,
+    "step_size": 0.0002,
+    "batch_size": 8
+   },
+   "summary": {
+    "n": 824,
+    "hack_rate": 0.9648,
+    "ceiling_rate": 0.9648,
+    "panel_rate": 1.0,
+    "mean_gain_ref": 0.6461,
+    "mean_gain_input": 0.6461
+   }
+  },
+  {
+   "name": "random_encodec",
+   "type": "random",
+   "target": "sslmos",
+   "codec": "encodec_24khz",
+   "reference": "rt_encodec",
+   "checkpoint": "e1_R0_s0.checkpoints.attacker_grpo_encodec.pt",
+   "eps": 0.5,
+   "summary": {
+    "n": 824,
+    "hack_rate": 0.0,
+    "ceiling_rate": 0.0,
+    "panel_rate": 1.0,
+    "mean_gain_ref": -0.3799,
+    "mean_gain_input": -0.631
+   }
+  }
+ ],
+ "examples": [
+  {
+   "utt_id": "p232_362",
+   "speaker": "p232",
+   "text": "You must have a government and a good civil service.",
+   "pick": "random",
+   "seconds": 2.88,
+   "clips": {
+    "clean": {
+     "wav": "audio/p232_362/clean.wav",
+     "img": "audio/p232_362/clean.webp",
+     "scores": {
+      "sslmos": 4.219,
+      "utmos": 4.294,
+      "nisqa": 3.527,
+      "dnsmos": 3.364
+     },
+     "panel": {
+      "estoi": 1.0,
+      "sisdr": 100.1436,
+      "wer": 0.0,
+      "sbs": 1.0
+     }
+    },
+    "rt_encodec": {
+     "wav": "audio/p232_362/rt_encodec.wav",
+     "img": "audio/p232_362/rt_encodec.webp",
+     "scores": {
+      "sslmos": 4.031,
+      "utmos": 4.024,
+      "nisqa": 4.865,
+      "dnsmos": 3.309
+     },
+     "panel": {
+      "estoi": 0.9622,
+      "sisdr": 8.9901,
+      "wer": 0.0,
+      "sbs": 0.9479
+     }
+    },
+    "encodec_sslmos": {
+     "wav": "audio/p232_362/encodec_sslmos.wav",
+     "img": "audio/p232_362/encodec_sslmos.webp",
+     "scores": {
+      "sslmos": 4.188,
+      "utmos": 4.025,
+      "nisqa": 4.617,
+      "dnsmos": 3.244
+     },
+     "panel": {
+      "estoi": 0.9452,
+      "sisdr": 8.5874,
+      "wer": 0.0,
+      "sbs": 0.8913
+     }
+    },
+    "encodec_nisqa": {
+     "wav": "audio/p232_362/encodec_nisqa.wav",
+     "img": "audio/p232_362/encodec_nisqa.webp",
+     "scores": {
+      "sslmos": 3.453,
+      "utmos": 3.388,
+      "nisqa": 5.162,
+      "dnsmos": 3.202
+     },
+     "panel": {
+      "estoi": 0.9352,
+      "sisdr": 7.8802,
+      "wer": 0.0,
+      "sbs": 0.8662
+     }
+    },
+    "encodec_dnsmos": {
+     "wav": "audio/p232_362/encodec_dnsmos.wav",
+     "img": "audio/p232_362/encodec_dnsmos.webp",
+     "scores": {
+      "sslmos": 3.797,
+      "utmos": 3.593,
+      "nisqa": 3.631,
+      "dnsmos": 3.364
+     },
+     "panel": {
+      "estoi": 0.9437,
+      "sisdr": 6.7247,
+      "wer": 0.0,
+      "sbs": 0.8891
+     }
+    },
+    "encodec_utmos": {
+     "wav": "audio/p232_362/encodec_utmos.wav",
+     "img": "audio/p232_362/encodec_utmos.webp",
+     "scores": {
+      "sslmos": 4.062,
+      "utmos": 4.006,
+      "nisqa": 4.882,
+      "dnsmos": 3.234
+     },
+     "panel": {
+      "estoi": 0.9519,
+      "sisdr": 8.8999,
+      "wer": 0.0,
+      "sbs": 0.9292
+     }
+    },
+    "rt_dac": {
+     "wav": "audio/p232_362/rt_dac.wav",
+     "img": "audio/p232_362/rt_dac.webp",
+     "scores": {
+      "sslmos": 4.062,
+      "utmos": 4.23,
+      "nisqa": 4.836,
+      "dnsmos": 3.394
+     },
+     "panel": {
+      "estoi": 0.9538,
+      "sisdr": -11.132,
+      "wer": 0.0,
+      "sbs": 0.9737
+     }
+    },
+    "dac_sslmos": {
+     "wav": "audio/p232_362/dac_sslmos.wav",
+     "img": "audio/p232_362/dac_sslmos.webp",
+     "scores": {
+      "sslmos": 3.984,
+      "utmos": 4.195,
+      "nisqa": 4.62,
+      "dnsmos": 3.4
+     },
+     "panel": {
+      "estoi": 0.9505,
+      "sisdr": -11.7996,
+      "wer": 0.0,
+      "sbs": 0.97
+     }
+    },
+    "pgd_sslmos": {
+     "wav": "audio/p232_362/pgd_sslmos.wav",
+     "img": "audio/p232_362/pgd_sslmos.webp",
+     "scores": {
+      "sslmos": 4.812,
+      "utmos": 4.344,
+      "nisqa": 3.414,
+      "dnsmos": 3.086
+     },
+     "panel": {
+      "estoi": 0.9775,
+      "sisdr": 30.3828,
+      "wer": 0.0,
+      "sbs": 0.8545
+     }
+    },
+    "random_encodec": {
+     "wav": "audio/p232_362/random_encodec.wav",
+     "img": "audio/p232_362/random_encodec.webp",
+     "scores": {
+      "sslmos": 3.875,
+      "utmos": 3.798,
+      "nisqa": 4.744,
+      "dnsmos": 3.123
+     },
+     "panel": {
+      "estoi": 0.9244,
+      "sisdr": 7.2121,
+      "wer": 0.0,
+      "sbs": 0.915
+     }
+    }
+   },
+   "verdicts": {
+    "encodec_sslmos": {
+     "gain_ref": 0.156,
+     "gain_input": -0.031,
+     "ceiling": false,
+     "hack": false,
+     "panel": {
+      "estoi": false,
+      "sisdr": false,
+      "wer": false,
+      "sbs": true
+     }
+    },
+    "encodec_nisqa": {
+     "gain_ref": 0.296,
+     "gain_input": 1.635,
+     "ceiling": false,
+     "hack": false,
+     "panel": {
+      "estoi": true,
+      "sisdr": true,
+      "wer": false,
+      "sbs": true
+     }
+    },
+    "encodec_dnsmos": {
+     "gain_ref": 0.055,
+     "gain_input": -0.0,
+     "ceiling": false,
+     "hack": false,
+     "panel": {
+      "estoi": false,
+      "sisdr": true,
+      "wer": false,
+      "sbs": true
+     }
+    },
+    "encodec_utmos": {
+     "gain_ref": -0.018,
+     "gain_input": -0.287,
+     "ceiling": false,
+     "hack": false,
+     "panel": {
+      "estoi": false,
+      "sisdr": false,
+      "wer": false,
+      "sbs": false
+     }
+    },
+    "dac_sslmos": {
+     "gain_ref": -0.078,
+     "gain_input": -0.234,
+     "ceiling": false,
+     "hack": false,
+     "panel": {
+      "estoi": false,
+      "sisdr": false,
+      "wer": false,
+      "sbs": false
+     }
+    },
+    "pgd_sslmos": {
+     "gain_ref": 0.594,
+     "gain_input": 0.594,
+     "ceiling": true,
+     "hack": true,
+     "panel": {
+      "estoi": true,
+      "sisdr": true,
+      "wer": false,
+      "sbs": true
+     }
+    },
+    "random_encodec": {
+     "gain_ref": -0.156,
+     "gain_input": -0.344,
+     "ceiling": false,
+     "hack": false,
+     "panel": {
+      "estoi": true,
+      "sisdr": true,
+      "wer": false,
+      "sbs": true
+     }
+    }
+   }
+  },
+  {
+   "utt_id": "p257_260",
+   "speaker": "p257",
+   "text": "Frankly, we should all have such problems.",
+   "pick": "random",
+   "seconds": 2.71,
+   "clips": {
+    "clean": {
+     "wav": "audio/p257_260/clean.wav",
+     "img": "audio/p257_260/clean.webp",
+     "scores": {
+      "sslmos": 4.125,
+      "utmos": 4.138,
+      "nisqa": 4.712,
+      "dnsmos": 3.421
+     },
+     "panel": {
+      "estoi": 1.0,
+      "sisdr": 101.3677,
+      "wer": 0.0,
+      "sbs": 1.0
+     }
+    },
+    "rt_encodec": {
+     "wav": "audio/p257_260/rt_encodec.wav",
+     "img": "audio/p257_260/rt_encodec.webp",
+     "scores": {
+      "sslmos": 3.969,
+      "utmos": 3.986,
+      "nisqa": 4.652,
+      "dnsmos": 3.354
+     },
+     "panel": {
+      "estoi": 0.8992,
+      "sisdr": 10.9589,
+      "wer": 0.0,
+      "sbs": 0.9336
+     }
+    },
+    "encodec_sslmos": {
+     "wav": "audio/p257_260/encodec_sslmos.wav",
+     "img": "audio/p257_260/encodec_sslmos.webp",
+     "scores": {
+      "sslmos": 4.062,
+      "utmos": 3.844,
+      "nisqa": 4.655,
+      "dnsmos": 3.333
+     },
+     "panel": {
+      "estoi": 0.8121,
+      "sisdr": 10.077,
+      "wer": 0.0,
+      "sbs": 0.8989
+     }
+    },
+    "encodec_nisqa": {
+     "wav": "audio/p257_260/encodec_nisqa.wav",
+     "img": "audio/p257_260/encodec_nisqa.webp",
+     "scores": {
+      "sslmos": 3.375,
+      "utmos": 3.202,
+      "nisqa": 5.04,
+      "dnsmos": 3.326
+     },
+     "panel": {
+      "estoi": 0.815,
+      "sisdr": 9.3378,
+      "wer": 0.0,
+      "sbs": 0.8531
+     }
+    },
+    "encodec_dnsmos": {
+     "wav": "audio/p257_260/encodec_dnsmos.wav",
+     "img": "audio/p257_260/encodec_dnsmos.webp",
+     "scores": {
+      "sslmos": 3.562,
+      "utmos": 3.465,
+      "nisqa": 4.472,
+      "dnsmos": 3.339
+     },
+     "panel": {
+      "estoi": 0.8204,
+      "sisdr": 8.319,
+      "wer": 0.0,
+      "sbs": 0.8914
+     }
+    },
+    "encodec_utmos": {
+     "wav": "audio/p257_260/encodec_utmos.wav",
+     "img": "audio/p257_260/encodec_utmos.webp",
+     "scores": {
+      "sslmos": 3.922,
+      "utmos": 3.828,
+      "nisqa": 4.784,
+      "dnsmos": 3.325
+     },
+     "panel": {
+      "estoi": 0.8427,
+      "sisdr": 10.2356,
+      "wer": 0.0,
+      "sbs": 0.9191
+     }
+    },
+    "rt_dac": {
+     "wav": "audio/p257_260/rt_dac.wav",
+     "img": "audio/p257_260/rt_dac.webp",
+     "scores": {
+      "sslmos": 4.125,
+      "utmos": 4.119,
+      "nisqa": 4.713,
+      "dnsmos": 3.322
+     },
+     "panel": {
+      "estoi": 0.9323,
+      "sisdr": -17.0823,
+      "wer": 0.0,
+      "sbs": 0.9733
+     }
+    },
+    "dac_sslmos": {
+     "wav": "audio/p257_260/dac_sslmos.wav",
+     "img": "audio/p257_260/dac_sslmos.webp",
+     "scores": {
+      "sslmos": 4.062,
+      "utmos": 4.096,
+      "nisqa": 4.7,
+      "dnsmos": 3.359
+     },
+     "panel": {
+      "estoi": 0.9244,
+      "sisdr": -18.3752,
+      "wer": 0.0,
+      "sbs": 0.9697
+     }
+    },
+    "pgd_sslmos": {
+     "wav": "audio/p257_260/pgd_sslmos.wav",
+     "img": "audio/p257_260/pgd_sslmos.webp",
+     "scores": {
+      "sslmos": 4.719,
+      "utmos": 4.133,
+      "nisqa": 3.61,
+      "dnsmos": 3.365
+     },
+     "panel": {
+      "estoi": 0.8053,
+      "sisdr": 32.2798,
+      "wer": 0.0,
+      "sbs": 0.8538
+     }
+    },
+    "random_encodec": {
+     "wav": "audio/p257_260/random_encodec.wav",
+     "img": "audio/p257_260/random_encodec.webp",
+     "scores": {
+      "sslmos": 3.328,
+      "utmos": 3.455,
+      "nisqa": 3.835,
+      "dnsmos": 2.766
+     },
+     "panel": {
+      "estoi": 0.7858,
+      "sisdr": 7.9799,
+      "wer": 0.0,
+      "sbs": 0.8995
+     }
+    }
+   },
+   "verdicts": {
+    "encodec_sslmos": {
+     "gain_ref": 0.094,
+     "gain_input": -0.062,
+     "ceiling": false,
+     "hack": false,
+     "panel": {
+      "estoi": true,
+      "sisdr": false,
+      "wer": false,
+      "sbs": true
+     }
+    },
+    "encodec_nisqa": {
+     "gain_ref": 0.387,
+     "gain_input": 0.327,
+     "ceiling": true,
+     "hack": true,
+     "panel": {
+      "estoi": true,
+      "sisdr": true,
+      "wer": false,
+      "sbs": true
+     }
+    },
+    "encodec_dnsmos": {
+     "gain_ref": -0.016,
+     "gain_input": -0.082,
+     "ceiling": false,
+     "hack": false,
+     "panel": {
+      "estoi": true,
+      "sisdr": true,
+      "wer": false,
+      "sbs": true
+     }
+    },
+    "encodec_utmos": {
+     "gain_ref": -0.158,
+     "gain_input": -0.31,
+     "ceiling": false,
+     "hack": false,
+     "panel": {
+      "estoi": true,
+      "sisdr": false,
+      "wer": false,
+      "sbs": false
+     }
+    },
+    "dac_sslmos": {
+     "gain_ref": -0.062,
+     "gain_input": -0.062,
+     "ceiling": false,
+     "hack": false,
+     "panel": {
+      "estoi": false,
+      "sisdr": true,
+      "wer": false,
+      "sbs": false
+     }
+    },
+    "pgd_sslmos": {
+     "gain_ref": 0.594,
+     "gain_input": 0.594,
+     "ceiling": true,
+     "hack": true,
+     "panel": {
+      "estoi": true,
+      "sisdr": true,
+      "wer": false,
+      "sbs": true
+     }
+    },
+    "random_encodec": {
+     "gain_ref": -0.641,
+     "gain_input": -0.797,
+     "ceiling": false,
+     "hack": false,
+     "panel": {
+      "estoi": true,
+      "sisdr": true,
+      "wer": false,
+      "sbs": true
+     }
+    }
+   }
+  },
+  {
+   "utt_id": "p257_199",
+   "speaker": "p257",
+   "text": "IT S all in the hair.",
+   "pick": "strongest",
+   "seconds": 4.23,
+   "clips": {
+    "clean": {
+     "wav": "audio/p257_199/clean.wav",
+     "img": "audio/p257_199/clean.webp",
+     "scores": {
+      "sslmos": 2.953,
+      "utmos": 3.509,
+      "nisqa": 3.848,
+      "dnsmos": 2.89
+     },
+     "panel": {
+      "estoi": 1.0,
+      "sisdr": 103.032,
+      "wer": 0.0,
+      "sbs": 1.0
+     }
+    },
+    "rt_encodec": {
+     "wav": "audio/p257_199/rt_encodec.wav",
+     "img": "audio/p257_199/rt_encodec.webp",
+     "scores": {
+      "sslmos": 2.797,
+      "utmos": 3.325,
+      "nisqa": 3.978,
+      "dnsmos": 2.668
+     },
+     "panel": {
+      "estoi": 0.6569,
+      "sisdr": 14.8783,
+      "wer": 0.0,
+      "sbs": 0.9207
+     }
+    },
+    "encodec_sslmos": {
+     "wav": "audio/p257_199/encodec_sslmos.wav",
+     "img": "audio/p257_199/encodec_sslmos.webp",
+     "scores": {
+      "sslmos": 3.469,
+      "utmos": 2.947,
+      "nisqa": 3.376,
+      "dnsmos": 2.973
+     },
+     "panel": {
+      "estoi": 0.4763,
+      "sisdr": 12.9737,
+      "wer": 0.0,
+      "sbs": 0.8334
+     }
+    },
+    "encodec_nisqa": {
+     "wav": "audio/p257_199/encodec_nisqa.wav",
+     "img": "audio/p257_199/encodec_nisqa.webp",
+     "scores": {
+      "sslmos": 2.703,
+      "utmos": 2.517,
+      "nisqa": 3.329,
+      "dnsmos": 2.397
+     },
+     "panel": {
+      "estoi": 0.5268,
+      "sisdr": 12.4455,
+      "wer": 0.0,
+      "sbs": 0.7894
+     }
+    },
+    "encodec_dnsmos": {
+     "wav": "audio/p257_199/encodec_dnsmos.wav",
+     "img": "audio/p257_199/encodec_dnsmos.webp",
+     "scores": {
+      "sslmos": 2.625,
+      "utmos": 2.613,
+      "nisqa": 2.352,
+      "dnsmos": 2.788
+     },
+     "panel": {
+      "estoi": 0.5219,
+      "sisdr": 10.6941,
+      "wer": 0.0,
+      "sbs": 0.8622
+     }
+    },
+    "encodec_utmos": {
+     "wav": "audio/p257_199/encodec_utmos.wav",
+     "img": "audio/p257_199/encodec_utmos.webp",
+     "scores": {
+      "sslmos": 2.812,
+      "utmos": 3.045,
+      "nisqa": 3.503,
+      "dnsmos": 2.729
+     },
+     "panel": {
+      "estoi": 0.5749,
+      "sisdr": 13.8823,
+      "wer": 0.0,
+      "sbs": 0.8782
+     }
+    },
+    "rt_dac": {
+     "wav": "audio/p257_199/rt_dac.wav",
+     "img": "audio/p257_199/rt_dac.webp",
+     "scores": {
+      "sslmos": 2.922,
+      "utmos": 3.403,
+      "nisqa": 4.012,
+      "dnsmos": 2.81
+     },
+     "panel": {
+      "estoi": 0.8069,
+      "sisdr": -14.5418,
+      "wer": 0.0,
+      "sbs": 0.9728
+     }
+    },
+    "dac_sslmos": {
+     "wav": "audio/p257_199/dac_sslmos.wav",
+     "img": "audio/p257_199/dac_sslmos.webp",
+     "scores": {
+      "sslmos": 2.875,
+      "utmos": 3.446,
+      "nisqa": 3.891,
+      "dnsmos": 2.818
+     },
+     "panel": {
+      "estoi": 0.7894,
+      "sisdr": -14.3496,
+      "wer": 0.0,
+      "sbs": 0.9727
+     }
+    },
+    "pgd_sslmos": {
+     "wav": "audio/p257_199/pgd_sslmos.wav",
+     "img": "audio/p257_199/pgd_sslmos.webp",
+     "scores": {
+      "sslmos": 4.469,
+      "utmos": 3.593,
+      "nisqa": 2.426,
+      "dnsmos": 2.621
+     },
+     "panel": {
+      "estoi": 0.5678,
+      "sisdr": 32.563,
+      "wer": 0.0,
+      "sbs": 0.7179
+     }
+    },
+    "random_encodec": {
+     "wav": "audio/p257_199/random_encodec.wav",
+     "img": "audio/p257_199/random_encodec.webp",
+     "scores": {
+      "sslmos": 2.25,
+      "utmos": 2.579,
+      "nisqa": 3.157,
+      "dnsmos": 2.596
+     },
+     "panel": {
+      "estoi": 0.4501,
+      "sisdr": 13.3022,
+      "wer": 0.0,
+      "sbs": 0.8362
+     }
+    }
+   },
+   "verdicts": {
+    "encodec_sslmos": {
+     "gain_ref": 0.672,
+     "gain_input": 0.516,
+     "ceiling": true,
+     "hack": true,
+     "panel": {
+      "estoi": true,
+      "sisdr": true,
+      "wer": false,
+      "sbs": true
+     }
+    },
+    "encodec_nisqa": {
+     "gain_ref": -0.648,
+     "gain_input": -0.519,
+     "ceiling": false,
+     "hack": false,
+     "panel": {
+      "estoi": true,
+      "sisdr": true,
+      "wer": false,
+      "sbs": true
+     }
+    },
+    "encodec_dnsmos": {
+     "gain_ref": 0.12,
+     "gain_input": -0.102,
+     "ceiling": false,
+     "hack": false,
+     "panel": {
+      "estoi": true,
+      "sisdr": true,
+      "wer": false,
+      "sbs": true
+     }
+    },
+    "encodec_utmos": {
+     "gain_ref": -0.28,
+     "gain_input": -0.464,
+     "ceiling": false,
+     "hack": false,
+     "panel": {
+      "estoi": true,
+      "sisdr": false,
+      "wer": false,
+      "sbs": true
+     }
+    },
+    "dac_sslmos": {
+     "gain_ref": -0.047,
+     "gain_input": -0.078,
+     "ceiling": false,
+     "hack": false,
+     "panel": {
+      "estoi": false,
+      "sisdr": false,
+      "wer": false,
+      "sbs": false
+     }
+    },
+    "pgd_sslmos": {
+     "gain_ref": 1.516,
+     "gain_input": 1.516,
+     "ceiling": true,
+     "hack": true,
+     "panel": {
+      "estoi": true,
+      "sisdr": true,
+      "wer": false,
+      "sbs": true
+     }
+    },
+    "random_encodec": {
+     "gain_ref": -0.547,
+     "gain_input": -0.703,
+     "ceiling": false,
+     "hack": false,
+     "panel": {
+      "estoi": true,
+      "sisdr": true,
+      "wer": false,
+      "sbs": true
+     }
+    }
+   }
+  }
+ ]
+}
